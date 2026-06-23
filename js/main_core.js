@@ -82,7 +82,8 @@ function updateBreadcrumb(page) {
         'listeningEdit': '编辑听力',
         'listeningTranslation': '译文管理',
         'listeningAlignment': '音文对齐',
-        'studentReadingDetail': '学生阅读详情'
+        'studentReadingDetail': '学生阅读详情',
+        'taskDetail': '任务详情'
     };
     if (extraPages[page]) {
         label = extraPages[page];

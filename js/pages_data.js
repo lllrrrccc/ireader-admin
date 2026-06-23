@@ -239,7 +239,6 @@ readingData: () => `
 readingTasks: () => `
 <div class="page-title">
     <span>阅读任务</span>
-    <button class="btn btn-primary" onclick="openModal('modal-add-task')"><i class="ri-add-line"></i> 新增任务</button>
 </div>
 
 <div class="filter-bar">
@@ -250,10 +249,6 @@ readingTasks: () => `
     <div class="filter-group">
         <label>任务名称</label>
         <input type="text" class="form-input" placeholder="搜索任务">
-    </div>
-    <div class="filter-group">
-        <label>书籍名称</label>
-        <input type="text" class="form-input" placeholder="书籍名称">
     </div>
     <div class="filter-group">
         <label>状态</label>
@@ -281,25 +276,27 @@ readingTasks: () => `
         <table class="data-table">
             <thead>
                 <tr>
+                    <th>任务ID</th>
                     <th>任务名称</th>
                     <th>创建老师ID</th>
-                    <th>书籍</th>
-                    <th>关联班级</th>
-                    <th>覆盖学生数量</th>
-                    <th>任务时间</th>
+                    <th>老师姓名</th>
+                    <th>目标班级</th>
+                    <th>发布时间</th>
+                    <th>截止日</th>
                     <th>完成率</th>
                     <th>状态</th>
-                    <th style="width:200px;">操作</th>
+                    <th style="width:100px;">操作</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
+                    <td style="font-size:12px;">230820T01A001</td>
                     <td>寒假阅读挑战</td>
-                    <td>T001</td>
-                    <td>小王子</td>
+                    <td>230820T01</td>
+                    <td>王老师</td>
                     <td>三(1)班, 三(2)班</td>
-                    <td>120</td>
-                    <td>2024-01-20 ~ 2024-02-20</td>
+                    <td>2024-01-20</td>
+                    <td>2024-02-20</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:8px;">
                             <div style="width:60px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:85%;height:100%;background:var(--success);border-radius:3px;"></div></div>
@@ -308,18 +305,17 @@ readingTasks: () => `
                     </td>
                     <td><span class="tag tag-blue">进行中</span></td>
                     <td style="white-space:nowrap;">
-                        <button class="btn btn-link btn-sm"><i class="ri-eye-line"></i> 查看</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-task')"><i class="ri-edit-line"></i> 编辑</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--danger);"><i class="ri-delete-bin-line"></i> 删除</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('taskDetail')"><i class="ri-eye-line"></i> 查看</button>
                     </td>
                 </tr>
                 <tr>
+                    <td style="font-size:12px;">230820T01A002</td>
                     <td>每日阅读30分钟</td>
-                    <td>T001</td>
-                    <td>任意</td>
+                    <td>230820T01</td>
+                    <td>王老师</td>
                     <td>三(1)班</td>
-                    <td>200</td>
-                    <td>2024-03-01 ~ 2024-03-31</td>
+                    <td>2024-03-01</td>
+                    <td>2024-03-31</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:8px;">
                             <div style="width:60px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:62%;height:100%;background:var(--primary);border-radius:3px;"></div></div>
@@ -328,18 +324,17 @@ readingTasks: () => `
                     </td>
                     <td><span class="tag tag-blue">进行中</span></td>
                     <td style="white-space:nowrap;">
-                        <button class="btn btn-link btn-sm"><i class="ri-eye-line"></i> 查看</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-task')"><i class="ri-edit-line"></i> 编辑</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--danger);"><i class="ri-delete-bin-line"></i> 删除</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('taskDetail')"><i class="ri-eye-line"></i> 查看</button>
                     </td>
                 </tr>
                 <tr>
+                    <td style="font-size:12px;">230901T01A001</td>
                     <td>春季阅读马拉松</td>
-                    <td>T002</td>
-                    <td>夏洛的网</td>
+                    <td>230901T01</td>
+                    <td>李老师</td>
                     <td>五(3)班</td>
-                    <td>150</td>
-                    <td>2024-04-01 ~ 2024-04-30</td>
+                    <td>2024-04-01</td>
+                    <td>2024-04-30</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:8px;">
                             <div style="width:60px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:0%;height:100%;background:var(--text-muted);border-radius:3px;"></div></div>
@@ -348,18 +343,17 @@ readingTasks: () => `
                     </td>
                     <td><span class="tag tag-yellow">未开始</span></td>
                     <td style="white-space:nowrap;">
-                        <button class="btn btn-link btn-sm"><i class="ri-eye-line"></i> 查看</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-task')"><i class="ri-edit-line"></i> 编辑</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--danger);"><i class="ri-delete-bin-line"></i> 删除</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('taskDetail')"><i class="ri-eye-line"></i> 查看</button>
                     </td>
                 </tr>
                 <tr>
+                    <td style="font-size:12px;">230901T01A002</td>
                     <td>英语原版阅读周</td>
-                    <td>T002</td>
-                    <td>The Little Prince</td>
+                    <td>230901T01</td>
+                    <td>李老师</td>
                     <td>五(3)班</td>
-                    <td>80</td>
-                    <td>2024-02-15 ~ 2024-02-22</td>
+                    <td>2024-02-15</td>
+                    <td>2024-02-22</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:8px;">
                             <div style="width:60px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:100%;height:100%;background:var(--success);border-radius:3px;"></div></div>
@@ -368,18 +362,17 @@ readingTasks: () => `
                     </td>
                     <td><span class="tag tag-green">已结束</span></td>
                     <td style="white-space:nowrap;">
-                        <button class="btn btn-link btn-sm"><i class="ri-eye-line"></i> 查看</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-task')"><i class="ri-edit-line"></i> 编辑</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--danger);"><i class="ri-delete-bin-line"></i> 删除</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('taskDetail')"><i class="ri-eye-line"></i> 查看</button>
                     </td>
                 </tr>
                 <tr>
+                    <td style="font-size:12px;">230820T01A003</td>
                     <td>国学经典诵读</td>
-                    <td>T001</td>
-                    <td>西游记</td>
+                    <td>230820T01</td>
+                    <td>王老师</td>
                     <td>三(2)班</td>
-                    <td>90</td>
-                    <td>2024-03-10 ~ 2024-05-10</td>
+                    <td>2024-03-10</td>
+                    <td>2024-05-10</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:8px;">
                             <div style="width:60px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:25%;height:100%;background:var(--warning);border-radius:3px;"></div></div>
@@ -388,18 +381,17 @@ readingTasks: () => `
                     </td>
                     <td><span class="tag tag-blue">进行中</span></td>
                     <td style="white-space:nowrap;">
-                        <button class="btn btn-link btn-sm"><i class="ri-eye-line"></i> 查看</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-task')"><i class="ri-edit-line"></i> 编辑</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--danger);"><i class="ri-delete-bin-line"></i> 删除</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('taskDetail')"><i class="ri-eye-line"></i> 查看</button>
                     </td>
                 </tr>
                 <tr>
+                    <td style="font-size:12px;">231005T01A001</td>
                     <td>暑假阅读计划</td>
-                    <td>T004</td>
-                    <td>哈利·波特</td>
+                    <td>231005T01</td>
+                    <td>刘老师</td>
                     <td>四(2)班</td>
-                    <td>250</td>
-                    <td>2024-07-01 ~ 2024-08-31</td>
+                    <td>2024-07-01</td>
+                    <td>2024-08-31</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:8px;">
                             <div style="width:60px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:0%;height:100%;background:var(--text-muted);border-radius:3px;"></div></div>
@@ -408,9 +400,7 @@ readingTasks: () => `
                     </td>
                     <td><span class="tag tag-yellow">未开始</span></td>
                     <td style="white-space:nowrap;">
-                        <button class="btn btn-link btn-sm"><i class="ri-eye-line"></i> 查看</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-task')"><i class="ri-edit-line"></i> 编辑</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--danger);"><i class="ri-delete-bin-line"></i> 删除</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('taskDetail')"><i class="ri-eye-line"></i> 查看</button>
                     </td>
                 </tr>
             </tbody>
@@ -430,120 +420,144 @@ readingTasks: () => `
         <button class="btn btn-sm btn-secondary"><i class="ri-arrow-right-s-line"></i></button>
     </div>
 </div>
+`,
 
-<!-- 新增任务模态框 -->
-<div class="modal-overlay" id="modal-add-task">
-    <div class="modal" style="max-width:600px;">
-        <div class="modal-header">
-            <span class="modal-title">新增阅读任务</span>
-            <button class="modal-close" onclick="closeModal('modal-add-task')"><i class="ri-close-line"></i></button>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-                <label class="form-label">任务名称 <span style="color:var(--danger);">*</span></label>
-                <input type="text" class="form-input" placeholder="请输入任务名称">
+// 任务详情
+taskDetail: () => `
+<div class="page-title" style="margin-bottom:16px;">
+    <button class="btn btn-link" onclick="navigateTo('readingTasks')"><i class="ri-arrow-left-line"></i> 返回阅读任务</button>
+</div>
+
+<div class="card" style="margin-bottom:16px;">
+    <div class="card-header">
+        <span class="card-title">📋 任务概况</span>
+    </div>
+    <div class="card-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+            <div>
+                <div style="font-size:13px;color:var(--text-secondary);margin-bottom:4px;">任务ID</div>
+                <div style="font-weight:600;font-size:15px;">230820T01A001</div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                <div class="form-group">
-                    <label class="form-label">任务类型 <span style="color:var(--danger);">*</span></label>
-                    <select class="form-select">
-                        <option>整书阅读</option>
-                        <option>每日阅读</option>
-                        <option>章节阅读</option>
-                    </select>
+            <div>
+                <div style="font-size:13px;color:var(--text-secondary);margin-bottom:4px;">任务名称</div>
+                <div style="font-weight:600;font-size:15px;">寒假阅读挑战</div>
+            </div>
+            <div>
+                <div style="font-size:13px;color:var(--text-secondary);margin-bottom:4px;">目标班级</div>
+                <div style="font-weight:600;font-size:15px;">三(1)班, 三(2)班</div>
+            </div>
+            <div>
+                <div style="font-size:13px;color:var(--text-secondary);margin-bottom:4px;">截止日</div>
+                <div style="font-weight:600;font-size:15px;">2024-02-20</div>
+            </div>
+            <div>
+                <div style="font-size:13px;color:var(--text-secondary);margin-bottom:4px;">整体完成率</div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="width:120px;height:8px;background:var(--bg);border-radius:4px;"><div style="width:85%;height:100%;background:var(--success);border-radius:4px;"></div></div>
+                    <span style="font-weight:600;color:var(--success);">85%</span>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">目标书籍</label>
-                    <input type="text" class="form-input" placeholder="搜索书籍">
-                </div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                <div class="form-group">
-                    <label class="form-label">开始时间 <span style="color:var(--danger);">*</span></label>
-                    <input type="date" class="form-input">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">结束时间 <span style="color:var(--danger);">*</span></label>
-                    <input type="date" class="form-input">
-                </div>
+            <div>
+                <div style="font-size:13px;color:var(--text-secondary);margin-bottom:4px;">创建老师</div>
+                <div style="font-weight:600;font-size:15px;">王老师 (230820T01)</div>
             </div>
-            <div class="form-group">
-                <label class="form-label">目标描述</label>
-                <input type="text" class="form-input" placeholder="如：阅读120页、每天30分钟">
-            </div>
-            <div class="form-group">
-                <label class="form-label">选择班级 <span style="color:var(--danger);">*</span></label>
-                <input type="text" class="form-input" placeholder="选择目标班级或学生">
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-secondary" onclick="closeModal('modal-add-task')">取消</button>
-            <button class="btn btn-primary">确认创建</button>
         </div>
     </div>
 </div>
 
-<!-- 编辑任务模态框 -->
-<div class="modal-overlay" id="modal-edit-task">
-    <div class="modal" style="max-width:600px;">
-        <div class="modal-header">
-            <span class="modal-title">编辑阅读任务</span>
-            <button class="modal-close" onclick="closeModal('modal-edit-task')"><i class="ri-close-line"></i></button>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-                <label class="form-label">任务名称 <span style="color:var(--danger);">*</span></label>
-                <input type="text" class="form-input" value="寒假阅读挑战">
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                <div class="form-group">
-                    <label class="form-label">任务类型 <span style="color:var(--danger);">*</span></label>
-                    <select class="form-select">
-                        <option selected>整书阅读</option>
-                        <option>每日阅读</option>
-                        <option>章节阅读</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">目标书籍</label>
-                    <input type="text" class="form-input" value="小王子">
-                </div>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                <div class="form-group">
-                    <label class="form-label">开始时间 <span style="color:var(--danger);">*</span></label>
-                    <input type="date" class="form-input" value="2024-01-20">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">结束时间 <span style="color:var(--danger);">*</span></label>
-                    <input type="date" class="form-input" value="2024-02-20">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">目标描述</label>
-                <input type="text" class="form-input" value="120页">
-            </div>
-            <div class="form-group">
-                <label class="form-label">选择班级 <span style="color:var(--danger);">*</span></label>
-                <input type="text" class="form-input" value="三(1)班, 三(2)班">
-            </div>
-            <div class="form-group">
-                <label class="form-label">状态</label>
-                <select class="form-select">
-                    <option selected>进行中</option>
-                    <option>已结束</option>
-                    <option>未开始</option>
-                </select>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-secondary" onclick="closeModal('modal-edit-task')">取消</button>
-            <button class="btn btn-primary">保存修改</button>
-        </div>
+<div class="card">
+    <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
+        <span class="card-title">👥 学生完成情况</span>
+        <span style="font-size:13px;color:var(--text-secondary);">共 120 人</span>
+    </div>
+    <div class="card-body" style="overflow-x:auto;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>学生ID</th>
+                    <th>学生姓名</th>
+                    <th>班级</th>
+                    <th>完成进度</th>
+                    <th>最后阅读时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>S0012301</td>
+                    <td>张小明</td>
+                    <td>三(1)班</td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:80px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:100%;height:100%;background:var(--success);border-radius:3px;"></div></div>
+                            <span style="font-size:12px;">100%</span>
+                        </div>
+                    </td>
+                    <td>2024-02-18 15:30</td>
+                </tr>
+                <tr>
+                    <td>S0012302</td>
+                    <td>李小红</td>
+                    <td>三(1)班</td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:80px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:85%;height:100%;background:var(--success);border-radius:3px;"></div></div>
+                            <span style="font-size:12px;">85%</span>
+                        </div>
+                    </td>
+                    <td>2024-02-17 10:20</td>
+                </tr>
+                <tr>
+                    <td>S0012303</td>
+                    <td>王小刚</td>
+                    <td>三(2)班</td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:80px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:60%;height:100%;background:var(--primary);border-radius:3px;"></div></div>
+                            <span style="font-size:12px;">60%</span>
+                        </div>
+                    </td>
+                    <td>2024-02-16 08:45</td>
+                </tr>
+                <tr>
+                    <td>S0012304</td>
+                    <td>赵丽丽</td>
+                    <td>三(2)班</td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:80px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:30%;height:100%;background:var(--warning);border-radius:3px;"></div></div>
+                            <span style="font-size:12px;">30%</span>
+                        </div>
+                    </td>
+                    <td>2024-02-14 19:10</td>
+                </tr>
+                <tr>
+                    <td>S0012305</td>
+                    <td>陈浩浩</td>
+                    <td>三(1)班</td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:80px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:0%;height:100%;background:var(--text-muted);border-radius:3px;"></div></div>
+                            <span style="font-size:12px;">0%</span>
+                        </div>
+                    </td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="pagination-bar">
+    <span>共 120 条记录</span>
+    <div class="pagination">
+        <button class="btn btn-sm btn-secondary" disabled><i class="ri-arrow-left-s-line"></i></button>
+        <button class="btn btn-sm btn-primary">1</button>
+        <button class="btn btn-sm btn-secondary">2</button>
+        <button class="btn btn-sm btn-secondary">3</button>
+        <button class="btn btn-sm btn-secondary"><i class="ri-arrow-right-s-line"></i></button>
     </div>
 </div>
 `,
-
 
 wordLearning: () => `
 <div class="page-title">
