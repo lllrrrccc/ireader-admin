@@ -1,0 +1,493 @@
+let currentPage = 'books';
+let sidebarCollapsed = false;
+let isLoggedIn = false;
+
+function init() {
+    // 初始显示登录页，隐藏主应用
+    document.getElementById('login-page').style.display = 'flex';
+    document.getElementById('main-app').style.display = 'none';
+}
+
+function doLogin() {
+    // 模拟登录成功
+    document.getElementById('login-page').style.display = 'none';
+    document.getElementById('main-app').style.display = 'flex';
+    isLoggedIn = true;
+    renderSidebar();
+    loadPage(currentPage);
+    updateBreadcrumb(currentPage);
+    setupEventListeners();
+}
+
+function renderSidebar() {
+    const nav = document.getElementById('sidebar-nav');
+    nav.innerHTML = navConfig.map(group => `
+        <div class="nav-group">
+            <div class="nav-group-title">${group.group}</div>
+            ${group.items.map(item => `
+                <a class="nav-item ${item.page === currentPage ? 'active' : ''}" 
+                   data-page="${item.page}" onclick="navigateTo('${item.page}')">
+                    <i class="${item.icon}"></i>
+                    <span>${item.label}</span>
+                </a>
+            `).join('')}
+        </div>
+    `).join('');
+}
+
+function navigateTo(page) {
+    currentPage = page;
+    renderSidebar();
+    loadPage(page);
+    updateBreadcrumb(page);
+    
+    // 移动端自动关闭侧边栏
+    if (window.innerWidth <= 768) {
+        document.getElementById('sidebar').classList.remove('open');
+    }
+}
+
+function updateBreadcrumb(page) {
+    let label = '书籍管理';
+    for (const group of navConfig) {
+        const item = group.items.find(i => i.page === page);
+        if (item) {
+            label = item.label;
+            break;
+        }
+    }
+    // 特殊页面不在导航配置中
+    const extraPages = {
+        'batchAddBooks': '批量新增书籍',
+        'bookDetail': '书籍详情',
+        'bookAudio': '音频管理',
+        'audioRange': '段落配置',
+        'studentDetail': '学生详情',
+        'deviceStudents': '设备学生绑定'
+    };
+    if (extraPages[page]) {
+        label = extraPages[page];
+    }
+    document.getElementById('breadcrumb').textContent = label;
+}
+
+function loadPage(page) {
+    const container = document.getElementById('page-container');
+    container.innerHTML = '';
+    
+    const pageFn = pageFunctions[page];
+    if (pageFn) {
+        container.innerHTML = pageFn();
+        attachPageEvents(page);
+    } else {
+        container.innerHTML = '<div class="empty-state"><i class="ri-error-warning-line"></i><p>页面未找到</p></div>';
+    }
+}
+
+function setupEventListeners() {
+    // 菜单折叠
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+        sidebarCollapsed = !sidebarCollapsed;
+        document.getElementById('sidebar').classList.toggle('collapsed', sidebarCollapsed);
+    });
+    
+    // 移动端点击遮罩关闭
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.getElementById('menu-toggle');
+            if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+                sidebar.classList.remove('open');
+            }
+        }
+    });
+}
+
+function attachPageEvents(page) {
+    // 页面特定事件绑定
+}
+
+// 模态框工具函数
+function openModal(modalId, name, parent) {
+    const modal = document.getElementById(modalId);
+    modal.classList.add('active');
+    
+    // 自动填充父级分类名称（添加二级分类）
+    if (modalId === 'modal-add-sub-category' && name) {
+        const parentInput = document.getElementById('sub-category-parent');
+        if (parentInput) {
+            parentInput.value = name;
+        }
+    }
+    
+    // 自动填充编辑基础分类名称（一级分类）
+    if (modalId === 'modal-edit-base-category' && name) {
+        const nameInput = document.getElementById('base-edit-name');
+        if (nameInput) {
+            nameInput.value = name;
+        }
+    }
+    
+    // 自动填充编辑二级分类名称和父分类
+    if (modalId === 'modal-edit-sub-category') {
+        if (name) {
+            const nameInput = document.getElementById('sub-edit-name');
+            if (nameInput) {
+                nameInput.value = name;
+            }
+        }
+        if (parent) {
+            const parentInput = document.getElementById('sub-edit-parent');
+            if (parentInput) {
+                parentInput.value = parent;
+            }
+        }
+    }
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.remove('active');
+}
+
+// 多选下拉框 — 切换显示并定位到触发器下方
+function toggleDropdown(trigger, optsId) {
+    const opts = document.getElementById(optsId);
+    const rect = trigger.getBoundingClientRect();
+    if (opts.style.display === 'block') {
+        opts.style.display = 'none';
+        // 移回原始容器
+        if (opts._originalContainer && opts.parentElement !== opts._originalContainer) {
+            opts._originalContainer.appendChild(opts);
+        }
+    } else {
+        // 关闭其他已打开的下拉框
+        document.querySelectorAll('.multiselect-options').forEach(d => {
+            if (d.id !== optsId && d.style.display === 'block') {
+                d.style.display = 'none';
+                if (d._originalContainer && d.parentElement !== d._originalContainer) {
+                    d._originalContainer.appendChild(d);
+                }
+            }
+        });
+        // 记录原始容器和触发器，并移出到 body 以突破 modal 限制
+        if (!opts._originalContainer) {
+            opts._originalContainer = opts.parentElement;
+        }
+        opts._originalTrigger = trigger;
+        document.body.appendChild(opts);
+        opts.style.width = rect.width + 'px';
+        opts.style.left = rect.left + 'px';
+        opts.style.top = (rect.bottom + 4) + 'px';
+        opts.style.display = 'block';
+    }
+}
+
+// 多选下拉框 — 根据选中项更新触发器文本
+function updateGradeText(prefix) {
+    const textEl = document.getElementById(prefix + '-text');
+    const opts = document.getElementById(prefix + '-opts');
+    const checked = opts.querySelectorAll('input[type="checkbox"]:checked');
+    const values = Array.from(checked).map(cb => cb.parentElement.textContent.trim());
+    textEl.textContent = values.length > 0 ? values.join('、') : '请选择匹配年级（可多选）';
+    textEl.style.color = values.length > 0 ? 'var(--text-primary)' : 'var(--text-secondary)';
+}
+
+// 点击页面其他地方关闭下拉框并移回原始容器
+document.addEventListener('click', function(e) {
+    document.querySelectorAll('.multiselect-options').forEach(d => {
+        if (d.style.display === 'block') {
+            const trigger = d._originalTrigger;
+            if (!trigger || (!trigger.contains(e.target) && !d.contains(e.target))) {
+                d.style.display = 'none';
+                if (d._originalContainer && d.parentElement !== d._originalContainer) {
+                    d._originalContainer.appendChild(d);
+                }
+            }
+        }
+    });
+});
+
+// 初始化
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
+function toggleBookEdit(isEdit) {
+    const view = document.getElementById('book-detail-view');
+    const edit = document.getElementById('book-detail-edit');
+    if (view && edit) {
+        view.style.display = isEdit ? 'none' : 'block';
+        edit.style.display = isEdit ? 'block' : 'none';
+    }
+}
+
+function showBookStep2() {
+    const step1 = document.getElementById('add-book-step1');
+    const step2 = document.getElementById('add-book-step2');
+    const footer = document.getElementById('add-book-footer');
+    if (step1 && step2 && footer) {
+        step1.style.display = 'none';
+        step2.style.display = 'block';
+        footer.innerHTML = '<button class="btn btn-secondary" onclick="closeModal(\'modal-add-book\')">取消</button><button class="btn btn-secondary" onclick="backToBookStep1()"><i class="ri-arrow-left-line"></i> 上一步</button><button class="btn btn-primary" onclick="closeModal(\'modal-add-book\')">确认保存</button>';
+    }
+}
+
+function backToBookStep1() {
+    const step1 = document.getElementById('add-book-step1');
+    const step2 = document.getElementById('add-book-step2');
+    const footer = document.getElementById('add-book-footer');
+    if (step1 && step2 && footer) {
+        step2.style.display = 'none';
+        step1.style.display = 'block';
+        footer.innerHTML = '<button class="btn btn-secondary" onclick="closeModal(\'modal-add-book\')">取消</button><button class="btn btn-primary" onclick="showBookStep2()">下一步 <i class="ri-arrow-right-line"></i></button>';
+    }
+}
+
+function updateRadioText(prefix, value) {
+    const textEl = document.getElementById(prefix + '-text');
+    if (textEl) {
+        textEl.textContent = value;
+        textEl.style.color = 'var(--text-primary)';
+    }
+}
+
+// ========== 批量新增书籍交互函数 ==========
+
+function handleBatchFiles(input) {
+    const files = Array.from(input.files || []);
+    const listEl = document.getElementById('batch-file-list');
+    const cardEl = document.getElementById('batch-file-list-card');
+    const countEl = document.getElementById('batch-count');
+    const nextBtn = document.getElementById('batch-next-btn');
+    
+    if (!files.length || !listEl) return;
+    
+    let existingCount = listEl.children.length;
+    files.forEach(file => {
+        if (existingCount >= 50) return;
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--bg);border-radius:6px;';
+        row.innerHTML = `
+            <i class="ri-file-3-line" style="font-size:20px;color:var(--primary);"></i>
+            <div style="flex:1;">
+                <div style="font-size:13px;font-weight:500;">${file.name}</div>
+                <div style="font-size:12px;color:var(--text-muted);">${(file.size / 1024 / 1024).toFixed(1)} MB</div>
+            </div>
+            <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="this.parentElement.remove();updateBatchCount();"><i class="ri-delete-bin-line"></i></button>
+        `;
+        listEl.appendChild(row);
+        existingCount++;
+    });
+    
+    cardEl.style.display = 'block';
+    countEl.textContent = listEl.children.length;
+    nextBtn.disabled = listEl.children.length === 0;
+}
+
+function updateBatchCount() {
+    const listEl = document.getElementById('batch-file-list');
+    const countEl = document.getElementById('batch-count');
+    const nextBtn = document.getElementById('batch-next-btn');
+    const cardEl = document.getElementById('batch-file-list-card');
+    
+    const count = listEl.children.length;
+    countEl.textContent = count;
+    nextBtn.disabled = count === 0;
+    if (count === 0) cardEl.style.display = 'none';
+}
+
+function showBatchStep1() {
+    document.getElementById('batch-upload-step').style.display = 'block';
+    document.getElementById('batch-edit-step').style.display = 'none';
+    document.getElementById('batch-done-step').style.display = 'none';
+    document.getElementById('batch-step-1').classList.add('active');
+    document.getElementById('batch-step-2').classList.remove('active');
+    document.getElementById('batch-step-3').classList.remove('active');
+}
+
+function showBatchStep2() {
+    const count = document.getElementById('batch-file-list').children.length;
+    if (count === 0) return;
+    
+    const bookNames = ['小王子', '夏洛的网', '哈利·波特', '西游记', '草房子', '窗边的小豆豆', '彼得·潘', '秘密花园', '绿野仙踪', '木偶奇遇记'];
+    const authors = ['圣埃克苏佩里', 'E·B·怀特', 'J.K.罗琳', '吴承恩', '曹文轩', '黑柳彻子', '詹姆斯·巴里', '弗朗西丝·伯内特', '鲍姆', '科洛迪'];
+    const tbody = document.getElementById('batch-edit-tbody');
+    tbody.innerHTML = '';
+    
+    for (let i = 0; i < Math.min(count, bookNames.length); i++) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><input type="checkbox" class="batch-row-check"></td>
+            <td><input type="text" class="form-input" value="${bookNames[i]}" style="min-width:120px;"></td>
+            <td><input type="text" class="form-input" value="${authors[i]}" style="min-width:100px;"></td>
+            <td><input type="text" class="form-input" value="978-7-020-0000${(i+1).toString().padStart(2,'0')}-${i+1}" style="min-width:140px;"></td>
+            <td>
+                <select class="form-select" style="min-width:100px;">
+                    <option selected>中文-文学</option>
+                    <option>中文-艺术</option>
+                    <option>中文-人文社科</option>
+                    <option>中文-自然科学</option>
+                    <option>英文-英语周报时文</option>
+                    <option>英文-外研社分级阅读</option>
+                    <option>英文-原版名著</option>
+                </select>
+            </td>
+            <td>
+                <select class="form-select" style="min-width:100px;">
+                    <option>小学1-2年级</option>
+                    <option selected>小学3-4年级</option>
+                    <option>小学5-6年级</option>
+                    <option>初中</option>
+                    <option>高中</option>
+                </select>
+            </td>
+            <td><span class="tag tag-green">可见</span></td>
+            <td><button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="this.closest('tr').remove();updateBatchEditCount();"><i class="ri-delete-bin-line"></i></button></td>
+        `;
+        tbody.appendChild(tr);
+    }
+    
+    document.getElementById('batch-edit-count').textContent = Math.min(count, bookNames.length);
+    document.getElementById('batch-upload-step').style.display = 'none';
+    document.getElementById('batch-edit-step').style.display = 'block';
+    document.getElementById('batch-done-step').style.display = 'none';
+    document.getElementById('batch-step-1').classList.remove('active');
+    document.getElementById('batch-step-2').classList.add('active');
+    document.getElementById('batch-step-3').classList.remove('active');
+}
+
+function updateBatchEditCount() {
+    const tbody = document.getElementById('batch-edit-tbody');
+    document.getElementById('batch-edit-count').textContent = tbody.children.length;
+}
+
+function showBatchStep3() {
+    const count = document.getElementById('batch-edit-tbody').children.length;
+    document.getElementById('batch-done-count').textContent = count;
+    document.getElementById('batch-upload-step').style.display = 'none';
+    document.getElementById('batch-edit-step').style.display = 'none';
+    document.getElementById('batch-done-step').style.display = 'block';
+    document.getElementById('batch-step-1').classList.remove('active');
+    document.getElementById('batch-step-2').classList.remove('active');
+    document.getElementById('batch-step-3').classList.add('active');
+}
+
+function toggleBatchCheckAll() {
+    const master = document.getElementById('batch-check-all');
+    const checks = document.querySelectorAll('.batch-row-check');
+    checks.forEach(cb => cb.checked = master.checked);
+}
+
+function applyBatchEdit() {
+    const cat = document.getElementById('batch-bulk-cat').value;
+    const grade = document.getElementById('batch-bulk-grade').value;
+    const checks = document.querySelectorAll('.batch-row-check:checked');
+    
+    checks.forEach(cb => {
+        const row = cb.closest('tr');
+        const selects = row.querySelectorAll('select');
+        if (cat !== '设置基础分类' && selects[0]) {
+            for (let o of selects[0].options) { if (o.text === cat) { selects[0].value = o.value; break; } }
+        }
+        if (grade !== '设置适用年级' && selects[1]) {
+            for (let o of selects[1].options) { if (o.text === grade) { selects[1].value = o.value; break; } }
+        }
+    });
+}
+
+// ========== 音频上传交互 ==========
+
+function handleAudioUpload(input) {
+    const files = Array.from(input.files || []);
+    if (!files.length) return;
+    
+    // 模拟上传效果：在控制台输出文件名
+    files.forEach(file => {
+        console.log('上传音频:', file.name, file.size);
+    });
+    
+    // 实际场景：这里会调用上传 API，上传完成后刷新音频列表
+    alert('已选择 ' + files.length + ' 个音频文件，实际场景将上传至服务器');
+}
+
+// ========== 书籍状态切换 ==========
+let currentBookStatusRow = null;
+
+function openBookStatusModal(modalId, rowId) {
+    currentBookStatusRow = rowId;
+    openModal(modalId);
+}
+
+function toggleBookVisibility(toVisible) {
+    if (!currentBookStatusRow) return;
+    
+    // 在书籍列表中查找对应行并切换状态
+    const table = document.querySelector('#page-container .data-table tbody');
+    if (!table) return;
+    
+    const rows = table.querySelectorAll('tr');
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length > 7) {
+            const idCell = cells[0].textContent.trim();
+            if (idCell === currentBookStatusRow) {
+                // 切换状态标签
+                const statusCell = cells[7];
+                const actionCell = cells[8];
+                
+                if (toVisible) {
+                    statusCell.innerHTML = '<span class="tag tag-green">可见</span>';
+                    actionCell.innerHTML = `
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('bookDetail')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openBookStatusModal('modal-book-hide', '${currentBookStatusRow}')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('bookAudio')"><i class="ri-music-2-line"></i> 音频</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--primary);" onclick="openModal('modal-book-ai')"><i class="ri-robot-2-line"></i> AI导读</button>
+                    `;
+                } else {
+                    statusCell.innerHTML = '<span class="tag tag-gray">隐藏</span>';
+                    actionCell.innerHTML = `
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('bookDetail')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="openBookStatusModal('modal-book-show', '${currentBookStatusRow}')"><i class="ri-eye-line"></i> 可见</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('bookAudio')"><i class="ri-music-2-line"></i> 音频</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--primary);" onclick="openModal('modal-book-ai')"><i class="ri-robot-2-line"></i> AI导读</button>
+                    `;
+                }
+            }
+        }
+    });
+    
+    currentBookStatusRow = null;
+    closeModal(toVisible ? 'modal-book-show' : 'modal-book-hide');
+}
+function saveTimeline() {
+    alert('时间轴标记已保存！');
+    navigateTo('bookAudio');
+}
+
+function markTextPosition(element) {
+    const toast = document.getElementById('audio-mark-toast');
+    const msg = document.getElementById('audio-mark-msg');
+    if (toast && msg) {
+        msg.textContent = '已标记当前音频位置';
+        toast.style.display = 'block';
+        element.style.background = 'rgba(37,99,235,0.2)';
+        element.style.borderBottom = '2px solid var(--primary)';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 2000);
+    }
+}
+
+function selectAudio(element) {
+    document.querySelectorAll('.audio-list-item').forEach(el => {
+        el.style.background = '';
+        el.style.border = 'none';
+    });
+    element.style.background = 'rgba(37,99,235,0.08)';
+    element.style.border = '1px solid var(--primary)';
+}
+
+function showMarkedPositions() {
+    alert('显示所有已标记的音频-文字对应位置');
+}

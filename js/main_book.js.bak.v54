@@ -1,0 +1,640 @@
+// Book-related actions: add, batch, audio, status
+function toggleBookEdit(isEdit) {
+    const view = document.getElementById('book-detail-view');
+    const edit = document.getElementById('book-detail-edit');
+    if (view && edit) {
+        view.style.display = isEdit ? 'none' : 'block';
+        edit.style.display = isEdit ? 'block' : 'none';
+    }
+}
+
+
+function showBookStep2() {
+    const step1 = document.getElementById('add-book-step1');
+    const step2 = document.getElementById('add-book-step2');
+    const footer = document.getElementById('add-book-footer');
+    if (step1 && step2 && footer) {
+        step1.style.display = 'none';
+        step2.style.display = 'block';
+        footer.innerHTML = '<button class="btn btn-secondary" onclick="closeModal(\'modal-add-book\')">取消</button><button class="btn btn-secondary" onclick="backToBookStep1()"><i class="ri-arrow-left-line"></i> 上一步</button><button class="btn btn-primary" onclick="closeModal(\'modal-add-book\')">确认保存</button>';
+    }
+}
+
+
+function backToBookStep1() {
+    const step1 = document.getElementById('add-book-step1');
+    const step2 = document.getElementById('add-book-step2');
+    const footer = document.getElementById('add-book-footer');
+    if (step1 && step2 && footer) {
+        step2.style.display = 'none';
+        step1.style.display = 'block';
+        footer.innerHTML = '<button class="btn btn-secondary" onclick="closeModal(\'modal-add-book\')">取消</button><button class="btn btn-primary" onclick="showBookStep2()">下一步 <i class="ri-arrow-right-line"></i></button>';
+    }
+}
+
+
+function handleBatchFiles(input) {
+    const files = Array.from(input.files || []);
+    const listEl = document.getElementById('batch-file-list');
+    const cardEl = document.getElementById('batch-file-list-card');
+    const countEl = document.getElementById('batch-count');
+    const nextBtn = document.getElementById('batch-next-btn');
+    
+    if (!files.length || !listEl) return;
+    
+    let existingCount = listEl.children.length;
+    files.forEach(file => {
+        if (existingCount >= 50) return;
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--bg);border-radius:6px;';
+        row.innerHTML = `
+            <i class="ri-file-3-line" style="font-size:20px;color:var(--primary);"></i>
+            <div style="flex:1;">
+                <div style="font-size:13px;font-weight:500;">${file.name}</div>
+                <div style="font-size:12px;color:var(--text-muted);">${(file.size / 1024 / 1024).toFixed(1)} MB</div>
+            </div>
+            <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="this.parentElement.remove();updateBatchCount();"><i class="ri-delete-bin-line"></i></button>
+        `;
+        listEl.appendChild(row);
+        existingCount++;
+    });
+    
+    cardEl.style.display = 'block';
+    countEl.textContent = listEl.children.length;
+    nextBtn.disabled = listEl.children.length === 0;
+}
+
+
+function updateBatchCount() {
+    const listEl = document.getElementById('batch-file-list');
+    const countEl = document.getElementById('batch-count');
+    const nextBtn = document.getElementById('batch-next-btn');
+    const cardEl = document.getElementById('batch-file-list-card');
+    
+    const count = listEl.children.length;
+    countEl.textContent = count;
+    nextBtn.disabled = count === 0;
+    if (count === 0) cardEl.style.display = 'none';
+}
+
+
+function showBatchStep1() {
+    document.getElementById('batch-cat-step').style.display = 'none';
+    document.getElementById('batch-upload-step').style.display = 'block';
+    document.getElementById('batch-edit-step').style.display = 'none';
+    document.getElementById('batch-done-step').style.display = 'none';
+    document.getElementById('batch-step-1').classList.remove('active');
+    document.getElementById('batch-step-2').classList.add('active');
+    document.getElementById('batch-step-3').classList.remove('active');
+    document.getElementById('batch-step-4').classList.remove('active');
+}
+
+
+function showBatchStep2() {
+    const count = document.getElementById('batch-file-list').children.length;
+    if (count === 0) return;
+    
+    const bookNames = ['小王子', '夏洛的网', '哈利·波特', '西游记', '草房子', '窗边的小豆豆', '彼得·潘', '秘密花园', '绿野仙踪', '木偶奇遇记'];
+    const authors = ['圣埃克苏佩里', 'E·B·怀特', 'J.K.罗琳', '吴承恩', '曹文轩', '黑柳彻子', '詹姆斯·巴里', '弗朗西丝·伯内特', '鲍姆', '科洛迪'];
+    const tbody = document.getElementById('batch-edit-tbody');
+    tbody.innerHTML = '';
+    
+    for (let i = 0; i < Math.min(count, bookNames.length); i++) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><input type="checkbox" class="batch-row-check"></td>
+            <td><input type="text" class="form-input" value="${bookNames[i]}" style="min-width:120px;"></td>
+            <td><input type="text" class="form-input" value="${authors[i]}" style="min-width:100px;"></td>
+            <td><input type="text" class="form-input" value="978-7-020-0000${(i+1).toString().padStart(2,'0')}-${i+1}" style="min-width:140px;"></td>
+            <td>
+                <select class="form-select" style="min-width:100px;">
+                    <option selected>中文-文学</option>
+                    <option>中文-艺术</option>
+                    <option>中文-人文社科</option>
+                    <option>中文-自然科学</option>
+                    <option>英文-英语周报时文</option>
+                    <option>英文-外研社分级阅读</option>
+                    <option>英文-原版名著</option>
+                </select>
+            </td>
+            <td>
+                <select class="form-select" style="min-width:100px;">
+                    <option>小学1-2年级</option>
+                    <option selected>小学3-4年级</option>
+                    <option>小学5-6年级</option>
+                    <option>初中</option>
+                    <option>高中</option>
+                </select>
+            </td>
+            <td><span class="tag tag-green">可见</span></td>
+            <td><button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="this.closest('tr').remove();updateBatchEditCount();"><i class="ri-delete-bin-line"></i></button></td>
+        `;
+        tbody.appendChild(tr);
+    }
+    
+    document.getElementById('batch-edit-count').textContent = Math.min(count, bookNames.length);
+    document.getElementById('batch-upload-step').style.display = 'none';
+    document.getElementById('batch-cat-step').style.display = 'none';
+    document.getElementById('batch-edit-step').style.display = 'block';
+    document.getElementById('batch-done-step').style.display = 'none';
+    document.getElementById('batch-step-1').classList.remove('active');
+    document.getElementById('batch-step-2').classList.remove('active');
+    document.getElementById('batch-step-3').classList.add('active');
+    document.getElementById('batch-step-4').classList.remove('active');
+}
+
+
+function showBatchStep4() {
+    const count = document.getElementById('batch-edit-tbody').children.length;
+    document.getElementById('batch-done-count').textContent = count;
+    document.getElementById('batch-upload-step').style.display = 'none';
+    document.getElementById('batch-cat-step').style.display = 'none';
+    document.getElementById('batch-edit-step').style.display = 'none';
+    document.getElementById('batch-done-step').style.display = 'block';
+    document.getElementById('batch-step-1').classList.remove('active');
+    document.getElementById('batch-step-2').classList.remove('active');
+    document.getElementById('batch-step-3').classList.remove('active');
+    document.getElementById('batch-step-4').classList.add('active');
+}
+
+function selectBatchLang(lang) {
+    document.getElementById('batch-cat-step').style.display = 'none';
+    document.getElementById('batch-upload-step').style.display = 'block';
+    document.getElementById('batch-step-1').classList.remove('active');
+    document.getElementById('batch-step-2').classList.add('active');
+}
+
+function selectChapter(el) {
+    const items = el.parentElement.querySelectorAll('.tree-item');
+    items.forEach(item => {
+        item.style.background = '';
+        item.style.border = '';
+    });
+    el.style.background = 'rgba(37,99,235,0.08)';
+    el.style.border = '1px solid var(--primary)';
+}
+
+function importTranslation(input) {
+    if (input.files && input.files.length > 0) {
+        const file = input.files[0];
+        const toast = document.getElementById('translation-import-toast');
+        if (toast) {
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+        }
+        input.value = '';
+    }
+}
+
+function saveTranslation() {
+    alert('译文保存成功！');
+}
+
+function showArticleStep2() {
+    const step1 = document.getElementById('add-article-step1');
+    const step2 = document.getElementById('add-article-step2');
+    const footer = document.getElementById('article-modal-footer');
+    if (step1 && step2 && footer) {
+        if (step1.style.display !== 'none') {
+            step1.style.display = 'none';
+            step2.style.display = 'block';
+            footer.innerHTML = '<button class="btn btn-secondary" onclick="backToArticleStep1()">上一步</button><button class="btn btn-primary" onclick="saveArticle()">确认保存</button>';
+        }
+    }
+}
+
+function backToArticleStep1() {
+    const step1 = document.getElementById('add-article-step1');
+    const step2 = document.getElementById('add-article-step2');
+    const footer = document.getElementById('article-modal-footer');
+    if (step1 && step2 && footer) {
+        step2.style.display = 'none';
+        step1.style.display = 'block';
+        footer.innerHTML = '<button class="btn btn-secondary" onclick="closeModal(\'modal-add-article\')">取消</button><button class="btn btn-primary" onclick="showArticleStep2()">下一步 <i class="ri-arrow-right-line"></i></button>';
+    }
+}
+
+
+function updateBatchEditCount() {
+    const tbody = document.getElementById('batch-edit-tbody');
+    document.getElementById('batch-edit-count').textContent = tbody.children.length;
+}
+
+
+function showBatchStep4() {
+    const count = document.getElementById('batch-edit-tbody').children.length;
+    document.getElementById('batch-done-count').textContent = count;
+    document.getElementById('batch-upload-step').style.display = 'none';
+    document.getElementById('batch-cat-step').style.display = 'none';
+    document.getElementById('batch-edit-step').style.display = 'none';
+    document.getElementById('batch-done-step').style.display = 'block';
+    document.getElementById('batch-step-1').classList.remove('active');
+    document.getElementById('batch-step-2').classList.remove('active');
+    document.getElementById('batch-step-3').classList.remove('active');
+    document.getElementById('batch-step-4').classList.add('active');
+}
+
+
+function toggleBatchCheckAll() {
+    const master = document.getElementById('batch-check-all');
+    const checks = document.querySelectorAll('.batch-row-check');
+    checks.forEach(cb => cb.checked = master.checked);
+}
+
+
+function applyBatchEdit() {
+    const cat = document.getElementById('batch-bulk-cat').value;
+    const grade = document.getElementById('batch-bulk-grade').value;
+    const checks = document.querySelectorAll('.batch-row-check:checked');
+    
+    checks.forEach(cb => {
+        const row = cb.closest('tr');
+        const selects = row.querySelectorAll('select');
+        if (cat !== '设置基础分类' && selects[0]) {
+            for (let o of selects[0].options) { if (o.text === cat) { selects[0].value = o.value; break; } }
+        }
+        if (grade !== '设置适用年级' && selects[1]) {
+            for (let o of selects[1].options) { if (o.text === grade) { selects[1].value = o.value; break; } }
+        }
+    });
+}
+
+// ========== 音频上传交互 ==========
+
+
+function handleAudioUpload(input) {
+    const files = Array.from(input.files || []);
+    if (!files.length) return;
+    
+    // 模拟上传效果：在控制台输出文件名
+    files.forEach(file => {
+        console.log('上传音频:', file.name, file.size);
+    });
+    
+    // 实际场景：这里会调用上传 API，上传完成后刷新音频列表
+    alert('已选择 ' + files.length + ' 个音频文件，实际场景将上传至服务器');
+}
+
+// ========== 书籍状态切换 ==========
+let currentBookStatusRow = null;
+
+
+function openBookStatusModal(modalId, rowId) {
+    currentBookStatusRow = rowId;
+    openModal(modalId);
+}
+
+
+function toggleBookVisibility(toVisible) {
+    if (!currentBookStatusRow) return;
+    
+    // 在书籍列表中查找对应行并切换状态
+    const table = document.querySelector('#page-container .data-table tbody');
+    if (!table) return;
+    
+    const rows = table.querySelectorAll('tr');
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length > 7) {
+            const idCell = cells[0].textContent.trim();
+            if (idCell === currentBookStatusRow) {
+                // 切换状态标签
+                const statusCell = cells[7];
+                const actionCell = cells[8];
+                
+                if (toVisible) {
+                    statusCell.innerHTML = '<span class="tag tag-green">可见</span>';
+                    actionCell.innerHTML = `
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('bookDetail')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openBookStatusModal('modal-book-hide', '${currentBookStatusRow}')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('bookAudio')"><i class="ri-music-2-line"></i> 音频</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--primary);" onclick="openModal('modal-book-ai')"><i class="ri-robot-2-line"></i> AI导读</button>
+                    `;
+                } else {
+                    statusCell.innerHTML = '<span class="tag tag-gray">隐藏</span>';
+                    actionCell.innerHTML = `
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('bookDetail')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="openBookStatusModal('modal-book-show', '${currentBookStatusRow}')"><i class="ri-eye-line"></i> 可见</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('bookAudio')"><i class="ri-music-2-line"></i> 音频</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--primary);" onclick="openModal('modal-book-ai')"><i class="ri-robot-2-line"></i> AI导读</button>
+                    `;
+                }
+            }
+        }
+    });
+    
+    currentBookStatusRow = null;
+    closeModal(toVisible ? 'modal-book-show' : 'modal-book-hide');
+}
+
+function saveTimeline() {
+    alert('时间轴标记已保存！');
+    navigateTo('bookAudio');
+}
+
+
+function markTextPosition(element) {
+    const toast = document.getElementById('audio-mark-toast');
+    const msg = document.getElementById('audio-mark-msg');
+    if (toast && msg) {
+        msg.textContent = '已标记当前音频位置';
+        toast.style.display = 'block';
+        element.style.background = 'rgba(37,99,235,0.2)';
+        element.style.borderBottom = '2px solid var(--primary)';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 2000);
+    }
+}
+
+
+function selectAudio(element) {
+    document.querySelectorAll('.audio-list-item').forEach(el => {
+        el.style.background = '';
+        el.style.border = 'none';
+    });
+    element.style.background = 'rgba(37,99,235,0.08)';
+    element.style.border = '1px solid var(--primary)';
+}
+
+
+function showMarkedPositions() {
+    alert('显示所有已标记的音频-文字对应位置');
+}
+
+
+function handleTranslationImport(input) {
+    if (input.files && input.files.length > 0) {
+        const file = input.files[0];
+        alert('已导入译文文件：' + file.name + '\n系统将按段落自动匹配并覆盖现有译文。');
+        closeModal('modal-import-translation');
+    }
+}
+
+function toggleAudioStatus(id) {
+    const statusEl = document.getElementById('audio-status-' + id);
+    if (statusEl) {
+        const current = statusEl.textContent;
+        if (current === '可见') {
+            statusEl.textContent = '不可见';
+            statusEl.className = 'tag tag-gray';
+        } else {
+            statusEl.textContent = '可见';
+            statusEl.className = 'tag tag-green';
+        }
+    }
+}
+
+function markTime(id) {
+    const now = new Date();
+    const totalMs = (now.getMinutes() * 60 + now.getSeconds()) * 1000 + now.getMilliseconds() - 10;
+    const adjusted = Math.max(0, totalMs);
+    const hh = String(Math.floor(adjusted / 3600000)).padStart(2, '0');
+    const mm = String(Math.floor((adjusted % 3600000) / 60000)).padStart(2, '0');
+    const ss = String(Math.floor((adjusted % 60000) / 1000)).padStart(2, '0');
+    const mmm = String(adjusted % 1000).padStart(3, '0');
+    const timeStr = hh + ':' + mm + ':' + ss + ':' + mmm;
+    const inputEl = document.getElementById('align-time-' + id);
+    if (inputEl) {
+        inputEl.value = timeStr;
+    }
+}
+
+function seekAudio(seconds) {
+    // 模拟快进/回退，更新进度条位置
+    const waveform = document.querySelector('.card:last-child .card-body > div:nth-child(2) > div');
+    if (waveform) {
+        const progress = waveform.querySelector('[style*="width:35%"]');
+        if (progress) {
+            let currentWidth = parseInt(progress.style.width) || 35;
+            let newWidth = currentWidth + (seconds * 2); // 每0.5秒约1%进度
+            if (newWidth < 0) newWidth = 0;
+            if (newWidth > 100) newWidth = 100;
+            progress.style.width = newWidth + '%';
+        }
+    }
+}
+
+function handleAlignmentUpload(input) {
+    if (input.files && input.files.length > 0) {
+        const file = input.files[0];
+        const statusEl = document.getElementById('alignment-status');
+        if (statusEl) {
+            statusEl.style.display = 'flex';
+        }
+        alert('已上传音频：' + file.name + '\n正在自动进行音文对齐...');
+        // 模拟2秒后完成对齐
+        setTimeout(() => {
+            if (statusEl) {
+                statusEl.style.display = 'none';
+            }
+            alert('音文对齐完成！');
+        }, 2000);
+    }
+}
+
+function toggleGradeVisibility(btn) {
+    const tagEl = btn.parentElement.previousElementSibling;
+    if (tagEl) {
+        const current = tagEl.textContent;
+        if (current === '筛选可见') {
+            tagEl.textContent = '筛选不可见';
+            tagEl.className = 'tag tag-gray';
+            btn.style.color = 'var(--success)';
+            btn.innerHTML = '<i class="ri-eye-line"></i>';
+            btn.title = '切换可见';
+        } else {
+            tagEl.textContent = '筛选可见';
+            tagEl.className = 'tag tag-green';
+            btn.style.color = 'var(--warning)';
+            btn.innerHTML = '<i class="ri-eye-off-line"></i>';
+            btn.title = '切换不可见';
+        }
+    }
+}
+
+function toggleArticleLangFields() {
+    const select = document.getElementById('article-lang-select');
+    const val = select ? select.value : '';
+    const enName = document.getElementById('article-name-en-group');
+    const zhName = document.getElementById('article-name-zh-group');
+    const enAuthor = document.getElementById('article-author-en-group');
+    const zhAuthor = document.getElementById('article-author-zh-group');
+    if (val === 'en') {
+        // 英文书籍：同时显示中英文名称和作者
+        if (enName) enName.style.display = 'block';
+        if (zhName) zhName.style.display = 'block';
+        if (enAuthor) enAuthor.style.display = 'block';
+        if (zhAuthor) zhAuthor.style.display = 'block';
+    } else {
+        // 中文书籍：只显示中文名称和作者
+        if (enName) enName.style.display = 'none';
+        if (zhName) zhName.style.display = 'block';
+        if (enAuthor) enAuthor.style.display = 'none';
+        if (zhAuthor) zhAuthor.style.display = 'block';
+    }
+}
+
+function autoSplitParagraphs(textarea) {
+    setTimeout(() => {
+        const text = textarea.value;
+        if (!text || text.length < 10) return;
+        const paragraphs = text.split(/\n{2,}|\n/).filter(p => p.trim().length > 0);
+        const list = document.getElementById('article-paragraphs-list');
+        const preview = document.getElementById('article-paragraphs-preview');
+        if (list && preview) {
+            list.innerHTML = paragraphs.map((p, i) => `
+                <div class="article-para-item" style="display:flex;gap:8px;align-items:flex-start;">
+                    <span style="flex-shrink:0;width:24px;height:24px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;">${i + 1}</span>
+                    <textarea class="form-textarea" rows="1" style="flex:1;font-size:13px;" oninput="this.rows=Math.max(1,Math.ceil(this.scrollHeight/24))">${p.trim()}</textarea>
+                </div>
+            `).join('');
+            preview.style.display = 'block';
+        }
+    }, 100);
+}
+
+function showArticleStep2() {
+    const step1 = document.getElementById('add-article-step1');
+    const step2 = document.getElementById('add-article-step2');
+    const step3 = document.getElementById('add-article-step3');
+    const footer = document.getElementById('add-article-footer');
+    if (step1 && step2 && step3 && footer) {
+        if (step1.style.display !== 'none') {
+            step1.style.display = 'none';
+            step2.style.display = 'block';
+            footer.innerHTML = '<button class="btn btn-secondary" onclick="backToArticleStep1()">上一步</button><button class="btn btn-primary" onclick="showArticleStep2()">下一步 <i class="ri-arrow-right-line"></i></button>';
+        } else if (step2.style.display !== 'none') {
+            step2.style.display = 'none';
+            step3.style.display = 'block';
+            footer.innerHTML = '<button class="btn btn-secondary" onclick="backToArticleStep2()">上一步</button><button class="btn btn-primary" onclick="saveArticle()">确认保存</button>';
+        }
+    }
+}
+
+function backToArticleStep1() {
+    const step1 = document.getElementById('add-article-step1');
+    const step2 = document.getElementById('add-article-step2');
+    const footer = document.getElementById('add-article-footer');
+    if (step1 && step2 && footer) {
+        step1.style.display = 'block';
+        step2.style.display = 'none';
+        footer.innerHTML = '<button class="btn btn-secondary" onclick="closeModal(\'modal-add-article\')">取消</button><button class="btn btn-primary" onclick="showArticleStep2()">下一步 <i class="ri-arrow-right-line"></i></button>';
+    }
+}
+
+function backToArticleStep2() {
+    const step2 = document.getElementById('add-article-step2');
+    const step3 = document.getElementById('add-article-step3');
+    const footer = document.getElementById('add-article-footer');
+    if (step2 && step3 && footer) {
+        step2.style.display = 'block';
+        step3.style.display = 'none';
+        footer.innerHTML = '<button class="btn btn-secondary" onclick="backToArticleStep1()">上一步</button><button class="btn btn-primary" onclick="showArticleStep2()">下一步 <i class="ri-arrow-right-line"></i></button>';
+    }
+}
+
+function generateArticleCover() {
+    const select = document.getElementById('article-lang-select');
+    const val = select ? select.value : 'zh';
+    const nameInput = val === 'en' ? document.getElementById('article-name-en') : document.getElementById('article-name-zh');
+    const preview = document.getElementById('article-cover-preview');
+    if (nameInput && preview && nameInput.value.trim()) {
+        const name = nameInput.value.trim();
+        const colors = ['#4A90D9', '#FF6B35', '#9B59B6', '#27AE60', '#E74C3C', '#F39C12', '#1ABC9C', '#34495E'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        preview.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:500;text-align:center;padding:4px;word-break:break-all;">' + name + '</div>';
+        preview.style.background = color;
+        preview.style.border = 'none';
+    }
+}
+
+function saveArticle() {
+    alert('文章保存成功！');
+    closeModal('modal-add-article');
+}
+
+// ===== 推荐排序 Tab 切换 =====
+function showHomeRecTab() {
+    const homeTab = document.getElementById('home-rec-tab');
+    const detailTab = document.getElementById('detail-rec-tab');
+    if (homeTab && detailTab) {
+        homeTab.style.display = 'block';
+        detailTab.style.display = 'none';
+    }
+    // 更新按钮样式
+    const buttons = document.querySelectorAll('.page-title + div button');
+    if (buttons.length >= 2) {
+        buttons[0].className = 'btn btn-primary btn-sm';
+        buttons[0].style.flex = '1';
+        buttons[1].className = 'btn btn-secondary btn-sm';
+        buttons[1].style.flex = '1';
+    }
+}
+
+function showDetailRecTab() {
+    const homeTab = document.getElementById('home-rec-tab');
+    const detailTab = document.getElementById('detail-rec-tab');
+    if (homeTab && detailTab) {
+        homeTab.style.display = 'none';
+        detailTab.style.display = 'block';
+    }
+    // 更新按钮样式
+    const buttons = document.querySelectorAll('.page-title + div button');
+    if (buttons.length >= 2) {
+        buttons[0].className = 'btn btn-secondary btn-sm';
+        buttons[0].style.flex = '1';
+        buttons[1].className = 'btn btn-primary btn-sm';
+        buttons[1].style.flex = '1';
+    }
+}
+
+// 选择年级（首页推荐）
+function selectRecGrade(el, grade) {
+    // 移除其他选中状态
+    const items = el.parentElement.querySelectorAll('.tree-item');
+    items.forEach(item => {
+        item.style.background = '';
+        item.style.border = '';
+    });
+    // 添加当前选中状态
+    el.style.background = 'rgba(37,99,235,0.08)';
+    el.style.border = '1px solid var(--primary)';
+}
+
+// 选择详情页分类
+function selectDetailRecCat(el, cat) {
+    // 移除其他选中状态
+    const items = el.parentElement.querySelectorAll('.tree-item');
+    items.forEach(item => {
+        item.style.background = '';
+        item.style.border = '';
+    });
+    // 添加当前选中状态
+    el.style.background = 'rgba(37,99,235,0.08)';
+    el.style.border = '1px solid var(--primary)';
+}
+
+// 搜索书籍（新增推荐弹窗）
+function searchBooks(query, inputEl) {
+    if (!inputEl) inputEl = document.activeElement;
+    if (!inputEl || !inputEl.id || !inputEl.id.endsWith('-rec-book-search')) return;
+    const resultsId = inputEl.id.replace('-search', '-results');
+    const results = document.getElementById(resultsId);
+    if (results) {
+        results.style.display = query.length > 0 ? 'block' : 'none';
+    }
+}
+
+// 选择书籍
+function selectBook(el) {
+    const input = el.closest('.modal-body').querySelector('input[id$="-rec-book-search"]');
+    if (input) {
+        const titleDiv = el.querySelector('div:first-child');
+        input.value = titleDiv ? titleDiv.textContent.trim() : el.textContent.trim();
+    }
+    const results = el.closest('.modal-body').querySelector('[id$="-rec-book-results"]');
+    if (results) {
+        results.style.display = 'none';
+    }
+}

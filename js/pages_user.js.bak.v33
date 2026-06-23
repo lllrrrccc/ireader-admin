@@ -1,0 +1,1034 @@
+Object.assign(pageFunctions, {
+students: () => `
+<div class="page-title">
+    <span>学生管理</span>
+    <button class="btn btn-primary" onclick="openModal('modal-add-student')"><i class="ri-add-line"></i> 新增学生</button>
+</div>
+
+<div class="filter-bar">
+    <div class="filter-group">
+        <label>学生ID</label>
+        <input type="text" class="form-input" placeholder="输入学生ID">
+    </div>
+    <div class="filter-group">
+        <label>设备SN码</label>
+        <input type="text" class="form-input" placeholder="输入设备SN码">
+    </div>
+    <div class="filter-group">
+        <label>年级</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>小学1-2年级</option>
+            <option>小学3-4年级</option>
+            <option>小学5-6年级</option>
+            <option>初中</option>
+            <option>高中</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>阅读级别</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>Level 1</option>
+            <option>Level 2</option>
+            <option>Level 3</option>
+            <option>Level 4</option>
+            <option>Level 5</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>状态</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>使用中</option>
+            <option>已终止</option>
+        </select>
+    </div>
+    <div class="filter-group" style="align-self:flex-end;">
+        <button class="btn btn-primary"><i class="ri-search-line"></i> 查询</button>
+        <button class="btn btn-secondary">重置</button>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body" style="overflow-x:auto;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>学生ID</th>
+                    <th>SN+序号</th>
+                    <th>昵称</th>
+                    <th>年级</th>
+                    <th>阅读级别</th>
+                    <th>状态</th>
+                    <th>添加时间</th>
+                    <th>终止时间</th>
+                    <th style="width:220px;">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>S001</td>
+                    <td>IRP20240001-01</td>
+                    <td>张三</td>
+                    <td>小学三年级</td>
+                    <td>Level 2</td>
+                    <td><span class="tag tag-green">使用中</span></td>
+                    <td>2023-09-01</td>
+                    <td>—</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('studentDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-student')"><i class="ri-edit-line"></i> 编辑</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-stop-student')"><i class="ri-forbid-line"></i> 终止使用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>S002</td>
+                    <td>IRP20240001-02</td>
+                    <td>李四</td>
+                    <td>小学三年级</td>
+                    <td>Level 2</td>
+                    <td><span class="tag tag-green">使用中</span></td>
+                    <td>2023-09-05</td>
+                    <td>—</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('studentDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-student')"><i class="ri-edit-line"></i> 编辑</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-stop-student')"><i class="ri-forbid-line"></i> 终止使用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>S003</td>
+                    <td>IRP20240002-01</td>
+                    <td>王五</td>
+                    <td>小学四年级</td>
+                    <td>Level 3</td>
+                    <td><span class="tag tag-green">使用中</span></td>
+                    <td>2023-09-10</td>
+                    <td>—</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('studentDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-student')"><i class="ri-edit-line"></i> 编辑</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-stop-student')"><i class="ri-forbid-line"></i> 终止使用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>S004</td>
+                    <td>IRP20240003-01</td>
+                    <td>赵六</td>
+                    <td>小学五年级</td>
+                    <td>Level 4</td>
+                    <td><span class="tag tag-red">已终止</span></td>
+                    <td>2023-09-12</td>
+                    <td>2024-01-15</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('studentDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-student')"><i class="ri-edit-line"></i> 编辑</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-stop-student')"><i class="ri-forbid-line"></i> 终止使用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>S005</td>
+                    <td>IRP20240004-01</td>
+                    <td>钱七</td>
+                    <td>小学六年级</td>
+                    <td>Level 4</td>
+                    <td><span class="tag tag-green">使用中</span></td>
+                    <td>2023-09-15</td>
+                    <td>—</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('studentDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-student')"><i class="ri-edit-line"></i> 编辑</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-stop-student')"><i class="ri-forbid-line"></i> 终止使用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>S006</td>
+                    <td>IRP20240005-01</td>
+                    <td>孙八</td>
+                    <td>小学二年级</td>
+                    <td>Level 1</td>
+                    <td><span class="tag tag-green">使用中</span></td>
+                    <td>2023-09-20</td>
+                    <td>—</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('studentDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-student')"><i class="ri-edit-line"></i> 编辑</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-stop-student')"><i class="ri-forbid-line"></i> 终止使用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>S007</td>
+                    <td>IRP20240006-01</td>
+                    <td>周九</td>
+                    <td>小学四年级</td>
+                    <td>Level 3</td>
+                    <td><span class="tag tag-red">已终止</span></td>
+                    <td>2023-10-01</td>
+                    <td>2024-02-20</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('studentDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-student')"><i class="ri-edit-line"></i> 编辑</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-stop-student')"><i class="ri-forbid-line"></i> 终止使用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>S008</td>
+                    <td>IRP20240007-01</td>
+                    <td>吴十</td>
+                    <td>小学五年级</td>
+                    <td>Level 4</td>
+                    <td><span class="tag tag-green">使用中</span></td>
+                    <td>2023-10-05</td>
+                    <td>—</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('studentDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-student')"><i class="ri-edit-line"></i> 编辑</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-stop-student')"><i class="ri-forbid-line"></i> 终止使用</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="pagination-bar">
+    <span>共 1,256 条记录</span>
+    <div class="pagination">
+        <button class="btn btn-sm btn-secondary" disabled><i class="ri-arrow-left-s-line"></i></button>
+        <button class="btn btn-sm btn-primary">1</button>
+        <button class="btn btn-sm btn-secondary">2</button>
+        <button class="btn btn-sm btn-secondary">3</button>
+        <button class="btn btn-sm btn-secondary">4</button>
+        <button class="btn btn-sm btn-secondary">5</button>
+        <button class="btn btn-sm btn-secondary"><i class="ri-arrow-right-s-line"></i></button>
+    </div>
+</div>
+
+<!-- 新增学生模态框 -->
+<div class="modal-overlay" id="modal-add-student">
+    <div class="modal" style="max-width:560px;">
+        <div class="modal-header">
+            <span class="modal-title">新增学生</span>
+            <button class="modal-close" onclick="closeModal('modal-add-student')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <div class="form-group">
+                    <label class="form-label">昵称 <span style="color:var(--danger);">*</span></label>
+                    <input type="text" class="form-input" placeholder="请输入昵称">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">年级 <span style="color:var(--danger);">*</span></label>
+                    <select class="form-select">
+                        <option>小学1-2年级</option>
+                        <option>小学3-4年级</option>
+                        <option selected>小学5-6年级</option>
+                        <option>初中</option>
+                        <option>高中</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">阅读级别 <span style="color:var(--danger);">*</span></label>
+                <select class="form-select">
+                    <option>Level 1</option>
+                    <option>Level 2</option>
+                    <option selected>Level 3</option>
+                    <option>Level 4</option>
+                    <option>Level 5</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">设备SN码 <span style="color:var(--danger);">*</span></label>
+                <input type="text" class="form-input" placeholder="输入设备SN码">
+            </div>
+            <div class="form-group">
+                <label class="form-label">学校</label>
+                <input type="text" class="form-input" placeholder="请输入学校名称">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-add-student')">取消</button>
+            <button class="btn btn-primary">确认创建</button>
+        </div>
+    </div>
+</div>
+
+<!-- 编辑学生模态框 -->
+<div class="modal-overlay" id="modal-edit-student">
+    <div class="modal" style="max-width:560px;">
+        <div class="modal-header">
+            <span class="modal-title">编辑学生</span>
+            <button class="modal-close" onclick="closeModal('modal-edit-student')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <div class="form-group">
+                    <label class="form-label">昵称 <span style="color:var(--danger);">*</span></label>
+                    <input type="text" class="form-input" value="张三">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">年级 <span style="color:var(--danger);">*</span></label>
+                    <select class="form-select">
+                        <option>小学1-2年级</option>
+                        <option>小学3-4年级</option>
+                        <option selected>小学5-6年级</option>
+                        <option>初中</option>
+                        <option>高中</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">阅读级别 <span style="color:var(--danger);">*</span></label>
+                <select class="form-select">
+                    <option>Level 1</option>
+                    <option>Level 2</option>
+                    <option selected>Level 3</option>
+                    <option>Level 4</option>
+                    <option>Level 5</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">设备SN码 <span style="color:var(--danger);">*</span></label>
+                <input type="text" class="form-input" value="IRP20240001">
+            </div>
+            <div class="form-group">
+                <label class="form-label">学校</label>
+                <input type="text" class="form-input" value="北京市第一实验小学">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-edit-student')">取消</button>
+            <button class="btn btn-primary">保存修改</button>
+        </div>
+    </div>
+</div>
+
+<!-- 终止使用确认模态框 -->
+<div class="modal-overlay" id="modal-stop-student">
+    <div class="modal" style="max-width:420px;">
+        <div class="modal-header">
+            <span class="modal-title">终止使用确认</span>
+            <button class="modal-close" onclick="closeModal('modal-stop-student')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body">
+            <p style="margin:0;color:var(--text);">终止使用后，该学生将从阅读端删除。此操作不可逆，是否确认？</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-stop-student')">取消</button>
+            <button class="btn btn-danger">确认终止</button>
+        </div>
+    </div>
+</div>
+`,
+
+
+studentDetail: () => `
+<div class="page-title">
+    <span>学生详情</span>
+    <button class="btn btn-secondary" onclick="navigateTo('students')"><i class="ri-arrow-left-line"></i> 返回学生列表</button>
+</div>
+
+<div class="card">
+    <div class="card-header"><span class="card-title">👤 基本信息</span></div>
+    <div class="card-body">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:16px;font-size:13px;">
+            <div><span style="color:var(--text-muted);">学生ID：</span>S001</div>
+            <div><span style="color:var(--text-muted);">SN+序号：</span>IRP20240001-01</div>
+            <div><span style="color:var(--text-muted);">昵称：</span>张三</div>
+            <div><span style="color:var(--text-muted);">年级：</span>小学三年级</div>
+            <div><span style="color:var(--text-muted);">阅读级别：</span>Level 2</div>
+            <div><span style="color:var(--text-muted);">状态：</span><span class="tag tag-green">使用中</span></div>
+            <div><span style="color:var(--text-muted);">学校：</span>北京市第一实验小学</div>
+            <div><span style="color:var(--text-muted);">设备SN：</span>IRP20240001</div>
+            <div><span style="color:var(--text-muted);">添加时间：</span>2023-09-01</div>
+            <div><span style="color:var(--text-muted);">最近阅读：</span>2024-03-15</div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header"><span class="card-title">📊 阅读数据</span></div>
+    <div class="card-body">
+        <div class="stat-grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:20px;">
+            <div class="stat-card">
+                <div class="stat-value">36.5h</div>
+                <div class="stat-label">累计阅读时长</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">12</div>
+                <div class="stat-label">读完本数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">86</div>
+                <div class="stat-label">累计天数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">8</div>
+                <div class="stat-label">笔记数量</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">3</div>
+                <div class="stat-label">读后感</div>
+            </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:16px;">
+            <button class="btn btn-sm btn-primary">阅读进度</button>
+            <button class="btn btn-sm btn-secondary">书架</button>
+            <button class="btn btn-sm btn-secondary">笔记</button>
+            <button class="btn btn-sm btn-secondary">读后感</button>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>书名</th>
+                        <th>阅读状态</th>
+                        <th>进度</th>
+                        <th>已读页数</th>
+                        <th>总页数</th>
+                        <th>加入书架</th>
+                        <th>最后阅读</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>小王子</td>
+                        <td><span class="tag tag-green">已读完</span></td>
+                        <td>100%</td>
+                        <td>120</td>
+                        <td>120</td>
+                        <td><span class="tag tag-green">已加入</span></td>
+                        <td>2024-03-15</td>
+                    </tr>
+                    <tr>
+                        <td>夏洛的网</td>
+                        <td><span class="tag tag-blue">阅读中</span></td>
+                        <td>65%</td>
+                        <td>130</td>
+                        <td>200</td>
+                        <td><span class="tag tag-green">已加入</span></td>
+                        <td>2024-03-14</td>
+                    </tr>
+                    <tr>
+                        <td>西游记</td>
+                        <td><span class="tag tag-blue">阅读中</span></td>
+                        <td>12%</td>
+                        <td>96</td>
+                        <td>800</td>
+                        <td><span class="tag tag-gray">未加入</span></td>
+                        <td>2024-03-15</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header"><span class="card-title">📚 书架</span></div>
+    <div class="card-body">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>书籍ID</th>
+                    <th>书名</th>
+                    <th>作者</th>
+                    <th>加入时间</th>
+                    <th>阅读状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>B001</td>
+                    <td>小王子</td>
+                    <td>圣埃克苏佩里</td>
+                    <td>2023-09-10</td>
+                    <td><span class="tag tag-green">已读完</span></td>
+                </tr>
+                <tr>
+                    <td>B002</td>
+                    <td>夏洛的网</td>
+                    <td>E·B·怀特</td>
+                    <td>2023-10-05</td>
+                    <td><span class="tag tag-blue">阅读中</span></td>
+                </tr>
+                <tr>
+                    <td>B003</td>
+                    <td>The Little Prince</td>
+                    <td>Antoine de Saint</td>
+                    <td>2024-01-20</td>
+                    <td><span class="tag tag-green">已读完</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="card">
+        <div class="card-header"><span class="card-title">📝 英语学习数据</span></div>
+        <div class="card-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+                <div class="stat-card" style="padding:12px;">
+                    <div class="stat-value">128</div>
+                    <div class="stat-label">累计背词</div>
+                </div>
+                <div class="stat-card" style="padding:12px;">
+                    <div class="stat-value">24.5h</div>
+                    <div class="stat-label">听力总时长</div>
+                </div>
+            </div>
+            <div style="font-size:13px;line-height:1.8;">
+                <div><span style="color:var(--text-muted);">当前词库：</span>小王子核心词汇</div>
+                <div><span style="color:var(--text-muted);">掌握进度：</span>86 / 128（67%）</div>
+                <div><span style="color:var(--text-muted);">最近学习：</span>2024-03-15</div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header"><span class="card-title">🎯 操作记录</span></div>
+        <div class="card-body" style="font-size:13px;line-height:1.8;">
+            <div><span style="color:var(--text-muted);">2024-03-15 14:30</span> 阅读《小王子》第3章</div>
+            <div><span style="color:var(--text-muted);">2024-03-15 10:12</span> 完成背单词 20 个</div>
+            <div><span style="color:var(--text-muted);">2024-03-14 16:45</span> 听力播放《小王子 - 第一章》</div>
+            <div><span style="color:var(--text-muted);">2024-03-13 09:20</span> 添加笔记 1 条</div>
+        </div>
+    </div>
+</div>
+`,
+
+
+teachers: () => `
+<div class="page-title">
+    <span>教师管理</span>
+    <button class="btn btn-primary" onclick="openModal('modal-add-teacher')"><i class="ri-add-line"></i> 新增教师</button>
+</div>
+
+<div class="filter-bar">
+    <div class="filter-group">
+        <label>姓名</label>
+        <input type="text" class="form-input" placeholder="输入教师姓名">
+    </div>
+    <div class="filter-group">
+        <label>手机号</label>
+        <input type="text" class="form-input" placeholder="输入手机号">
+    </div>
+    <div class="filter-group">
+        <label>年级</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>小学1-2年级</option>
+            <option>小学3-4年级</option>
+            <option>小学5-6年级</option>
+            <option>初中</option>
+            <option>高中</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>学科</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>语文</option>
+            <option>英语</option>
+            <option>数学</option>
+            <option>其他</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>状态</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>启用</option>
+            <option>禁用</option>
+        </select>
+    </div>
+    <div class="filter-group" style="align-self:flex-end;">
+        <button class="btn btn-primary"><i class="ri-search-line"></i> 查询</button>
+        <button class="btn btn-secondary">重置</button>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body" style="overflow-x:auto;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>教师ID</th>
+                    <th>手机号(账号)</th>
+                    <th>姓名</th>
+                    <th>年级</th>
+                    <th>学科</th>
+                    <th>班级</th>
+                    <th>注册时间</th>
+                    <th>状态</th>
+                    <th style="width:280px;">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>T001</td>
+                    <td>138****1234</td>
+                    <td>王老师</td>
+                    <td>小学三年级</td>
+                    <td>英语</td>
+                    <td>三(1)班, 三(2)班</td>
+                    <td>2023-08-20</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="copyTeacherLink()"><i class="ri-links-line"></i> 复制链接</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('teacherDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-reset-teacher-pwd')"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-disable-teacher')"><i class="ri-forbid-line"></i> 禁用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>T002</td>
+                    <td>139****5678</td>
+                    <td>李老师</td>
+                    <td>小学五年级</td>
+                    <td>语文</td>
+                    <td>五(3)班</td>
+                    <td>2023-09-01</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="copyTeacherLink()"><i class="ri-links-line"></i> 复制链接</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('teacherDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-reset-teacher-pwd')"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-disable-teacher')"><i class="ri-forbid-line"></i> 禁用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>T003</td>
+                    <td>137****9012</td>
+                    <td>张老师</td>
+                    <td>初中</td>
+                    <td>英语</td>
+                    <td>初一(1)班, 初一(2)班</td>
+                    <td>2023-09-15</td>
+                    <td><span class="tag tag-red">禁用</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="copyTeacherLink()"><i class="ri-links-line"></i> 复制链接</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('teacherDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-reset-teacher-pwd')"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="openModal('modal-enable-teacher')"><i class="ri-check-line"></i> 启用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>T004</td>
+                    <td>136****3456</td>
+                    <td>刘老师</td>
+                    <td>小学四年级</td>
+                    <td>数学</td>
+                    <td>四(2)班</td>
+                    <td>2023-10-05</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="copyTeacherLink()"><i class="ri-links-line"></i> 复制链接</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('teacherDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-reset-teacher-pwd')"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-disable-teacher')"><i class="ri-forbid-line"></i> 禁用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>T005</td>
+                    <td>135****7890</td>
+                    <td>陈老师</td>
+                    <td>高中</td>
+                    <td>英语</td>
+                    <td>高一(1)班</td>
+                    <td>2023-10-20</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="copyTeacherLink()"><i class="ri-links-line"></i> 复制链接</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('teacherDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-reset-teacher-pwd')"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-disable-teacher')"><i class="ri-forbid-line"></i> 禁用</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="pagination-bar">
+    <span>共 86 条记录</span>
+    <div class="pagination">
+        <button class="btn btn-sm btn-secondary" disabled><i class="ri-arrow-left-s-line"></i></button>
+        <button class="btn btn-sm btn-primary">1</button>
+        <button class="btn btn-sm btn-secondary">2</button>
+        <button class="btn btn-sm btn-secondary">3</button>
+        <button class="btn btn-sm btn-secondary"><i class="ri-arrow-right-s-line"></i></button>
+    </div>
+</div>
+
+<!-- 新增教师模态框 -->
+<div class="modal-overlay" id="modal-add-teacher">
+    <div class="modal" style="max-width:560px;">
+        <div class="modal-header">
+            <span class="modal-title">新增教师</span>
+            <button class="modal-close" onclick="closeModal('modal-add-teacher')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="form-label">手机号(账号) <span style="color:var(--danger);">*</span></label>
+                <input type="text" class="form-input" placeholder="请输入手机号">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <div class="form-group">
+                    <label class="form-label">姓名 <span style="color:var(--danger);">*</span></label>
+                    <input type="text" class="form-input" placeholder="请输入姓名">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">学科 <span style="color:var(--danger);">*</span></label>
+                    <select class="form-select">
+                        <option>语文</option>
+                        <option selected>英语</option>
+                        <option>数学</option>
+                        <option>其他</option>
+                    </select>
+                </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <div class="form-group">
+                    <label class="form-label">年级 <span style="color:var(--danger);">*</span></label>
+                    <select class="form-select">
+                        <option>小学1-2年级</option>
+                        <option>小学3-4年级</option>
+                        <option selected>小学5-6年级</option>
+                        <option>初中</option>
+                        <option>高中</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">班级</label>
+                    <input type="text" class="form-input" placeholder="多个班级用逗号分隔">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">学校</label>
+                <input type="text" class="form-input" placeholder="请输入学校">
+            </div>
+            <div class="form-group">
+                <label class="form-label">初始密码 <span style="color:var(--danger);">*</span></label>
+                <input type="password" class="form-input" placeholder="请输入初始密码">
+            </div>
+            <div style="padding:8px;background:var(--bg);border-radius:4px;font-size:12px;color:var(--text-muted);">
+                <i class="ri-information-line"></i> 支持批量导入：可先下载模板，填写后上传
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-add-teacher')">取消</button>
+            <button class="btn btn-primary">确认创建</button>
+        </div>
+    </div>
+</div>
+
+<!-- 重置密码模态框 -->
+<div class="modal-overlay" id="modal-reset-teacher-pwd">
+    <div class="modal" style="max-width:420px;">
+        <div class="modal-header">
+            <span class="modal-title">重置教师密码</span>
+            <button class="modal-close" onclick="closeModal('modal-reset-teacher-pwd')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="form-label">新密码 <span style="color:var(--danger);">*</span></label>
+                <input type="password" class="form-input" placeholder="请输入新密码">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-reset-teacher-pwd')">取消</button>
+            <button class="btn btn-primary">确认重置</button>
+        </div>
+    </div>
+</div>
+
+<!-- 禁用教师确认模态框 -->
+<div class="modal-overlay" id="modal-disable-teacher">
+    <div class="modal" style="max-width:420px;">
+        <div class="modal-header">
+            <span class="modal-title">禁用账号确认</span>
+            <button class="modal-close" onclick="closeModal('modal-disable-teacher')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body">
+            <p style="margin:0;color:var(--text);">禁用后教师将无法登录，是否确认？</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-disable-teacher')">取消</button>
+            <button class="btn btn-danger">确认禁用</button>
+        </div>
+    </div>
+</div>
+
+<!-- 启用教师确认模态框 -->
+<div class="modal-overlay" id="modal-enable-teacher">
+    <div class="modal" style="max-width:420px;">
+        <div class="modal-header">
+            <span class="modal-title">启用账号确认</span>
+            <button class="modal-close" onclick="closeModal('modal-enable-teacher')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body">
+            <p style="margin:0;color:var(--text);">启用后教师可正常登录，是否确认？</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-enable-teacher')">取消</button>
+            <button class="btn btn-primary">确认启用</button>
+        </div>
+    </div>
+</div>
+`,
+
+
+parents: () => `
+<div class="page-title">
+    <span>家长管理</span>
+</div>
+
+<div class="filter-bar">
+    <div class="filter-group">
+        <label>手机号</label>
+        <input type="text" class="form-input" placeholder="输入家长手机号">
+    </div>
+    <div class="filter-group">
+        <label>绑定SN码</label>
+        <input type="text" class="form-input" placeholder="输入设备SN码">
+    </div>
+    <div class="filter-group">
+        <label>绑定时间</label>
+        <input type="date" class="form-input">
+    </div>
+    <div class="filter-group">
+        <label>状态</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>正常</option>
+            <option>已解绑</option>
+        </select>
+    </div>
+    <div class="filter-group" style="align-self:flex-end;">
+        <button class="btn btn-primary"><i class="ri-search-line"></i> 查询</button>
+        <button class="btn btn-secondary">重置</button>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body" style="overflow-x:auto;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>手机号</th>
+                    <th>注册时间</th>
+                    <th>绑定学员数</th>
+                    <th>绑定设备数</th>
+                    <th>状态</th>
+                    <th style="width:200px;">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>138****0001</td>
+                    <td>2023-09-01</td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>2 位学员</span>
+                            <div style="font-size:12px;color:var(--text-muted);">
+                                <div>S001 / IRP20240001-01 / 张三</div>
+                                <div>S002 / IRP20240001-02 / 李四</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 台设备</span>
+                            <div style="font-size:12px;color:var(--text-muted);">IRP20240001</div>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-green">正常</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-parent-detail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-unbind-parent')"><i class="ri-link-unlink-m-line"></i> 解绑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>139****0002</td>
+                    <td>2023-09-05</td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 位学员</span>
+                            <div style="font-size:12px;color:var(--text-muted);">S003 / IRP20240002-01 / 王五</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 台设备</span>
+                            <div style="font-size:12px;color:var(--text-muted);">IRP20240002</div>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-green">正常</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-parent-detail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-unbind-parent')"><i class="ri-link-unlink-m-line"></i> 解绑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>137****0003</td>
+                    <td>2023-09-10</td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 位学员</span>
+                            <div style="font-size:12px;color:var(--text-muted);">S005 / IRP20240004-01 / 钱七</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 台设备</span>
+                            <div style="font-size:12px;color:var(--text-muted);">IRP20240004</div>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-green">正常</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-parent-detail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-unbind-parent')"><i class="ri-link-unlink-m-line"></i> 解绑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>136****0004</td>
+                    <td>2023-09-12</td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>0 位学员</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>0 台设备</span>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-red">已解绑</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-parent-detail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" disabled style="color:var(--text-muted);"><i class="ri-link-unlink-m-line"></i> 解绑</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="pagination-bar">
+    <span>共 256 条记录</span>
+    <div class="pagination">
+        <button class="btn btn-sm btn-secondary" disabled><i class="ri-arrow-left-s-line"></i></button>
+        <button class="btn btn-sm btn-primary">1</button>
+        <button class="btn btn-sm btn-secondary">2</button>
+        <button class="btn btn-sm btn-secondary">3</button>
+        <button class="btn btn-sm btn-secondary"><i class="ri-arrow-right-s-line"></i></button>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header"><span class="card-title">📋 绑定记录表</span></div>
+    <div class="card-body" style="overflow-x:auto;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>时间</th>
+                    <th>家长手机号</th>
+                    <th>学员ID</th>
+                    <th>SN+序号</th>
+                    <th>学员姓名</th>
+                    <th>操作类型</th>
+                    <th>操作人</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2024-03-15 10:30</td>
+                    <td>138****0001</td>
+                    <td>S001</td>
+                    <td>IRP20240001-01</td>
+                    <td>张三</td>
+                    <td><span class="tag tag-green">绑定</span></td>
+                    <td>家长扫码</td>
+                </tr>
+                <tr>
+                    <td>2024-03-14 16:20</td>
+                    <td>139****0002</td>
+                    <td>S003</td>
+                    <td>IRP20240002-01</td>
+                    <td>王五</td>
+                    <td><span class="tag tag-green">绑定</span></td>
+                    <td>家长扫码</td>
+                </tr>
+                <tr>
+                    <td>2024-03-13 09:15</td>
+                    <td>138****0001</td>
+                    <td>S002</td>
+                    <td>IRP20240001-02</td>
+                    <td>李四</td>
+                    <td><span class="tag tag-green">绑定</span></td>
+                    <td>后台操作</td>
+                </tr>
+                <tr>
+                    <td>2024-03-10 14:00</td>
+                    <td>136****0004</td>
+                    <td>S004</td>
+                    <td>IRP20240003-01</td>
+                    <td>赵六</td>
+                    <td><span class="tag tag-red">解绑</span></td>
+                    <td>后台操作</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 家长详情模态框 -->
+<div class="modal-overlay" id="modal-parent-detail">
+    <div class="modal" style="max-width:560px;">
+        <div class="modal-header">
+            <span class="modal-title">家长详情</span>
+            <button class="modal-close" onclick="closeModal('modal-parent-detail')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body" style="font-size:13px;line-height:1.8;">
+            <div><span style="color:var(--text-muted);">手机号：</span>138****0001</div>
+            <div><span style="color:var(--text-muted);">注册时间：</span>2023-09-01</div>
+            <div><span style="color:var(--text-muted);">状态：</span><span class="tag tag-green">正常</span></div>
+            <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+                <div style="font-weight:600;margin-bottom:8px;">绑定学员</div>
+                <div>S001 / IRP20240001-01 / 张三</div>
+                <div>S002 / IRP20240001-02 / 李四</div>
+            </div>
+            <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+                <div style="font-weight:600;margin-bottom:8px;">绑定设备</div>
+                <div>IRP20240001</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-parent-detail')">关闭</button>
+        </div>
+    </div>
+</div>
+
+<!-- 解绑确认模态框 -->
+<div class="modal-overlay" id="modal-unbind-parent">
+    <div class="modal" style="max-width:420px;">
+        <div class="modal-header">
+            <span class="modal-title">解绑家长</span>
+            <button class="modal-close" onclick="closeModal('modal-unbind-parent')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body">
+            <p style="margin:0;color:var(--text);">解绑后家长将无法查看该学员数据，是否确认？</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-unbind-parent')">取消</button>
+            <button class="btn btn-danger">确认解绑</button>
+        </div>
+    </div>
+</div>
+`,
+
+
+});

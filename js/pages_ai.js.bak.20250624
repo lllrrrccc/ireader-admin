@@ -1,0 +1,1862 @@
+// AI 管理模块 — 重写版（对齐 PRD v1.0）
+// 页面：aiGuide, aiGuideConfig, aiTranslate, aiTranslateConfig, aiExplain, aiExplainConfig, knowledge
+
+Object.assign(pageFunctions, {
+
+// ========== 1. AI导读管理 ==========
+
+aiGuide: () => `
+<div class="page-title">
+    <span>AI导读管理</span>
+    <button class="btn btn-primary" onclick="navigateTo('aiGuideConfig')"><i class="ri-settings-3-line"></i> AI导读配置</button>
+</div>
+
+<div class="filter-bar">
+    <div class="filter-group">
+        <label>用户ID</label>
+        <input type="text" class="form-input" placeholder="输入用户ID">
+    </div>
+    <div class="filter-group">
+        <label>学生姓名</label>
+        <input type="text" class="form-input" placeholder="输入姓名">
+    </div>
+    <div class="filter-group">
+        <label>书籍名称</label>
+        <input type="text" class="form-input" placeholder="输入书名">
+    </div>
+    <div class="filter-group">
+        <label>时间范围</label>
+        <input type="date" class="form-input"> ~ <input type="date" class="form-input">
+    </div>
+    <div class="filter-group">
+        <label>状态</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>成功</option>
+            <option>生成中</option>
+            <option>失败</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>可见性</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>可见</option>
+            <option>已隐藏</option>
+        </select>
+    </div>
+    <div class="filter-group" style="align-self:flex-end;">
+        <button class="btn btn-primary"><i class="ri-search-line"></i> 查询</button>
+        <button class="btn btn-secondary">重置</button>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
+        <span class="card-title">📋 导读记录表</span>
+        <button class="btn btn-secondary btn-sm"><i class="ri-download-line"></i> 批量导出</button>
+    </div>
+    <div class="card-body" style="overflow-x:auto;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>用户ID</th>
+                    <th>学生姓名</th>
+                    <th>年级</th>
+                    <th>书籍名称</th>
+                    <th>导读内容摘要</th>
+                    <th>获取时间</th>
+                    <th>耗时</th>
+                    <th>状态</th>
+                    <th>可见性</th>
+                    <th style="width:140px;">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GD001</td>
+                    <td>S0000001</td>
+                    <td>张三</td>
+                    <td>小学三年级</td>
+                    <td>小王子</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">这是一本关于成长与友谊的经典童话，讲述了小王子在各个星球...</td>
+                    <td>2024-03-15 10:23:15</td>
+                    <td>1.8s</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-guide-GD001')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-guide-GD001')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>GD002</td>
+                    <td>S0000002</td>
+                    <td>李四</td>
+                    <td>小学四年级</td>
+                    <td>夏洛的网</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">关于一只蜘蛛和一头猪的友谊故事，展现了生命的珍贵...</td>
+                    <td>2024-03-15 11:05:42</td>
+                    <td>2.3s</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-guide-GD002')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-guide-GD002')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>GD003</td>
+                    <td>S0000003</td>
+                    <td>王五</td>
+                    <td>小学五年级</td>
+                    <td>西游记</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">中国古代四大名著之一，讲述唐僧师徒西天取经的故事...</td>
+                    <td>2024-03-15 14:12:08</td>
+                    <td>3.1s</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-red">已隐藏</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-guide-GD003')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="openModal('modal-unhide-guide-GD003')"><i class="ri-eye-line"></i> 显示</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>GD004</td>
+                    <td>S0000004</td>
+                    <td>赵六</td>
+                    <td>小学六年级</td>
+                    <td>哈利·波特与魔法石</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">男孩哈利·波特进入霍格沃茨魔法学校的冒险故事...</td>
+                    <td>2024-03-15 15:30:22</td>
+                    <td>2.5s</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-guide-GD004')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-guide-GD004')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>GD005</td>
+                    <td>S0000005</td>
+                    <td>钱七</td>
+                    <td>初中一年级</td>
+                    <td>草房子</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">桑桑在油麻地小学度过的六年小学生活，充满童真...</td>
+                    <td>2024-03-15 16:45:10</td>
+                    <td>1.9s</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-guide-GD005')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-guide-GD005')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>GD006</td>
+                    <td>S0000006</td>
+                    <td>孙八</td>
+                    <td>初中二年级</td>
+                    <td>The Little Prince</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">A timeless tale about a little prince from a distant planet...</td>
+                    <td>2024-03-15 17:20:33</td>
+                    <td>2.2s</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-guide-GD006')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-guide-GD006')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>GD007</td>
+                    <td>S0000007</td>
+                    <td>周九</td>
+                    <td>小学三年级</td>
+                    <td>夏洛的网</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">夏洛和威尔伯的友谊超越了物种的界限，温暖感人...</td>
+                    <td>2024-03-15 18:00:55</td>
+                    <td>2.7s</td>
+                    <td><span class="tag tag-yellow">生成中</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-guide-GD007')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-guide-GD007')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>GD008</td>
+                    <td>S0000008</td>
+                    <td>吴十</td>
+                    <td>小学四年级</td>
+                    <td>小王子</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">通过小王子的旅程，探讨了爱、责任和人生的真谛...</td>
+                    <td>2024-03-15 19:15:18</td>
+                    <td>1.6s</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-guide-GD008')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-guide-GD008')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="pagination-bar">
+    <span>共 56 条记录</span>
+    <div class="pagination">
+        <button class="btn btn-sm btn-secondary" disabled><i class="ri-arrow-left-s-line"></i></button>
+        <button class="btn btn-sm btn-primary">1</button>
+        <button class="btn btn-sm btn-secondary">2</button>
+        <button class="btn btn-sm btn-secondary">3</button>
+        <button class="btn btn-sm btn-secondary">4</button>
+        <button class="btn btn-sm btn-secondary">5</button>
+        <button class="btn btn-sm btn-secondary"><i class="ri-arrow-right-s-line"></i></button>
+    </div>
+</div>
+
+<!-- 隐藏确认弹窗 -->
+<div class="modal-overlay" id="modal-hide-guide-GD003">
+    <div class="modal" style="max-width:400px;">
+        <div class="modal-header">
+            <span class="modal-title">隐藏记录</span>
+            <button class="modal-close" onclick="closeModal('modal-hide-guide-GD003')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body" style="text-align:center;padding:24px 20px;">
+            <i class="ri-eye-off-line" style="font-size:40px;color:var(--warning);margin-bottom:12px;"></i>
+            <div style="font-size:15px;font-weight:600;margin-bottom:8px;">确认隐藏此导读记录？</div>
+            <div style="font-size:13px;color:var(--text-secondary);">隐藏后用户将无法在设备端查看此导读内容，但记录仍保留在后台。</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-hide-guide-GD003')">取消</button>
+            <button class="btn btn-warning">确认隐藏</button>
+        </div>
+    </div>
+</div>
+
+<!-- 取消隐藏弹窗 -->
+<div class="modal-overlay" id="modal-unhide-guide-GD003">
+    <div class="modal" style="max-width:400px;">
+        <div class="modal-header">
+            <span class="modal-title">恢复显示</span>
+            <button class="modal-close" onclick="closeModal('modal-unhide-guide-GD003')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body" style="text-align:center;padding:24px 20px;">
+            <i class="ri-eye-line" style="font-size:40px;color:var(--success);margin-bottom:12px;"></i>
+            <div style="font-size:15px;font-weight:600;margin-bottom:8px;">确认恢复显示此导读记录？</div>
+            <div style="font-size:13px;color:var(--text-secondary);">恢复后用户将可以重新查看此导读内容。</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-unhide-guide-GD003')">取消</button>
+            <button class="btn btn-success">确认显示</button>
+        </div>
+    </div>
+</div>
+
+<!-- 查看导读详情弹窗 -->
+<div class="modal-overlay" id="modal-view-guide-GD001">
+    <div class="modal" style="max-width:600px;">
+        <div class="modal-header">
+            <span class="modal-title">导读详情 — GD001</span>
+            <button class="modal-close" onclick="closeModal('modal-view-guide-GD001')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body">
+            <div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;">
+                <div><span style="color:var(--text-muted);font-size:12px;">用户ID</span><div style="font-size:14px;font-weight:500;">S0000001</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">学生</span><div style="font-size:14px;font-weight:500;">张三</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">年级</span><div style="font-size:14px;font-weight:500;">小学三年级</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">书籍</span><div style="font-size:14px;font-weight:500;">小王子</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">时间</span><div style="font-size:14px;font-weight:500;">2024-03-15 10:23:15</div></div>
+            </div>
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">导读全文</div>
+            <div style="padding:16px;background:var(--bg);border-radius:var(--radius);font-size:13px;line-height:1.8;color:var(--text-secondary);max-height:300px;overflow-y:auto;">
+                <p>《小王子》是法国作家安托万·德·圣埃克苏佩里创作的一部经典童话。故事讲述了一位来自B-612小行星的小王子，因为和心爱的玫瑰闹了矛盾，决定离开自己的星球去宇宙旅行。</p>
+                <p>在旅途中，小王子先后访问了六个星球，遇到了各种各样的大人：有权力欲极强的国王、爱慕虚荣的人、酗酒的酒鬼、忙于计算星星的商人、循规蹈矩的点灯人，以及从不离开书桌的地理学家。这些大人让小王子感到困惑，因为他们都过于关注"重要的事"，却忽略了生活中真正重要的东西。</p>
+                <p>最后，小王子来到地球，在撒哈拉沙漠遇到了故事的叙述者——一位因飞机故障而迫降的飞行员。小王子向飞行员讲述了自己的故事，并分享了狐狸教给他的秘密："真正重要的东西，用眼睛是看不见的。"</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-view-guide-GD001')">关闭</button>
+        </div>
+    </div>
+</div>
+`,
+
+// ========== 1.2 AI导读配置（二级页面） ==========
+
+aiGuideConfig: () => `
+<div class="page-title">
+    <button class="btn btn-secondary" onclick="navigateTo('aiGuide')"><i class="ri-arrow-left-line"></i> 返回AI导读管理</button>
+    <span>AI导读配置</span>
+</div>
+
+<div style="display:flex;gap:16px;align-items:flex-start;">
+    <div class="card" style="flex:2;">
+        <div class="card-header"><span class="card-title">⚙️ 提示词配置</span></div>
+        <div class="card-body">
+            <div class="form-group">
+                <label class="form-label">系统角色设定</label>
+                <textarea class="form-textarea" rows="4" placeholder="设定AI导读助手的角色和语气...">你是一位亲切的阅读导师，擅长用生动有趣的方式为学生介绍书籍内容。请根据学生的年级和阅读水平，调整语言的难易程度。</textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">导读生成模板</label>
+                <textarea class="form-textarea" rows="6" placeholder="输入导读生成的模板提示词...">请为《{{书名}}》生成一段简短的导读，适合{{年级}}学生阅读。
+
+学生信息：
+- 昵称：{{昵称}}
+- 年级：{{年级}}
+- 阅读级别：{{阅读级别}}
+
+书籍信息：
+- 书名：{{书名}}
+- 作者：{{作者}}
+- 当前章节：{{章节标题}}
+
+要求：
+1. 介绍故事背景和主要人物
+2. 语言生动有趣，适合该年龄段学生
+3. 控制在300字以内</textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">模型选择</label>
+                <select class="form-select">
+                    <option selected>GPT-4</option>
+                    <option>GPT-3.5</option>
+                    <option>Claude 3</option>
+                </select>
+            </div>
+            <div class="form-group" style="text-align:right;">
+                <button class="btn btn-primary">保存配置</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="flex:1;min-width:320px;">
+        <div class="card-header"><span class="card-title">🔧 变量库</span></div>
+        <div class="card-body">
+            <!-- 来源分类 Tab -->
+            <div style="display:flex;gap:4px;margin-bottom:12px;">
+                <button class="btn btn-sm btn-primary" id="var-tab-guide-user" onclick="switchVarTab('guide','user')">用户字段</button>
+                <button class="btn btn-sm btn-secondary" id="var-tab-guide-book" onclick="switchVarTab('guide','book')">书籍字段</button>
+                <button class="btn btn-sm btn-secondary" id="var-tab-guide-kb" onclick="switchVarTab('guide','kb')">知识库</button>
+            </div>
+
+            <!-- 用户字段面板 -->
+            <div id="var-panel-guide-user">
+                <div style="margin-bottom:12px;">
+                    <input type="text" class="form-input" id="var-search-guide-user" placeholder="搜索变量..." oninput="filterVarList('guide','user')">
+                </div>
+                <div style="max-height:360px;overflow-y:auto;" id="var-list-guide-user">
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{昵称}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{昵称}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{年级}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{年级}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{阅读级别}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{阅读级别}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{设备SN}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{设备SN}}')">复制</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 书籍字段面板 -->
+            <div id="var-panel-guide-book" style="display:none;">
+                <div style="margin-bottom:12px;">
+                    <input type="text" class="form-input" id="var-search-guide-book" placeholder="搜索变量..." oninput="filterVarList('guide','book')">
+                </div>
+                <div style="max-height:360px;overflow-y:auto;" id="var-list-guide-book">
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{书名}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{书名}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{作者}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{作者}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{章节标题}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{章节标题}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{当前段落译文}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{当前段落译文}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{本章译文}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{本章译文}}')">复制</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 知识库面板（含子Tab） -->
+            <div id="var-panel-guide-kb" style="display:none;">
+                <!-- 知识库调用方式子Tab -->
+                <div style="display:flex;gap:4px;margin-bottom:12px;">
+                    <button class="btn btn-sm btn-primary" id="var-kbtab-guide-file" onclick="switchKbVarTab('guide','file')">指定文件</button>
+                    <button class="btn btn-sm btn-secondary" id="var-kbtab-guide-tag" onclick="switchKbVarTab('guide','tag')">按标签</button>
+                </div>
+
+                <!-- 指定文件子面板 -->
+                <div id="var-kb-panel-guide-file">
+                    <div style="margin-bottom:12px;">
+                        <input type="text" class="form-input" id="var-search-guide-kbfile" placeholder="搜索文档..." oninput="filterKbVarList('guide','file')">
+                    </div>
+                    <div style="max-height:300px;overflow-y:auto;" id="var-list-guide-kbfile">
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:4px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{知识库文件:作者生平简介.pdf}}</code>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库文件:作者生平简介.pdf}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:4px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{知识库文件:小王子创作背景.md}}</code>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库文件:小王子创作背景.md}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:4px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{知识库文件:法国文学简史.docx}}</code>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库文件:法国文学简史.docx}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:4px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{知识库文件:名著导读资料.md}}</code>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库文件:名著导读资料.md}}')">复制</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 按标签子面板 -->
+                <div id="var-kb-panel-guide-tag" style="display:none;">
+                    <div style="margin-bottom:12px;">
+                        <input type="text" class="form-input" id="var-search-guide-kbtag" placeholder="搜索标签..." oninput="filterKbVarList('guide','tag')">
+                    </div>
+                    <div style="max-height:300px;overflow-y:auto;" id="var-list-guide-kbtag">
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <div>
+                                <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{知识库标签:作者简介}}</code>
+                                <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">覆盖 3 篇</span>
+                            </div>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库标签:作者简介}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <div>
+                                <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{知识库标签:作品背景}}</code>
+                                <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">覆盖 2 篇</span>
+                            </div>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库标签:作品背景}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <div>
+                                <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{知识库标签:文学赏析}}</code>
+                                <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">覆盖 1 篇</span>
+                            </div>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库标签:文学赏析}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <div>
+                                <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{知识库标签:词汇表}}</code>
+                                <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">覆盖 2 篇</span>
+                            </div>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库标签:词汇表}}')">复制</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+`,
+
+// ========== 2. AI翻译管理 ==========
+
+aiTranslate: () => `
+<div class="page-title">
+    <span>AI翻译管理</span>
+    <button class="btn btn-primary" onclick="navigateTo('aiTranslateConfig')"><i class="ri-settings-3-line"></i> AI翻译配置</button>
+</div>
+
+<div class="filter-bar">
+    <div class="filter-group">
+        <label>用户ID</label>
+        <input type="text" class="form-input" placeholder="输入用户ID">
+    </div>
+    <div class="filter-group">
+        <label>学生姓名</label>
+        <input type="text" class="form-input" placeholder="输入姓名">
+    </div>
+    <div class="filter-group">
+        <label>书籍名称</label>
+        <input type="text" class="form-input" placeholder="输入书名">
+    </div>
+    <div class="filter-group">
+        <label>章节</label>
+        <input type="text" class="form-input" placeholder="输入章节">
+    </div>
+    <div class="filter-group">
+        <label>时间范围</label>
+        <input type="date" class="form-input"> ~ <input type="date" class="form-input">
+    </div>
+    <div class="filter-group">
+        <label>状态</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>成功</option>
+            <option>生成中</option>
+            <option>失败</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>可见性</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>可见</option>
+            <option>已隐藏</option>
+        </select>
+    </div>
+    <div class="filter-group" style="align-self:flex-end;">
+        <button class="btn btn-primary"><i class="ri-search-line"></i> 查询</button>
+        <button class="btn btn-secondary">重置</button>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
+        <span class="card-title">📋 翻译记录表</span>
+        <button class="btn btn-secondary btn-sm"><i class="ri-download-line"></i> 批量导出</button>
+    </div>
+    <div class="card-body" style="overflow-x:auto;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>用户ID</th>
+                    <th>学生姓名</th>
+                    <th>年级</th>
+                    <th>书籍名称</th>
+                    <th>章节</th>
+                    <th>原文</th>
+                    <th>译文</th>
+                    <th>获取时间</th>
+                    <th>状态</th>
+                    <th>可见性</th>
+                    <th style="width:140px;">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>TR001</td>
+                    <td>S0000001</td>
+                    <td>张三</td>
+                    <td>小学三年级</td>
+                    <td>The Little Prince</td>
+                    <td>Chapter 1</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">It is the time you have wasted for your rose...</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">正是你为你的玫瑰花费的时光，才使你的玫瑰变得如此重要...</td>
+                    <td>2024-03-15 10:25:18</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-translate-TR001')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-translate-TR001')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TR002</td>
+                    <td>S0000002</td>
+                    <td>李四</td>
+                    <td>小学四年级</td>
+                    <td>Charlotte's Web</td>
+                    <td>Chapter 3</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Where there is life, there is hope.</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">哪里有生命，哪里就有希望。</td>
+                    <td>2024-03-15 11:10:42</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-translate-TR002')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-translate-TR002')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TR003</td>
+                    <td>S0000003</td>
+                    <td>王五</td>
+                    <td>小学五年级</td>
+                    <td>The Little Prince</td>
+                    <td>Chapter 7</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">The stars are beautiful, because of a flower that cannot be seen.</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">星星真美，因为有一朵看不见的花。</td>
+                    <td>2024-03-15 12:30:55</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-red">已隐藏</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-translate-TR003')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="openModal('modal-unhide-translate-TR003')"><i class="ri-eye-line"></i> 显示</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TR004</td>
+                    <td>S0000004</td>
+                    <td>赵六</td>
+                    <td>小学六年级</td>
+                    <td>Harry Potter</td>
+                    <td>Chapter 2</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">You have been my friend. That in itself is a tremendous thing.</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">你一直是我的朋友。这本身就是一件了不起的事。</td>
+                    <td>2024-03-15 15:20:33</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-translate-TR004')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-translate-TR004')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TR005</td>
+                    <td>S0000005</td>
+                    <td>钱七</td>
+                    <td>初中一年级</td>
+                    <td>Charlotte's Web</td>
+                    <td>Chapter 5</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">What is essential is invisible to the eye.</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">真正重要的东西，用眼睛是看不见的。</td>
+                    <td>2024-03-15 17:30:10</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-translate-TR005')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-translate-TR005')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TR006</td>
+                    <td>S0000006</td>
+                    <td>孙八</td>
+                    <td>初中二年级</td>
+                    <td>The Little Prince</td>
+                    <td>Chapter 21</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">One sees clearly only with the heart.</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">一个人只有用心去看，才能看到真实。</td>
+                    <td>2024-03-15 18:45:22</td>
+                    <td><span class="tag tag-yellow">生成中</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-translate-TR006')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-translate-TR006')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="pagination-bar">
+    <span>共 156 条记录</span>
+    <div class="pagination">
+        <button class="btn btn-sm btn-secondary" disabled><i class="ri-arrow-left-s-line"></i></button>
+        <button class="btn btn-sm btn-primary">1</button>
+        <button class="btn btn-sm btn-secondary">2</button>
+        <button class="btn btn-sm btn-secondary">3</button>
+        <button class="btn btn-sm btn-secondary">4</button>
+        <button class="btn btn-sm btn-secondary">5</button>
+        <button class="btn btn-sm btn-secondary"><i class="ri-arrow-right-s-line"></i></button>
+    </div>
+</div>
+
+<!-- 隐藏确认弹窗 -->
+<div class="modal-overlay" id="modal-hide-translate-TR001">
+    <div class="modal" style="max-width:400px;">
+        <div class="modal-header">
+            <span class="modal-title">隐藏记录</span>
+            <button class="modal-close" onclick="closeModal('modal-hide-translate-TR001')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body" style="text-align:center;padding:24px 20px;">
+            <i class="ri-eye-off-line" style="font-size:40px;color:var(--warning);margin-bottom:12px;"></i>
+            <div style="font-size:15px;font-weight:600;margin-bottom:8px;">确认隐藏此翻译记录？</div>
+            <div style="font-size:13px;color:var(--text-secondary);">隐藏后用户将无法在设备端查看此翻译内容，但记录仍保留在后台。</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-hide-translate-TR001')">取消</button>
+            <button class="btn btn-warning">确认隐藏</button>
+        </div>
+    </div>
+</div>
+
+<!-- 取消隐藏弹窗 -->
+<div class="modal-overlay" id="modal-unhide-translate-TR003">
+    <div class="modal" style="max-width:400px;">
+        <div class="modal-header">
+            <span class="modal-title">恢复显示</span>
+            <button class="modal-close" onclick="closeModal('modal-unhide-translate-TR003')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body" style="text-align:center;padding:24px 20px;">
+            <i class="ri-eye-line" style="font-size:40px;color:var(--success);margin-bottom:12px;"></i>
+            <div style="font-size:15px;font-weight:600;margin-bottom:8px;">确认恢复显示此翻译记录？</div>
+            <div style="font-size:13px;color:var(--text-secondary);">恢复后用户将可以重新查看此翻译内容。</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-unhide-translate-TR003')">取消</button>
+            <button class="btn btn-success">确认显示</button>
+        </div>
+    </div>
+</div>
+
+<!-- 查看翻译详情弹窗 -->
+<div class="modal-overlay" id="modal-view-translate-TR001">
+    <div class="modal" style="max-width:600px;">
+        <div class="modal-header">
+            <span class="modal-title">翻译详情 — TR001</span>
+            <button class="modal-close" onclick="closeModal('modal-view-translate-TR001')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body">
+            <div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;">
+                <div><span style="color:var(--text-muted);font-size:12px;">用户ID</span><div style="font-size:14px;font-weight:500;">S0000001</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">学生</span><div style="font-size:14px;font-weight:500;">张三</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">年级</span><div style="font-size:14px;font-weight:500;">小学三年级</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">书籍</span><div style="font-size:14px;font-weight:500;">The Little Prince</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">章节</span><div style="font-size:14px;font-weight:500;">Chapter 1</div></div>
+            </div>
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">原文</div>
+            <div style="padding:12px;background:var(--bg);border-radius:var(--radius);font-size:13px;line-height:1.6;color:var(--text-secondary);margin-bottom:16px;">
+                It is the time you have wasted for your rose that makes your rose so important.
+            </div>
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">译文</div>
+            <div style="padding:12px;background:var(--bg);border-radius:var(--radius);font-size:13px;line-height:1.6;color:var(--text-secondary);">
+                正是你为你的玫瑰花费的时光，才使你的玫瑰变得如此重要。
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-view-translate-TR001')">关闭</button>
+        </div>
+    </div>
+</div>
+`,
+
+// ========== 2.2 AI翻译配置（二级页面） ==========
+
+aiTranslateConfig: () => `
+<div class="page-title">
+    <button class="btn btn-secondary" onclick="navigateTo('aiTranslate')"><i class="ri-arrow-left-line"></i> 返回AI翻译管理</button>
+    <span>AI翻译配置</span>
+</div>
+
+<div style="display:flex;gap:16px;align-items:flex-start;">
+    <div class="card" style="flex:2;">
+        <div class="card-header"><span class="card-title">⚙️ 翻译提示词配置</span></div>
+        <div class="card-body">
+            <div style="padding:12px;background:#f0f9ff;border:1px solid #bae6fd;border-radius:var(--radius);margin-bottom:16px;">
+                <div style="font-size:13px;color:#0369a1;"><i class="ri-information-line" style="margin-right:4px;"></i>当前配置仅用于英文书籍下的英译中场景</div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">翻译风格</label>
+                <select class="form-select">
+                    <option>直译（忠实原文）</option>
+                    <option selected>意译（流畅自然）</option>
+                    <option>学术翻译</option>
+                    <option>儿童友好翻译</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">系统提示词</label>
+                <textarea class="form-textarea" rows="6" placeholder="设定AI翻译的风格和要求...">你是一位专业的英语翻译助手，擅长将英文内容翻译成适合{{年级}}学生理解的中文。
+
+翻译要求：
+1. 保持原文的意思准确
+2. 使用{{年级}}学生能理解的词汇和句式
+3. 如果原文涉及文化背景，适当添加解释
+4. 参考{{当前段落译文}}保持翻译风格一致
+
+当前段落：{{当前段落译文}}
+本章上下文：{{本章译文}}</textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">模型选择</label>
+                <select class="form-select">
+                    <option selected>GPT-4</option>
+                    <option>GPT-3.5</option>
+                    <option>Claude 3</option>
+                </select>
+            </div>
+            <div class="form-group" style="text-align:right;">
+                <button class="btn btn-primary">保存配置</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="flex:1;min-width:320px;">
+        <div class="card-header"><span class="card-title">🔧 变量库</span></div>
+        <div class="card-body">
+            <!-- 来源分类 Tab -->
+            <div style="display:flex;gap:4px;margin-bottom:12px;">
+                <button class="btn btn-sm btn-primary" id="var-tab-translate-user" onclick="switchVarTab('translate','user')">用户字段</button>
+                <button class="btn btn-sm btn-secondary" id="var-tab-translate-book" onclick="switchVarTab('translate','book')">书籍字段</button>
+                <button class="btn btn-sm btn-secondary" id="var-tab-translate-kb" onclick="switchVarTab('translate','kb')">知识库</button>
+            </div>
+
+            <!-- 用户字段面板 -->
+            <div id="var-panel-translate-user">
+                <div style="margin-bottom:12px;">
+                    <input type="text" class="form-input" id="var-search-translate-user" placeholder="搜索变量..." oninput="filterVarList('translate','user')">
+                </div>
+                <div style="max-height:360px;overflow-y:auto;" id="var-list-translate-user">
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{昵称}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{昵称}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{年级}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{年级}}')">复制</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 书籍字段面板 -->
+            <div id="var-panel-translate-book" style="display:none;">
+                <div style="margin-bottom:12px;">
+                    <input type="text" class="form-input" id="var-search-translate-book" placeholder="搜索变量..." oninput="filterVarList('translate','book')">
+                </div>
+                <div style="max-height:360px;overflow-y:auto;" id="var-list-translate-book">
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{书名}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{书名}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{章节}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{章节}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{当前段落译文}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{当前段落译文}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{本章译文}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{本章译文}}')">复制</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 知识库面板（含子Tab） -->
+            <div id="var-panel-translate-kb" style="display:none;">
+                <!-- 知识库调用方式子Tab -->
+                <div style="display:flex;gap:4px;margin-bottom:12px;">
+                    <button class="btn btn-sm btn-primary" id="var-kbtab-translate-file" onclick="switchKbVarTab('translate','file')">指定文件</button>
+                    <button class="btn btn-sm btn-secondary" id="var-kbtab-translate-tag" onclick="switchKbVarTab('translate','tag')">按标签</button>
+                </div>
+
+                <!-- 指定文件子面板 -->
+                <div id="var-kb-panel-translate-file">
+                    <div style="margin-bottom:12px;">
+                        <input type="text" class="form-input" id="var-search-translate-kbfile" placeholder="搜索文档..." oninput="filterKbVarList('translate','file')">
+                    </div>
+                    <div style="max-height:300px;overflow-y:auto;" id="var-list-translate-kbfile">
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:4px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{知识库文件:学术术语表.pdf}}</code>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库文件:学术术语表.pdf}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:4px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{知识库文件:英语分级词汇.md}}</code>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库文件:英语分级词汇.md}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:4px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{知识库文件:儿童文学常用词.txt}}</code>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库文件:儿童文学常用词.txt}}')">复制</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 按标签子面板 -->
+                <div id="var-kb-panel-translate-tag" style="display:none;">
+                    <div style="margin-bottom:12px;">
+                        <input type="text" class="form-input" id="var-search-translate-kbtag" placeholder="搜索标签..." oninput="filterKbVarList('translate','tag')">
+                    </div>
+                    <div style="max-height:300px;overflow-y:auto;" id="var-list-translate-kbtag">
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <div>
+                                <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{知识库标签:词汇表}}</code>
+                                <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">覆盖 3 篇</span>
+                            </div>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库标签:词汇表}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <div>
+                                <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{知识库标签:术语库}}</code>
+                                <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">覆盖 2 篇</span>
+                            </div>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库标签:术语库}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <div>
+                                <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{知识库标签:分级标准}}</code>
+                                <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">覆盖 1 篇</span>
+                            </div>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库标签:分级标准}}')">复制</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+`,
+
+// ========== 3. AI讲解管理 ==========
+
+aiExplain: () => `
+<div class="page-title">
+    <span>AI讲解管理</span>
+    <button class="btn btn-primary" onclick="navigateTo('aiExplainConfig')"><i class="ri-settings-3-line"></i> AI讲解配置</button>
+</div>
+
+<div class="filter-bar">
+    <div class="filter-group">
+        <label>用户ID</label>
+        <input type="text" class="form-input" placeholder="输入用户ID">
+    </div>
+    <div class="filter-group">
+        <label>学生姓名</label>
+        <input type="text" class="form-input" placeholder="输入姓名">
+    </div>
+    <div class="filter-group">
+        <label>书籍名称</label>
+        <input type="text" class="form-input" placeholder="输入书名">
+    </div>
+    <div class="filter-group">
+        <label>对话轮数</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>时间范围</label>
+        <input type="date" class="form-input"> ~ <input type="date" class="form-input">
+    </div>
+    <div class="filter-group">
+        <label>状态</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>成功</option>
+            <option>生成中</option>
+            <option>失败</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>可见性</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>可见</option>
+            <option>已隐藏</option>
+        </select>
+    </div>
+    <div class="filter-group" style="align-self:flex-end;">
+        <button class="btn btn-primary"><i class="ri-search-line"></i> 查询</button>
+        <button class="btn btn-secondary">重置</button>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
+        <span class="card-title">📋 对话记录表</span>
+        <button class="btn btn-secondary btn-sm"><i class="ri-download-line"></i> 批量导出</button>
+    </div>
+    <div class="card-body" style="overflow-x:auto;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>用户ID</th>
+                    <th>学生姓名</th>
+                    <th>年级</th>
+                    <th>书籍名称</th>
+                    <th>首轮问题</th>
+                    <th>AI首轮回复摘要</th>
+                    <th>对话轮数</th>
+                    <th>获取时间</th>
+                    <th>状态</th>
+                    <th>可见性</th>
+                    <th style="width:160px;">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>EX001</td>
+                    <td>S0000001</td>
+                    <td>张三</td>
+                    <td>小学三年级</td>
+                    <td>小王子</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">请讲解"正是你为你的玫瑰花费了时间，才使你的玫瑰变得如此重要"</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">这句话是狐狸对小王子说的，意思是...</td>
+                    <td>3</td>
+                    <td>2024-03-15 10:30:15</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-dialog-EX001')"><i class="ri-chat-1-line"></i> 查看对话</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-explain-EX001')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>EX002</td>
+                    <td>S0000002</td>
+                    <td>李四</td>
+                    <td>小学四年级</td>
+                    <td>夏洛的网</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">夏洛为什么要帮助威尔伯？</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">夏洛帮助威尔伯是因为它们之间建立了深厚的友谊...</td>
+                    <td>2</td>
+                    <td>2024-03-15 11:15:42</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-dialog-EX002')"><i class="ri-chat-1-line"></i> 查看对话</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-explain-EX002')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>EX003</td>
+                    <td>S0000003</td>
+                    <td>王五</td>
+                    <td>小学五年级</td>
+                    <td>西游记</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">孙悟空为什么要保护唐僧？</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">孙悟空被观音菩萨点化，答应保护唐僧西天取经...</td>
+                    <td>1</td>
+                    <td>2024-03-15 12:00:08</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-red">已隐藏</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-dialog-EX003')"><i class="ri-chat-1-line"></i> 查看对话</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="openModal('modal-unhide-explain-EX003')"><i class="ri-eye-line"></i> 显示</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>EX004</td>
+                    <td>S0000004</td>
+                    <td>赵六</td>
+                    <td>小学六年级</td>
+                    <td>哈利·波特与魔法石</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">哈利·波特为什么能进入霍格沃茨？</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">哈利·波特是巫师，收到了霍格沃茨魔法学校的录取通知书...</td>
+                    <td>3</td>
+                    <td>2024-03-15 13:45:22</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-dialog-EX004')"><i class="ri-chat-1-line"></i> 查看对话</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-explain-EX004')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>EX005</td>
+                    <td>S0000005</td>
+                    <td>钱七</td>
+                    <td>初中一年级</td>
+                    <td>草房子</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">草房子为什么叫草房子？</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">草房子指的是故事中用油麻搭建的房子...</td>
+                    <td>2</td>
+                    <td>2024-03-15 14:30:55</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-dialog-EX005')"><i class="ri-chat-1-line"></i> 查看对话</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-explain-EX005')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>EX006</td>
+                    <td>S0000006</td>
+                    <td>孙八</td>
+                    <td>初中二年级</td>
+                    <td>The Little Prince</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">What does the fox mean by "tame"?</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">The fox explains that "taming" means creating ties...</td>
+                    <td>3</td>
+                    <td>2024-03-15 15:20:33</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-dialog-EX006')"><i class="ri-chat-1-line"></i> 查看对话</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-explain-EX006')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>EX007</td>
+                    <td>S0000007</td>
+                    <td>周九</td>
+                    <td>小学三年级</td>
+                    <td>夏洛的网</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Why did the spider write words on the web?</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Charlotte wrote words on her web to save Wilbur...</td>
+                    <td>1</td>
+                    <td>2024-03-15 16:00:10</td>
+                    <td><span class="tag tag-yellow">生成中</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-dialog-EX007')"><i class="ri-chat-1-line"></i> 查看对话</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-explain-EX007')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>EX008</td>
+                    <td>S0000008</td>
+                    <td>吴十</td>
+                    <td>小学四年级</td>
+                    <td>哈利·波特与魔法石</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">How does the Sorting Hat work?</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">The Sorting Hat is a magical hat that reads the wearer's mind...</td>
+                    <td>2</td>
+                    <td>2024-03-15 17:10:18</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-dialog-EX008')"><i class="ri-chat-1-line"></i> 查看对话</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-explain-EX008')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="pagination-bar">
+    <span>共 128 条记录</span>
+    <div class="pagination">
+        <button class="btn btn-sm btn-secondary" disabled><i class="ri-arrow-left-s-line"></i></button>
+        <button class="btn btn-sm btn-primary">1</button>
+        <button class="btn btn-sm btn-secondary">2</button>
+        <button class="btn btn-sm btn-secondary">3</button>
+        <button class="btn btn-sm btn-secondary">4</button>
+        <button class="btn btn-sm btn-secondary">5</button>
+        <button class="btn btn-sm btn-secondary"><i class="ri-arrow-right-s-line"></i></button>
+    </div>
+</div>
+
+<!-- 对话详情弹窗（3轮完整对话） -->
+<div class="modal-overlay" id="modal-dialog-EX001">
+    <div class="modal" style="max-width:640px;">
+        <div class="modal-header">
+            <span class="modal-title">对话详情 — EX001</span>
+            <button class="modal-close" onclick="closeModal('modal-dialog-EX001')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body">
+            <div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;padding:12px;background:var(--bg);border-radius:var(--radius);">
+                <div><span style="color:var(--text-muted);font-size:12px;">用户ID</span><div style="font-size:14px;font-weight:500;">S0000001</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">学生</span><div style="font-size:14px;font-weight:500;">张三</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">年级</span><div style="font-size:14px;font-weight:500;">小学三年级</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">书籍</span><div style="font-size:14px;font-weight:500;">小王子</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">触发时间</span><div style="font-size:14px;font-weight:500;">2024-03-15 10:30:15</div></div>
+            </div>
+
+            <!-- 第1轮 -->
+            <div style="margin-bottom:16px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+                <div style="padding:8px 12px;background:rgba(37,99,235,0.06);font-size:13px;font-weight:600;color:var(--primary);border-bottom:1px solid var(--border);">第1轮</div>
+                <div style="padding:12px;">
+                    <div style="margin-bottom:12px;">
+                        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+                            <span style="width:24px;height:24px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;">🙋</span>
+                            <span style="font-size:13px;font-weight:500;">用户</span>
+                        </div>
+                        <div style="padding:10px 12px;background:#f8fafc;border-radius:0 12px 12px 12px;margin-left:30px;font-size:13px;line-height:1.6;">
+                            请讲解"正是你为你的玫瑰花费了时间，才使你的玫瑰变得如此重要"
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+                            <span style="width:24px;height:24px;background:var(--success);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;">🤖</span>
+                            <span style="font-size:13px;font-weight:500;">AI</span>
+                        </div>
+                        <div style="padding:10px 12px;background:#f0fdf4;border-radius:12px 0 12px 12px;margin-left:30px;font-size:13px;line-height:1.6;">
+                            <p>这句话是狐狸对小王子说的，意思是：</p>
+                            <p>当你为某个人或某样东西付出了时间和精力，你们之间就建立了特殊的联系。这种联系让这个东西对你来说变得独一无二、非常重要。</p>
+                            <p>就像小王子为他的玫瑰浇水、盖玻璃罩、捉毛毛虫，虽然玫瑰有时很任性，但正因为小王子付出了时间，这朵玫瑰就成为了世界上独一无二的玫瑰。</p>
+                            <div style="margin-top:8px;display:flex;align-items:center;gap:4px;font-size:12px;color:var(--success);">
+                                <i class="ri-bookmark-line"></i> 已收藏
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第2轮 -->
+            <div style="margin-bottom:16px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+                <div style="padding:8px 12px;background:rgba(37,99,235,0.06);font-size:13px;font-weight:600;color:var(--primary);border-bottom:1px solid var(--border);">第2轮</div>
+                <div style="padding:12px;">
+                    <div style="margin-bottom:12px;">
+                        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+                            <span style="width:24px;height:24px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;">🙋</span>
+                            <span style="font-size:13px;font-weight:500;">用户</span>
+                        </div>
+                        <div style="padding:10px 12px;background:#f8fafc;border-radius:0 12px 12px 12px;margin-left:30px;font-size:13px;line-height:1.6;">
+                            那小王子最后回到玫瑰身边了吗？
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+                            <span style="width:24px;height:24px;background:var(--success);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;">🤖</span>
+                            <span style="font-size:13px;font-weight:500;">AI</span>
+                        </div>
+                        <div style="padding:10px 12px;background:#f0fdf4;border-radius:12px 0 12px 12px;margin-left:30px;font-size:13px;line-height:1.6;">
+                            <p>这是一个开放式结局。在故事的最后，小王子让蛇咬了他，他的身体变得轻飘飘的，像一片羽毛一样飞走了。</p>
+                            <p>作者没有明确告诉我们小王子是否回到了B-612星球。但我们可以相信，小王子一定回到了他的玫瑰身边，因为他曾经说过："我要对我的玫瑰负责。"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第3轮 -->
+            <div style="margin-bottom:16px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+                <div style="padding:8px 12px;background:rgba(37,99,235,0.06);font-size:13px;font-weight:600;color:var(--primary);border-bottom:1px solid var(--border);">第3轮</div>
+                <div style="padding:12px;">
+                    <div style="margin-bottom:12px;">
+                        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+                            <span style="width:24px;height:24px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;">🙋</span>
+                            <span style="font-size:13px;font-weight:500;">用户</span>
+                        </div>
+                        <div style="padding:10px 12px;background:#f8fafc;border-radius:0 12px 12px 12px;margin-left:30px;font-size:13px;line-height:1.6;">
+                            这本书的作者是谁？
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+                            <span style="width:24px;height:24px;background:var(--success);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;">🤖</span>
+                            <span style="font-size:13px;font-weight:500;">AI</span>
+                        </div>
+                        <div style="padding:10px 12px;background:#f0fdf4;border-radius:12px 0 12px 12px;margin-left:30px;font-size:13px;line-height:1.6;">
+                            <p>《小王子》的作者是安托万·德·圣埃克苏佩里（Antoine de Saint-Exupéry），他是一位法国作家和飞行员。</p>
+                            <p>圣埃克苏佩里出生于1900年，除了写作，他还是一名勇敢的飞行员。他在1944年执行飞行任务时失踪，再也没有回来。</p>
+                            <div style="margin-top:8px;display:flex;align-items:center;gap:4px;font-size:12px;color:var(--info);">
+                                <i class="ri-database-2-line"></i> 来源：知识库 — 作者简介
+                            </div>
+                            <div style="margin-top:4px;display:flex;align-items:center;gap:4px;font-size:12px;color:var(--success);">
+                                <i class="ri-bookmark-line"></i> 已收藏
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align:center;padding:8px;background:#fef2f2;border-radius:var(--radius);font-size:12px;color:var(--danger);">
+                <i class="ri-error-warning-line" style="margin-right:4px;"></i>已达到最大对话轮数限制（3轮），本次对话已结束
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" onclick="closeModal('modal-dialog-EX001');openModal('modal-hide-explain-EX001')">隐藏此对话</button>
+            <button class="btn btn-secondary" onclick="closeModal('modal-dialog-EX001')">关闭</button>
+        </div>
+    </div>
+</div>
+
+<!-- 隐藏确认弹窗 -->
+<div class="modal-overlay" id="modal-hide-explain-EX001">
+    <div class="modal" style="max-width:400px;">
+        <div class="modal-header">
+            <span class="modal-title">隐藏记录</span>
+            <button class="modal-close" onclick="closeModal('modal-hide-explain-EX001')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body" style="text-align:center;padding:24px 20px;">
+            <i class="ri-eye-off-line" style="font-size:40px;color:var(--warning);margin-bottom:12px;"></i>
+            <div style="font-size:15px;font-weight:600;margin-bottom:8px;">确认隐藏此对话记录？</div>
+            <div style="font-size:13px;color:var(--text-secondary);">隐藏后用户将无法在设备端查看此对话内容，但记录仍保留在后台。</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-hide-explain-EX001')">取消</button>
+            <button class="btn btn-warning">确认隐藏</button>
+        </div>
+    </div>
+</div>
+
+<!-- 取消隐藏弹窗 -->
+<div class="modal-overlay" id="modal-unhide-explain-EX003">
+    <div class="modal" style="max-width:400px;">
+        <div class="modal-header">
+            <span class="modal-title">恢复显示</span>
+            <button class="modal-close" onclick="closeModal('modal-unhide-explain-EX003')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body" style="text-align:center;padding:24px 20px;">
+            <i class="ri-eye-line" style="font-size:40px;color:var(--success);margin-bottom:12px;"></i>
+            <div style="font-size:15px;font-weight:600;margin-bottom:8px;">确认恢复显示此对话记录？</div>
+            <div style="font-size:13px;color:var(--text-secondary);">恢复后用户将可以重新查看此对话内容。</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-unhide-explain-EX003')">取消</button>
+            <button class="btn btn-success">确认显示</button>
+        </div>
+    </div>
+</div>
+`,
+
+// ========== 3.2 AI讲解配置（二级页面） ==========
+
+aiExplainConfig: () => `
+<div class="page-title">
+    <button class="btn btn-secondary" onclick="navigateTo('aiExplain')"><i class="ri-arrow-left-line"></i> 返回AI讲解管理</button>
+    <span>AI讲解配置</span>
+</div>
+
+<div style="display:flex;gap:16px;align-items:flex-start;">
+    <div class="card" style="flex:2;">
+        <div class="card-header"><span class="card-title">⚙️ 讲解提示词配置</span></div>
+        <div class="card-body">
+            <div style="padding:12px;background:#f0f9ff;border:1px solid #bae6fd;border-radius:var(--radius);margin-bottom:16px;">
+                <div style="font-size:13px;color:#0369a1;"><i class="ri-information-line" style="margin-right:4px;"></i>AI讲解支持最多3轮对话，超过后将提示用户对话结束</div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">解释风格</label>
+                <select class="form-select">
+                    <option>简洁明了</option>
+                    <option selected>详细展开</option>
+                    <option>适合儿童</option>
+                    <option>学术深度</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">首轮对话提示词</label>
+                <textarea class="form-textarea" rows="6" placeholder="定义用户划取内容后首次发送给AI的模板...">你是一位耐心的阅读讲解助手，正在为{{年级}}的学生讲解《{{书名}}》中的内容。
+
+学生划取了以下内容："{{划选原文}}"
+
+当前章节：{{当前章节}}
+当前段落译文：{{当前段落译文}}
+本章译文：{{本章译文}}
+
+请根据学生的年级和理解能力，用{{年级}}学生能听懂的语言，讲解这段内容的含义。如果涉及文化背景或作者信息，可以适当补充。
+
+学生的问题："请讲解'{{划选原文}}'"</textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">多轮对话规则</label>
+                <textarea class="form-textarea" rows="4" placeholder="定义后续追问的上下文保留规则...">在多轮对话中，请保持以下上下文：
+1. 始终记住当前讨论的书籍《{{书名}}》和章节{{当前章节}}
+2. 保持与学生的年级{{年级}}相匹配的语言难度
+3. 如果学生追问作者或背景信息，可以参考知识库内容
+4. 每轮回答控制在200字以内，便于学生阅读
+5. 最多进行3轮对话，超过后提示用户对话结束</textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">模型选择</label>
+                <select class="form-select">
+                    <option selected>GPT-4</option>
+                    <option>GPT-3.5</option>
+                    <option>Claude 3</option>
+                </select>
+            </div>
+            <div class="form-group" style="text-align:right;">
+                <button class="btn btn-primary">保存配置</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="flex:1;min-width:320px;">
+        <div class="card-header"><span class="card-title">🔧 变量库</span></div>
+        <div class="card-body">
+            <!-- 来源分类 Tab -->
+            <div style="display:flex;gap:4px;margin-bottom:12px;">
+                <button class="btn btn-sm btn-primary" id="var-tab-explain-user" onclick="switchVarTab('explain','user')">用户字段</button>
+                <button class="btn btn-sm btn-secondary" id="var-tab-explain-book" onclick="switchVarTab('explain','book')">书籍字段</button>
+                <button class="btn btn-sm btn-secondary" id="var-tab-explain-kb" onclick="switchVarTab('explain','kb')">知识库</button>
+            </div>
+
+            <!-- 用户字段面板 -->
+            <div id="var-panel-explain-user">
+                <div style="margin-bottom:12px;">
+                    <input type="text" class="form-input" id="var-search-explain-user" placeholder="搜索变量..." oninput="filterVarList('explain','user')">
+                </div>
+                <div style="max-height:360px;overflow-y:auto;" id="var-list-explain-user">
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{昵称}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{昵称}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{年级}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{年级}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{阅读级别}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{阅读级别}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{设备SN}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{设备SN}}')">复制</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 书籍字段面板 -->
+            <div id="var-panel-explain-book" style="display:none;">
+                <div style="margin-bottom:12px;">
+                    <input type="text" class="form-input" id="var-search-explain-book" placeholder="搜索变量..." oninput="filterVarList('explain','book')">
+                </div>
+                <div style="max-height:360px;overflow-y:auto;" id="var-list-explain-book">
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{书名}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{书名}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{作者}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{作者}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{划选原文}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{划选原文}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{当前章节}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{当前章节}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{当前段落译文}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{当前段落译文}}')">复制</button>
+                    </div>
+                    <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                        <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{本章译文}}</code>
+                        <button class="btn btn-link btn-sm" onclick="copyVar('{{本章译文}}')">复制</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 知识库面板（含子Tab） -->
+            <div id="var-panel-explain-kb" style="display:none;">
+                <!-- 知识库调用方式子Tab -->
+                <div style="display:flex;gap:4px;margin-bottom:12px;">
+                    <button class="btn btn-sm btn-primary" id="var-kbtab-explain-file" onclick="switchKbVarTab('explain','file')">指定文件</button>
+                    <button class="btn btn-sm btn-secondary" id="var-kbtab-explain-tag" onclick="switchKbVarTab('explain','tag')">按标签</button>
+                </div>
+
+                <!-- 指定文件子面板 -->
+                <div id="var-kb-panel-explain-file">
+                    <div style="margin-bottom:12px;">
+                        <input type="text" class="form-input" id="var-search-explain-kbfile" placeholder="搜索文档..." oninput="filterKbVarList('explain','file')">
+                    </div>
+                    <div style="max-height:300px;overflow-y:auto;" id="var-list-explain-kbfile">
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:4px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{知识库文件:作者生平简介.pdf}}</code>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库文件:作者生平简介.pdf}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:4px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{知识库文件:小王子创作背景.md}}</code>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库文件:小王子创作背景.md}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:4px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{知识库文件:法国文学简史.docx}}</code>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库文件:法国文学简史.docx}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:4px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{知识库文件:名著导读资料.md}}</code>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库文件:名著导读资料.md}}')">复制</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 按标签子面板 -->
+                <div id="var-kb-panel-explain-tag" style="display:none;">
+                    <div style="margin-bottom:12px;">
+                        <input type="text" class="form-input" id="var-search-explain-kbtag" placeholder="搜索标签..." oninput="filterKbVarList('explain','tag')">
+                    </div>
+                    <div style="max-height:300px;overflow-y:auto;" id="var-list-explain-kbtag">
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <div>
+                                <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{知识库标签:作者简介}}</code>
+                                <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">覆盖 3 篇</span>
+                            </div>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库标签:作者简介}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <div>
+                                <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{知识库标签:作品背景}}</code>
+                                <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">覆盖 2 篇</span>
+                            </div>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库标签:作品背景}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <div>
+                                <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{知识库标签:文学赏析}}</code>
+                                <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">覆盖 1 篇</span>
+                            </div>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库标签:文学赏析}}')">复制</button>
+                        </div>
+                        <div class="var-item" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);">
+                            <div>
+                                <code style="font-size:12px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{知识库标签:词汇表}}</code>
+                                <span style="font-size:11px;color:var(--text-muted);margin-left:4px;">覆盖 2 篇</span>
+                            </div>
+                            <button class="btn btn-link btn-sm" onclick="copyVar('{{知识库标签:词汇表}}')">复制</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+`,
+
+// ========== 4. 知识库管理 ==========
+
+knowledge: () => `
+<div class="page-title">
+    <span>知识库管理</span>
+    <button class="btn btn-primary" onclick="openModal('modal-add-knowledge')"><i class="ri-add-line"></i> 新增文档</button>
+</div>
+
+<div class="filter-bar">
+    <div class="filter-group">
+        <label>文档名称</label>
+        <input type="text" class="form-input" placeholder="搜索文档">
+    </div>
+    <div class="filter-group">
+        <label>文档类型</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>PDF</option>
+            <option>Word</option>
+            <option>Markdown</option>
+            <option>TXT</option>
+            <option>图片</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>状态</label>
+        <select class="form-select">
+            <option>全部</option>
+            <option>已解析</option>
+            <option>解析中</option>
+            <option>解析失败</option>
+        </select>
+    </div>
+    <div class="filter-group" style="align-self:flex-end;">
+        <button class="btn btn-primary"><i class="ri-search-line"></i> 查询</button>
+        <button class="btn btn-secondary">重置</button>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body" style="overflow-x:auto;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>文档名称</th>
+                    <th>类型</th>
+                    <th>大小</th>
+                    <th>段落数</th>
+                    <th>状态</th>
+                    <th>可调用标签</th>
+                    <th>上传时间</th>
+                    <th style="width:160px;">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>KB001</td>
+                    <td><i class="ri-file-pdf-line" style="color:var(--danger);"></i> 阅读教育白皮书2024.pdf</td>
+                    <td>PDF</td>
+                    <td>2.5 MB</td>
+                    <td>128</td>
+                    <td><span class="tag tag-green">已解析</span></td>
+                    <td><span class="tag">阅读教育</span><span class="tag">政策</span></td>
+                    <td>2024-01-10</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-knowledge')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-delete-knowledge-ref')"><i class="ri-delete-bin-line"></i> 删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>KB002</td>
+                    <td><i class="ri-file-word-line" style="color:var(--primary);"></i> 中小学阅读书目指南.docx</td>
+                    <td>Word</td>
+                    <td>1.2 MB</td>
+                    <td>86</td>
+                    <td><span class="tag tag-green">已解析</span></td>
+                    <td><span class="tag">书目推荐</span><span class="tag">分级阅读</span></td>
+                    <td>2024-01-15</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-knowledge')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-delete-knowledge-ref')"><i class="ri-delete-bin-line"></i> 删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>KB003</td>
+                    <td><i class="ri-markdown-line" style="color:var(--success);"></i> 儿童文学知识库.md</td>
+                    <td>Markdown</td>
+                    <td>856 KB</td>
+                    <td>256</td>
+                    <td><span class="tag tag-yellow">解析中</span></td>
+                    <td><span class="tag">儿童文学</span><span class="tag">名著</span></td>
+                    <td>2024-02-20</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-knowledge')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-delete-knowledge-ref')"><i class="ri-delete-bin-line"></i> 删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>KB004</td>
+                    <td><i class="ri-file-text-line" style="color:var(--text-muted);"></i> 阅读理解技巧.txt</td>
+                    <td>TXT</td>
+                    <td>45 KB</td>
+                    <td>32</td>
+                    <td><span class="tag tag-green">已解析</span></td>
+                    <td><span class="tag">阅读技巧</span><span class="tag">教学方法</span></td>
+                    <td>2024-02-25</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-knowledge')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-delete-knowledge-ref')"><i class="ri-delete-bin-line"></i> 删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>KB005</td>
+                    <td><i class="ri-file-pdf-line" style="color:var(--danger);"></i> 英语分级阅读标准.pdf</td>
+                    <td>PDF</td>
+                    <td>3.8 MB</td>
+                    <td>65</td>
+                    <td><span class="tag tag-green">已解析</span></td>
+                    <td><span class="tag">分级标准</span><span class="tag">英语</span></td>
+                    <td>2024-03-01</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-knowledge')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-delete-knowledge-ref')"><i class="ri-delete-bin-line"></i> 删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>KB006</td>
+                    <td><i class="ri-file-word-line" style="color:var(--primary);"></i> 阅读教学案例分析.docx</td>
+                    <td>Word</td>
+                    <td>2.1 MB</td>
+                    <td>42</td>
+                    <td><span class="tag tag-red">解析失败</span></td>
+                    <td><span class="tag">教学案例</span></td>
+                    <td>2024-03-05</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-knowledge')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-delete-knowledge-ref')"><i class="ri-delete-bin-line"></i> 删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>KB007</td>
+                    <td><i class="ri-markdown-line" style="color:var(--success);"></i> 名著导读资料.md</td>
+                    <td>Markdown</td>
+                    <td>1.2 MB</td>
+                    <td>180</td>
+                    <td><span class="tag tag-green">已解析</span></td>
+                    <td><span class="tag">作者简介</span><span class="tag">作品背景</span><span class="tag">文学赏析</span></td>
+                    <td>2024-03-08</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-knowledge')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-delete-knowledge-ref')"><i class="ri-delete-bin-line"></i> 删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>KB008</td>
+                    <td><i class="ri-file-text-line" style="color:var(--text-muted);"></i> 学生阅读习惯调研.txt</td>
+                    <td>TXT</td>
+                    <td>128 KB</td>
+                    <td>88</td>
+                    <td><span class="tag tag-yellow">解析中</span></td>
+                    <td><span class="tag">调研</span><span class="tag">数据</span></td>
+                    <td>2024-03-10</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-knowledge')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-delete-knowledge-ref')"><i class="ri-delete-bin-line"></i> 删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="pagination-bar">
+    <span>共 48 条记录</span>
+    <div class="pagination">
+        <button class="btn btn-sm btn-secondary" disabled><i class="ri-arrow-left-s-line"></i></button>
+        <button class="btn btn-sm btn-primary">1</button>
+        <button class="btn btn-sm btn-secondary">2</button>
+        <button class="btn btn-sm btn-secondary">3</button>
+        <button class="btn btn-sm btn-secondary">4</button>
+        <button class="btn btn-sm btn-secondary">5</button>
+        <button class="btn btn-sm btn-secondary"><i class="ri-arrow-right-s-line"></i></button>
+    </div>
+</div>
+
+<!-- 新增文档模态框 -->
+<div class="modal-overlay" id="modal-add-knowledge">
+    <div class="modal" style="max-width:520px;">
+        <div class="modal-header">
+            <span class="modal-title">新增文档</span>
+            <button class="modal-close" onclick="closeModal('modal-add-knowledge')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body">
+            <!-- 步骤1：上传文件 -->
+            <div id="kb-upload-step">
+                <div style="padding:12px;background:#f0f9ff;border:1px solid #bae6fd;border-radius:var(--radius);margin-bottom:16px;">
+                    <div style="font-size:13px;color:#0369a1;"><i class="ri-information-line" style="margin-right:4px;"></i>请先上传文件，系统将自动解析并提取文档信息</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">上传文件</label>
+                    <div style="border:2px dashed var(--border);border-radius:8px;padding:32px;text-align:center;color:var(--text-muted);cursor:pointer;" onclick="simulateKbUpload()">
+                        <i class="ri-upload-cloud-2-line" style="font-size:40px;"></i>
+                        <p style="margin:8px 0;font-size:14px;">点击上传或拖拽文件到此处</p>
+                        <p style="font-size:12px;color:var(--text-muted);">支持 PDF、Word、Markdown、TXT、图片格式</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 步骤2：解析完成，可编辑 -->
+            <div id="kb-edit-step" style="display:none;">
+                <div style="padding:12px;background:#f0fdf4;border:1px solid #86efac;border-radius:var(--radius);margin-bottom:16px;">
+                    <div style="font-size:13px;color:#15803d;"><i class="ri-check-line" style="margin-right:4px;"></i>文件解析完成，已自动填入文档信息，您可以修改后保存</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">文档名称</label>
+                    <input type="text" class="form-input" id="kb-doc-name" value="作者生平简介" placeholder="请输入文档名称">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">文档类型</label>
+                    <select class="form-select" id="kb-doc-type">
+                        <option selected>PDF</option>
+                        <option>Word</option>
+                        <option>Markdown</option>
+                        <option>TXT</option>
+                        <option>图片</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">可调用标签</label>
+                    <div style="position:relative;" id="kb-tag-dropdown-wrapper">
+                        <!-- 已选标签展示 -->
+                        <div id="kb-selected-tags" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;min-height:28px;"></div>
+                        <!-- 下拉触发区 -->
+                        <div style="border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;" onclick="toggleKbTagDropdown()">
+                            <span style="color:var(--text-muted);font-size:13px;">点击选择标签...</span>
+                            <i class="ri-arrow-down-s-line" style="color:var(--text-muted);"></i>
+                        </div>
+                        <!-- 下拉面板 -->
+                        <div id="kb-tag-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;margin-top:4px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 4px 12px rgba(0,0,0,0.15);z-index:100;max-height:280px;overflow:hidden;">
+                            <div style="padding:8px 12px;border-bottom:1px solid var(--border);">
+                                <input type="text" class="form-input" id="kb-tag-search" placeholder="搜索标签..." style="font-size:13px;" oninput="filterKbTagOptions()">
+                            </div>
+                            <div id="kb-tag-options" style="max-height:200px;overflow-y:auto;padding:4px 0;">
+                                <label style="display:flex;align-items:center;padding:8px 12px;cursor:pointer;font-size:13px;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''">
+                                    <input type="checkbox" value="作者简介" style="margin-right:8px;" onchange="toggleKbTag(this)">
+                                    <span>作者简介</span>
+                                </label>
+                                <label style="display:flex;align-items:center;padding:8px 12px;cursor:pointer;font-size:13px;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''">
+                                    <input type="checkbox" value="作品背景" style="margin-right:8px;" onchange="toggleKbTag(this)">
+                                    <span>作品背景</span>
+                                </label>
+                                <label style="display:flex;align-items:center;padding:8px 12px;cursor:pointer;font-size:13px;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''">
+                                    <input type="checkbox" value="文学赏析" style="margin-right:8px;" onchange="toggleKbTag(this)">
+                                    <span>文学赏析</span>
+                                </label>
+                                <label style="display:flex;align-items:center;padding:8px 12px;cursor:pointer;font-size:13px;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''">
+                                    <input type="checkbox" value="词汇表" style="margin-right:8px;" onchange="toggleKbTag(this)">
+                                    <span>词汇表</span>
+                                </label>
+                                <label style="display:flex;align-items:center;padding:8px 12px;cursor:pointer;font-size:13px;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''">
+                                    <input type="checkbox" value="术语库" style="margin-right:8px;" onchange="toggleKbTag(this)">
+                                    <span>术语库</span>
+                                </label>
+                                <label style="display:flex;align-items:center;padding:8px 12px;cursor:pointer;font-size:13px;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''">
+                                    <input type="checkbox" value="创作背景" style="margin-right:8px;" onchange="toggleKbTag(this)">
+                                    <span>创作背景</span>
+                                </label>
+                                <label style="display:flex;align-items:center;padding:8px 12px;cursor:pointer;font-size:13px;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''">
+                                    <input type="checkbox" value="时代背景" style="margin-right:8px;" onchange="toggleKbTag(this)">
+                                    <span>时代背景</span>
+                                </label>
+                            </div>
+                            <!-- 新增标签 -->
+                            <div id="kb-tag-add-new" style="display:none;padding:8px 12px;border-top:1px solid var(--border);cursor:pointer;color:var(--primary);font-size:13px;" onclick="addNewKbTag()">
+                                <i class="ri-add-line" style="margin-right:4px;"></i>新增标签 "<span id="kb-tag-search-text"></span>"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding:10px 12px;background:var(--bg);border-radius:var(--radius);font-size:12px;color:var(--text-muted);">
+                    <i class="ri-file-line" style="margin-right:4px;"></i>已上传：<span id="kb-file-name">作者生平简介.pdf</span>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-add-knowledge')">取消</button>
+            <button class="btn btn-primary" id="kb-btn-upload" onclick="simulateKbUpload()">开始解析</button>
+            <button class="btn btn-primary" id="kb-btn-save" style="display:none;" onclick="closeModal('modal-add-knowledge')">保存</button>
+        </div>
+    </div>
+</div>
+
+<!-- 删除确认（含关联检测） -->
+<div class="modal-overlay" id="modal-delete-knowledge-ref">
+    <div class="modal" style="max-width:480px;">
+        <div class="modal-header">
+            <span class="modal-title">确认删除</span>
+            <button class="modal-close" onclick="closeModal('modal-delete-knowledge-ref')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body" style="padding:24px 20px;">
+            <div style="text-align:center;margin-bottom:16px;">
+                <i class="ri-error-warning-line" style="font-size:40px;color:var(--warning);"></i>
+            </div>
+            <div style="font-size:15px;font-weight:600;text-align:center;margin-bottom:12px;">以下 AI 提示词正在引用此文档</div>
+            <div style="padding:12px;background:var(--bg);border-radius:var(--radius);margin-bottom:16px;">
+                <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;"><i class="ri-robot-line" style="margin-right:4px;"></i>AI导读配置：{{知识库:作者简介}}、{{知识库:作品背景}}</div>
+                <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;"><i class="ri-translate-2" style="margin-right:4px;"></i>AI翻译配置：{{知识库:词汇表}}、{{知识库:术语库}}</div>
+                <div style="font-size:13px;color:var(--text-secondary);"><i class="ri-chat-ai-line" style="margin-right:4px;"></i>AI讲解配置：{{知识库:作者简介}}、{{知识库:作品背景}}、{{知识库:文学赏析}}</div>
+            </div>
+            <div style="font-size:13px;color:var(--text-secondary);text-align:center;">删除后将影响对应 AI 功能的回答质量，是否确认？</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-delete-knowledge-ref')">取消</button>
+            <button class="btn btn-danger">确认删除</button>
+        </div>
+    </div>
+</div>
+
+<!-- 查看知识库文档模态框 -->
+<div class="modal-overlay" id="modal-view-knowledge">
+    <div class="modal" style="max-width:600px;">
+        <div class="modal-header">
+            <span class="modal-title">知识库文档详情</span>
+            <button class="modal-close" onclick="closeModal('modal-view-knowledge')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body">
+            <div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;">
+                <div><span style="color:var(--text-muted);font-size:12px;">文档标题</span><div style="font-size:14px;font-weight:500;">文学作品赏析指南</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">类型</span><div style="font-size:14px;font-weight:500;">PDF</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">大小</span><div style="font-size:14px;font-weight:500;">2.5 MB</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">段落数</span><div style="font-size:14px;font-weight:500;">128</div></div>
+                <div><span style="color:var(--text-muted);font-size:12px;">状态</span><div style="font-size:14px;font-weight:500;"><span class="tag tag-green">已解析</span></div></div>
+            </div>
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">可调用标签</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+                <span class="tag">作者简介</span>
+                <span class="tag">作品背景</span>
+                <span class="tag">文学赏析</span>
+            </div>
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">文档摘要</div>
+            <div style="padding:12px;background:var(--bg);border-radius:var(--radius);font-size:13px;line-height:1.6;color:var(--text-secondary);margin-bottom:16px;max-height:200px;overflow-y:auto;">
+                本文档收录了经典文学作品的深度赏析，包括主题解读、人物分析、写作手法等内容，适用于小学高年级和初中学生的课外阅读指导。
+            </div>
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">关联书籍</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                <span class="tag">小王子</span>
+                <span class="tag">夏洛的网</span>
+                <span class="tag">草房子</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-view-knowledge')">关闭</button>
+        </div>
+    </div>
+</div>
+`,
+
+
+});
