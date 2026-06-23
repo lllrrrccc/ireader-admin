@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语周报双语阅读本 - 管理后台</title>
+    <link rel="stylesheet" href="css/main.css?v=77">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 登录页 -->
+    <div id="login-page" class="login-page">
+        <div class="login-page-inner">
+            <div class="login-left">
+                <div class="login-slogan">
+                    <div class="login-slogan-line">海量双语读物</div>
+                    <div class="login-slogan-line">AI 智能导读</div>
+                    <div class="login-slogan-line">精准阅读数据</div>
+                    <div class="login-slogan-line">分级阅读体系</div>
+                </div>
+                <div class="login-decoration">
+                    <div class="login-deco-circle"></div>
+                    <div class="login-deco-circle-2"></div>
+                    <div class="login-deco-dots"></div>
+                </div>
+            </div>
+            <div class="login-right">
+                <div class="login-panel">
+                    <div class="login-panel-header">
+                        <div class="login-panel-brand">
+                            <img src="assets/logo.png" alt="英语周报" class="login-panel-logo">
+                            <div class="login-panel-text">
+                                <div class="login-panel-title">双语阅读本</div>
+                                <div class="login-panel-sub">管理后台</div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="login-form" onsubmit="event.preventDefault(); doLogin();">
+                        <div class="form-group">
+                            <label class="form-label">账号</label>
+                            <div class="login-input-wrap">
+                                <i class="ri-user-line"></i>
+                                <input type="text" class="form-input" placeholder="请输入账号">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">密码</label>
+                            <div class="login-input-wrap">
+                                <i class="ri-lock-password-line"></i>
+                                <input type="password" class="form-input" placeholder="请输入密码">
+                            </div>
+                        </div>
+                        <div class="login-options">
+                            <label class="login-remember">
+                                <input type="checkbox"> 记住我
+                            </label>
+                            <a href="#" class="login-forgot">忘记密码？</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary login-submit">登录</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主应用 -->
+    <div id="main-app" class="app" style="display:none;">
+        <!-- 侧边栏 -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="assets/logo.png" alt="英语周报" class="logo-img">
+                    <div class="logo-text">
+                        <div class="logo-title">双语阅读本</div>
+                        <div class="logo-sub">管理后台</div>
+                    </div>
+                </div>
+            </div>
+            <nav class="sidebar-nav" id="sidebar-nav">
+                <!-- 导航内容由JS生成 -->
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">管</div>
+                    <div class="user-meta">
+                        <div class="user-name">管理员</div>
+                        <div class="user-role">系统管理员</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content" id="main-content">
+            <!-- 顶部导航栏 -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menu-toggle"><i class="ri-menu-line"></i></button>
+                    <div class="breadcrumb" id="breadcrumb">书籍管理</div>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <i class="ri-search-line"></i>
+                        <input type="text" placeholder="搜索...">
+                    </div>
+                    <div class="header-actions">
+                        <button class="action-btn"><i class="ri-notification-3-line"></i></button>
+                        <button class="action-btn"><i class="ri-question-line"></i></button>
+                    </div>
+                    <div class="user-dropdown">
+                        <div class="user-avatar" style="width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;">管</div>
+                        <span class="user-name">管理员</span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 页面内容区 -->
+            <div class="page-container" id="page-container">
+                <!-- 内容由JS加载 -->
+            </div>
+        </main>
+    </div>
+
+    <script src="js/navigation.js?v=77"></script>
+    <script>const pageFunctions = {};</script>
+    <script src="js/pages_books.js?v=77"></script>
+    <script src="js/pages_categories.js?v=77"></script>
+    <script src="js/pages_ai.js?v=77"></script>
+    <script src="js/pages_user.js?v=77"></script>
+    <script src="js/pages_device.js?v=77"></script>
+    <script src="js/pages_data.js?v=77"></script>
+    <script src="js/pages_system.js?v=77"></script>
+    <script src="js/main_core.js?v=77"></script>
+    <script src="js/main_modal.js?v=77"></script>
+    <script src="js/main_book.js?v=77"></script>
+    <script>init();</script>
+</body>
+</html>
