@@ -193,6 +193,42 @@ devices: () => `
                         <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-disable-device')"><i class="ri-forbid-line"></i> 禁用</button>
                     </td>
                 </tr>
+                <tr>
+                    <td>IRP20240009</td>
+                    <td>iReader Pro</td>
+                    <td>2023-10-15 09:30</td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 名学生</span>
+                            <div style="font-size:12px;color:var(--text-muted);">S0000009 / IRP20240009-01 / 郑十一</div>
+                        </div>
+                    </td>
+                    <td>—</td>
+                    <td>2023-10-15 09:30</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('deviceStudents')"><i class="ri-eye-line"></i> 查看学生</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-disable-device')"><i class="ri-forbid-line"></i> 禁用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>IRL20240010</td>
+                    <td>iReader Lite</td>
+                    <td>2023-10-20 14:00</td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 名学生</span>
+                            <div style="font-size:12px;color:var(--text-muted);">S0000010 / IRL20240010-01 / 冯十二</div>
+                        </div>
+                    </td>
+                    <td>—</td>
+                    <td>2023-10-20 14:00</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('deviceStudents')"><i class="ri-eye-line"></i> 查看学生</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-disable-device')"><i class="ri-forbid-line"></i> 禁用</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

@@ -216,6 +216,46 @@ readingData: () => `
                         <button class="btn btn-link btn-sm" style="color:var(--primary);" onclick="navigateTo('studentReadingDetail')"><i class="ri-eye-line"></i> 查看详情</button>
                     </td>
                 </tr>
+                <tr>
+                    <td>26AD0002RI567</td>
+                    <td>26AD0002</td>
+                    <td>小吴</td>
+                    <td>B005</td>
+                    <td>草房子</td>
+                    <td>2024-03-05 10:15:22</td>
+                    <td>2024-03-12 09:30:18</td>
+                    <td><span class="tag tag-green">已加入</span></td>
+                    <td><span class="tag tag-blue">阅读中</span></td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:80px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:55%;height:100%;background:var(--primary);border-radius:3px;"></div></div>
+                            <span style="font-size:12px;">55%</span>
+                        </div>
+                    </td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" style="color:var(--primary);" onclick="navigateTo('studentReadingDetail')"><i class="ri-eye-line"></i> 查看详情</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>26AE0001RJ890</td>
+                    <td>26AE0001</td>
+                    <td>小陈</td>
+                    <td>B003</td>
+                    <td>西游记</td>
+                    <td>2024-03-02 08:30:10</td>
+                    <td>2024-03-10 16:20:45</td>
+                    <td><span class="tag tag-gray">未加入</span></td>
+                    <td><span class="tag tag-green">已读完</span></td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:80px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:100%;height:100%;background:var(--success);border-radius:3px;"></div></div>
+                            <span style="font-size:12px;">100%</span>
+                        </div>
+                    </td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" style="color:var(--primary);" onclick="navigateTo('studentReadingDetail')"><i class="ri-eye-line"></i> 查看详情</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

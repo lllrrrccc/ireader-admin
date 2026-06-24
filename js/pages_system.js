@@ -440,62 +440,6 @@ permissions: () => `
                     <td>2023-02-01 14:15:00</td>
                     <td><span class="tag tag-green">启用</span></td>
                 </tr>
-                <tr>
-                    <td>R004</td>
-                    <td><span class="tag tag-yellow">教师</span></td>
-                    <td>可以管理班级学生和阅读任务</td>
-                    <td>15</td>
-                    <td>2023-02-15 10:30:00</td>
-                    <td><span class="tag tag-green">启用</span></td>
-                </tr>
-                <tr>
-                    <td>R005</td>
-                    <td><span class="tag tag-blue">学生管理员</span></td>
-                    <td>管理学生账号信息和班级分配</td>
-                    <td>10</td>
-                    <td>2023-03-01 09:00:00</td>
-                    <td><span class="tag tag-green">启用</span></td>
-                </tr>
-                <tr>
-                    <td>R006</td>
-                    <td><span class="tag tag-blue">数据查看员</span></td>
-                    <td>仅可查看数据统计报表，无法进行任何操作</td>
-                    <td>6</td>
-                    <td>2023-03-10 11:20:00</td>
-                    <td><span class="tag tag-green">启用</span></td>
-                </tr>
-                <tr>
-                    <td>R007</td>
-                    <td><span class="tag tag-yellow">书籍管理员</span></td>
-                    <td>负责书籍上架、下架和分类管理</td>
-                    <td>4</td>
-                    <td>2023-03-20 14:00:00</td>
-                    <td><span class="tag tag-green">启用</span></td>
-                </tr>
-                <tr>
-                    <td>R008</td>
-                    <td><span class="tag tag-blue">客服</span></td>
-                    <td>处理用户反馈和问题工单</td>
-                    <td>3</td>
-                    <td>2023-04-01 08:45:00</td>
-                    <td><span class="tag tag-green">启用</span></td>
-                </tr>
-                <tr>
-                    <td>R009</td>
-                    <td><span class="tag tag-blue">审计员</span></td>
-                    <td>查看系统操作日志和审计记录</td>
-                    <td>2</td>
-                    <td>2023-04-15 16:30:00</td>
-                    <td><span class="tag tag-yellow">停用</span></td>
-                </tr>
-                <tr>
-                    <td>R010</td>
-                    <td><span class="tag tag-blue">设备管理员</span></td>
-                    <td>管理设备注册、激活和固件更新</td>
-                    <td>7</td>
-                    <td>2023-05-01 10:00:00</td>
-                    <td><span class="tag tag-green">启用</span></td>
-                </tr>
             </tbody>
         </table>
     </div>
