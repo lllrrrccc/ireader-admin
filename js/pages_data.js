@@ -57,7 +57,7 @@ readingData: () => `
             </thead>
             <tbody>
                 <tr>
-                    <td>240315A123</td>
+                    <td>26AA0001RA123</td>
                     <td>26AA0001</td>
                     <td>小明</td>
                     <td>B001</td>
@@ -77,7 +77,7 @@ readingData: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>240314B456</td>
+                    <td>26AA0001RB456</td>
                     <td>26AA0001</td>
                     <td>小明</td>
                     <td>B002</td>
@@ -97,7 +97,7 @@ readingData: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>240313C789</td>
+                    <td>26AA0002RC789</td>
                     <td>26AA0002</td>
                     <td>小红</td>
                     <td>B001</td>
@@ -117,7 +117,7 @@ readingData: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>240312D012</td>
+                    <td>26AB0001RD012</td>
                     <td>26AB0001</td>
                     <td>小刚</td>
                     <td>B003</td>
@@ -137,7 +137,7 @@ readingData: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>240311E345</td>
+                    <td>26AB0002RE345</td>
                     <td>26AB0002</td>
                     <td>小丽</td>
                     <td>B004</td>
@@ -157,7 +157,7 @@ readingData: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>240310F678</td>
+                    <td>26AC0001RF678</td>
                     <td>26AC0001</td>
                     <td>小华</td>
                     <td>B005</td>
@@ -177,7 +177,7 @@ readingData: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>240309G901</td>
+                    <td>26AC0002RG901</td>
                     <td>26AC0002</td>
                     <td>小芳</td>
                     <td>B006</td>
@@ -197,7 +197,7 @@ readingData: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>240308H234</td>
+                    <td>26AD0001RH234</td>
                     <td>26AD0001</td>
                     <td>小军</td>
                     <td>B007</td>
@@ -290,7 +290,7 @@ readingTasks: () => `
             </thead>
             <tbody>
                 <tr>
-                    <td style="font-size:12px;">230820T01A001</td>
+                    <td style="font-size:12px;">230820T01TA123</td>
                     <td>寒假阅读挑战</td>
                     <td>230820T01</td>
                     <td>王老师</td>
@@ -309,7 +309,7 @@ readingTasks: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td style="font-size:12px;">230820T01A002</td>
+                    <td style="font-size:12px;">230820T01TB456</td>
                     <td>每日阅读30分钟</td>
                     <td>230820T01</td>
                     <td>王老师</td>
@@ -328,7 +328,7 @@ readingTasks: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td style="font-size:12px;">230901T01A001</td>
+                    <td style="font-size:12px;">230901T01TC789</td>
                     <td>春季阅读马拉松</td>
                     <td>230901T01</td>
                     <td>李老师</td>
@@ -347,7 +347,7 @@ readingTasks: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td style="font-size:12px;">230901T01A002</td>
+                    <td style="font-size:12px;">230901T01TD012</td>
                     <td>英语原版阅读周</td>
                     <td>230901T01</td>
                     <td>李老师</td>
@@ -366,7 +366,7 @@ readingTasks: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td style="font-size:12px;">230820T01A003</td>
+                    <td style="font-size:12px;">230820T01TE345</td>
                     <td>国学经典诵读</td>
                     <td>230820T01</td>
                     <td>王老师</td>
@@ -385,7 +385,7 @@ readingTasks: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td style="font-size:12px;">231005T01A001</td>
+                    <td style="font-size:12px;">231005T01TF678</td>
                     <td>暑假阅读计划</td>
                     <td>231005T01</td>
                     <td>刘老师</td>
@@ -609,7 +609,7 @@ wordLearning: () => `
             </thead>
             <tbody>
                 <tr>
-                    <td>26AA0001001</td>
+                    <td>26AA0001WA123</td>
                     <td>26AA0001</td>
                     <td>张三</td>
                     <td>WB001</td>
@@ -626,7 +626,7 @@ wordLearning: () => `
                     <td><span class="tag tag-blue">学习中</span></td>
                 </tr>
                 <tr>
-                    <td>26AA0002001</td>
+                    <td>26AA0002WB456</td>
                     <td>26AA0002</td>
                     <td>李四</td>
                     <td>WB002</td>
@@ -643,7 +643,7 @@ wordLearning: () => `
                     <td><span class="tag tag-blue">学习中</span></td>
                 </tr>
                 <tr>
-                    <td>26AB0001001</td>
+                    <td>26AB0001WC789</td>
                     <td>26AB0001</td>
                     <td>王五</td>
                     <td>WB003</td>
@@ -660,7 +660,7 @@ wordLearning: () => `
                     <td><span class="tag tag-blue">学习中</span></td>
                 </tr>
                 <tr>
-                    <td>26AB0002001</td>
+                    <td>26AB0002WD012</td>
                     <td>26AB0002</td>
                     <td>赵六</td>
                     <td>WB004</td>
@@ -677,7 +677,7 @@ wordLearning: () => `
                     <td><span class="tag tag-blue">学习中</span></td>
                 </tr>
                 <tr>
-                    <td>26AC0001001</td>
+                    <td>26AC0001WE345</td>
                     <td>26AC0001</td>
                     <td>钱七</td>
                     <td>WB005</td>
@@ -694,7 +694,7 @@ wordLearning: () => `
                     <td><span class="tag tag-blue">学习中</span></td>
                 </tr>
                 <tr>
-                    <td>26AC0002001</td>
+                    <td>26AC0002WF678</td>
                     <td>26AC0002</td>
                     <td>孙八</td>
                     <td>WB001</td>
@@ -711,7 +711,7 @@ wordLearning: () => `
                     <td><span class="tag tag-blue">学习中</span></td>
                 </tr>
                 <tr>
-                    <td>26AD0001001</td>
+                    <td>26AD0001WG901</td>
                     <td>26AD0001</td>
                     <td>周九</td>
                     <td>WB003</td>
@@ -728,7 +728,7 @@ wordLearning: () => `
                     <td><span class="tag tag-blue">学习中</span></td>
                 </tr>
                 <tr>
-                    <td>26AD0002001</td>
+                    <td>26AD0002WH234</td>
                     <td>26AD0002</td>
                     <td>吴十</td>
                     <td>WB004</td>
@@ -802,18 +802,20 @@ listeningData: () => `
         <table class="data-table">
             <thead>
                 <tr>
+                    <th>学生听力ID</th>
                     <th>学生ID</th>
                     <th>学生姓名</th>
-                    <th>听力内容ID</th>
-                    <th>听力标题</th>
-                    <th>播放进度</th>
-                    <th>已听次数</th>
-                    <th>最后播放</th>
+                    <th>听力ID</th>
+                    <th>听力名称</th>
+                    <th>最近播放进度</th>
+                    <th>完播次数</th>
+                    <th>最近播放时间</th>
                     <th>状态</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
+                    <td>26AA0001LA123</td>
                     <td>26AA0001</td>
                     <td>张三</td>
                     <td>L001</td>
@@ -825,10 +827,11 @@ listeningData: () => `
                         </div>
                     </td>
                     <td>3</td>
-                    <td>2024-03-15</td>
+                    <td>20240315142315</td>
                     <td><span class="tag tag-green">已完成</span></td>
                 </tr>
                 <tr>
+                    <td>26AA0002LB456</td>
                     <td>26AA0002</td>
                     <td>李四</td>
                     <td>L002</td>
@@ -840,10 +843,11 @@ listeningData: () => `
                         </div>
                     </td>
                     <td>2</td>
-                    <td>2024-03-14</td>
+                    <td>20240314091530</td>
                     <td><span class="tag tag-blue">进行中</span></td>
                 </tr>
                 <tr>
+                    <td>26AB0001LC789</td>
                     <td>26AB0001</td>
                     <td>王五</td>
                     <td>L003</td>
@@ -859,6 +863,7 @@ listeningData: () => `
                     <td><span class="tag tag-gray">未开始</span></td>
                 </tr>
                 <tr>
+                    <td>26AB0002LD012</td>
                     <td>26AB0002</td>
                     <td>赵六</td>
                     <td>L004</td>
@@ -870,10 +875,11 @@ listeningData: () => `
                         </div>
                     </td>
                     <td>1</td>
-                    <td>2024-03-13</td>
+                    <td>20240313112045</td>
                     <td><span class="tag tag-blue">进行中</span></td>
                 </tr>
                 <tr>
+                    <td>26AC0001LE345</td>
                     <td>26AC0001</td>
                     <td>钱七</td>
                     <td>L005</td>
@@ -885,10 +891,11 @@ listeningData: () => `
                         </div>
                     </td>
                     <td>2</td>
-                    <td>2024-03-12</td>
+                    <td>20240312083015</td>
                     <td><span class="tag tag-green">已完成</span></td>
                 </tr>
                 <tr>
+                    <td>26AC0002LF678</td>
                     <td>26AC0002</td>
                     <td>孙八</td>
                     <td>L006</td>
@@ -904,6 +911,7 @@ listeningData: () => `
                     <td><span class="tag tag-gray">未开始</span></td>
                 </tr>
                 <tr>
+                    <td>26AD0001LG901</td>
                     <td>26AD0001</td>
                     <td>周九</td>
                     <td>L007</td>
@@ -915,10 +923,11 @@ listeningData: () => `
                         </div>
                     </td>
                     <td>4</td>
-                    <td>2024-03-15</td>
+                    <td>20240315131005</td>
                     <td><span class="tag tag-green">已完成</span></td>
                 </tr>
                 <tr>
+                    <td>26AD0002LH234</td>
                     <td>26AD0002</td>
                     <td>吴十</td>
                     <td>L008</td>
@@ -930,7 +939,7 @@ listeningData: () => `
                         </div>
                     </td>
                     <td>1</td>
-                    <td>2024-03-11</td>
+                    <td>20240311100522</td>
                     <td><span class="tag tag-blue">进行中</span></td>
                 </tr>
             </tbody>
