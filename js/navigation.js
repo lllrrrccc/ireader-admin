@@ -41,8 +41,6 @@ const navConfig = [
         group: "数据统计",
         items: [
             { id: "platform-overview", label: "平台概览", icon: "ri-bar-chart-box-line", page: "platformOverview" },
-            { id: "book-analysis", label: "书籍分析", icon: "ri-book-mark-line", page: "bookAnalysis" },
-            { id: "user-analysis", label: "用户分析", icon: "ri-user-follow-line", page: "userAnalysis" },
             { id: "version", label: "版本管理", icon: "ri-git-branch-line", page: "version" }
         ]
     },

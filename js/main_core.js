@@ -128,6 +128,354 @@ function setupEventListeners() {
 
 function attachPageEvents(page) {
     // 页面特定事件绑定
+    if (page === 'platformOverview') {
+        initDeviceChart();
+        initStudentChart();
+        initActiveDeviceChart();
+    }
+}
+
+function initDeviceChart() {
+    if (typeof echarts === 'undefined') {
+        console.error('ECharts not loaded');
+        return;
+    }
+    
+    var dom = document.getElementById('device-chart-container');
+    if (!dom) {
+        console.error('Chart container not found');
+        return;
+    }
+    
+    var myChart = echarts.init(dom, null, { renderer: 'canvas' });
+    
+    var monthData = {
+        xAxis: ['1月', '2月', '3月', '4月', '5月', '6月', '7月'],
+        series: [28500, 29800, 30600, 31200, 32100, 32944, 33800]
+    };
+    
+    var dayData = {
+        xAxis: ['06-18', '06-19', '06-20', '06-21', '06-22', '06-23', '06-24'],
+        series: [15200, 18500, 21800, 17300, 24600, 20100, 26400]
+    };
+    
+    function getOption(data) {
+        return {
+            grid: {
+                top: 30,
+                right: 20,
+                bottom: 30,
+                left: 60,
+                containLabel: false
+            },
+            tooltip: {
+                trigger: 'axis',
+                formatter: function(params) {
+                    return params[0].value.toLocaleString();
+                },
+                backgroundColor: 'rgba(255,255,255,0.95)',
+                borderColor: '#e8e8e8',
+                borderWidth: 1,
+                textStyle: { color: '#333', fontSize: 13 },
+                extraCssText: 'box-shadow: 0 2px 8px rgba(0,0,0,0.15);'
+            },
+            xAxis: {
+                type: 'category',
+                data: data.xAxis,
+                axisLine: { lineStyle: { color: '#d9d9d9' } },
+                axisTick: { show: false },
+                axisLabel: { color: '#8c8c8c', fontSize: 12 }
+            },
+            yAxis: {
+                type: 'value',
+                axisLine: { show: false },
+                axisTick: { show: false },
+                splitLine: { lineStyle: { color: '#f0f0f0' } },
+                axisLabel: {
+                    color: '#8c8c8c',
+                    fontSize: 12,
+                    formatter: function(value) {
+                        return (value / 1000).toFixed(0) + 'k';
+                    }
+                }
+            },
+            series: [{
+                data: data.series,
+                type: 'line',
+                smooth: false,
+                symbol: 'rect',
+                symbolSize: 8,
+                lineStyle: {
+                    color: '#1890ff',
+                    width: 2
+                },
+                itemStyle: {
+                    color: '#1890ff',
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                emphasis: {
+                    itemStyle: {
+                        color: '#1890ff',
+                        borderColor: '#fff',
+                        borderWidth: 2,
+                        shadowBlur: 4,
+                        shadowColor: 'rgba(24,144,255,0.3)'
+                    }
+                }
+            }]
+        };
+    }
+    
+    myChart.setOption(getOption(monthData));
+    
+    window.addEventListener('resize', function() {
+        myChart.resize();
+    });
+    
+    // 按钮切换
+    var card = dom;
+    while (card && !card.classList.contains('card')) {
+        card = card.parentElement;
+    }
+    var monthBtn = card.querySelector('.device-btn-month');
+    var dayBtn = card.querySelector('.device-btn-day');
+    
+    if (monthBtn && dayBtn) {
+        monthBtn.addEventListener('click', function() {
+            monthBtn.classList.remove('btn-secondary');
+            monthBtn.classList.add('btn-primary');
+            dayBtn.classList.remove('btn-primary');
+            dayBtn.classList.add('btn-secondary');
+            myChart.setOption(getOption(monthData));
+        });
+        
+        dayBtn.addEventListener('click', function() {
+            dayBtn.classList.remove('btn-secondary');
+            dayBtn.classList.add('btn-primary');
+            monthBtn.classList.remove('btn-primary');
+            monthBtn.classList.add('btn-secondary');
+            myChart.setOption(getOption(dayData));
+        });
+    }
+}
+
+function initStudentChart() {
+    if (typeof echarts === 'undefined') {
+        console.error('ECharts not loaded');
+        return;
+    }
+    
+    var dom = document.getElementById('student-chart-container');
+    if (!dom) {
+        console.error('Student chart container not found');
+        return;
+    }
+    
+    var myChart = echarts.init(dom, null, { renderer: 'canvas' });
+    
+    var monthData = {
+        xAxis: ['1月', '2月', '3月', '4月', '5月', '6月'],
+        series: [34200, 35800, 36500, 37200, 38600, 39844]
+    };
+    
+    var dayData = {
+        xAxis: ['06-18', '06-19', '06-20', '06-21', '06-22', '06-23', '06-24'],
+        series: [38500, 38720, 38950, 39180, 39400, 39620, 39844]
+    };
+    
+    function getOption(data) {
+        return {
+            grid: {
+                top: 30,
+                right: 20,
+                bottom: 30,
+                left: 60,
+                containLabel: false
+            },
+            tooltip: {
+                trigger: 'axis',
+                formatter: function(params) {
+                    return params[0].value.toLocaleString();
+                },
+                backgroundColor: 'rgba(255,255,255,0.95)',
+                borderColor: '#e8e8e8',
+                borderWidth: 1,
+                textStyle: { color: '#333', fontSize: 13 },
+                extraCssText: 'box-shadow: 0 2px 8px rgba(0,0,0,0.15);'
+            },
+            xAxis: {
+                type: 'category',
+                data: data.xAxis,
+                axisLine: { lineStyle: { color: '#d9d9d9' } },
+                axisTick: { show: false },
+                axisLabel: { color: '#8c8c8c', fontSize: 12 }
+            },
+            yAxis: {
+                type: 'value',
+                axisLine: { show: false },
+                axisTick: { show: false },
+                splitLine: { lineStyle: { color: '#f0f0f0' } },
+                axisLabel: {
+                    color: '#8c8c8c',
+                    fontSize: 12,
+                    formatter: function(value) {
+                        return (value / 1000).toFixed(0) + 'k';
+                    }
+                }
+            },
+            series: [{
+                data: data.series,
+                type: 'line',
+                smooth: false,
+                symbol: 'rect',
+                symbolSize: 8,
+                lineStyle: {
+                    color: '#1890ff',
+                    width: 2
+                },
+                itemStyle: {
+                    color: '#1890ff',
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                emphasis: {
+                    itemStyle: {
+                        color: '#1890ff',
+                        borderColor: '#fff',
+                        borderWidth: 2,
+                        shadowBlur: 4,
+                        shadowColor: 'rgba(24,144,255,0.3)'
+                    }
+                }
+            }]
+        };
+    }
+    
+    myChart.setOption(getOption(monthData));
+    
+    window.addEventListener('resize', function() {
+        myChart.resize();
+    });
+    
+    // 按钮切换
+    var card = dom;
+    while (card && !card.classList.contains('card')) {
+        card = card.parentElement;
+    }
+    var monthBtn = card.querySelector('.student-btn-month');
+    var dayBtn = card.querySelector('.student-btn-day');
+    
+    if (monthBtn && dayBtn) {
+        monthBtn.addEventListener('click', function() {
+            monthBtn.classList.remove('btn-secondary');
+            monthBtn.classList.add('btn-primary');
+            dayBtn.classList.remove('btn-primary');
+            dayBtn.classList.add('btn-secondary');
+            myChart.setOption(getOption(monthData));
+        });
+        
+        dayBtn.addEventListener('click', function() {
+            dayBtn.classList.remove('btn-secondary');
+            dayBtn.classList.add('btn-primary');
+            monthBtn.classList.remove('btn-primary');
+            monthBtn.classList.add('btn-secondary');
+            myChart.setOption(getOption(dayData));
+        });
+    }
+}
+
+function initActiveDeviceChart() {
+    if (typeof echarts === 'undefined') {
+        console.error('ECharts not loaded');
+        return;
+    }
+    
+    var dom = document.getElementById('active-device-chart-container');
+    if (!dom) {
+        console.error('Active device chart container not found');
+        return;
+    }
+    
+    var myChart = echarts.init(dom, null, { renderer: 'canvas' });
+    
+    var data = {
+        xAxis: ['05-26', '05-27', '05-28', '05-29', '05-30', '05-31', '06-01', '06-02', '06-03', '06-04', '06-05', '06-06', '06-07', '06-08', '06-09', '06-10', '06-11', '06-12', '06-13', '06-14', '06-15', '06-16', '06-17', '06-18', '06-19', '06-20', '06-21', '06-22', '06-23', '06-24'],
+        series: [21800, 22500, 23100, 22800, 23500, 24200, 23800, 24500, 25100, 24800, 25500, 26200, 25800, 26500, 27100, 26800, 27500, 28200, 27800, 28500, 29100, 28800, 29500, 30200, 29800, 30500, 31200, 30800, 31500, 32100]
+    };
+    
+    var option = {
+        grid: {
+            top: 30,
+            right: 20,
+            bottom: 50,
+            left: 60,
+            containLabel: false
+        },
+        tooltip: {
+            trigger: 'axis',
+            formatter: function(params) {
+                return params[0].name + '<br/>活跃设备: ' + params[0].value.toLocaleString();
+            },
+            backgroundColor: 'rgba(255,255,255,0.95)',
+            borderColor: '#e8e8e8',
+            borderWidth: 1,
+            textStyle: { color: '#333', fontSize: 13 },
+            extraCssText: 'box-shadow: 0 2px 8px rgba(0,0,0,0.15);'
+        },
+        xAxis: {
+            type: 'category',
+            data: data.xAxis,
+            axisLine: { lineStyle: { color: '#d9d9d9' } },
+            axisTick: { show: false },
+            axisLabel: { 
+                color: '#8c8c8c', 
+                fontSize: 11,
+                rotate: 45,
+                interval: 4
+            }
+        },
+        yAxis: {
+            type: 'value',
+            axisLine: { show: false },
+            axisTick: { show: false },
+            splitLine: { lineStyle: { color: '#f0f0f0' } },
+            axisLabel: {
+                color: '#8c8c8c',
+                fontSize: 12,
+                formatter: function(value) {
+                    return (value / 1000).toFixed(0) + 'k';
+                }
+            }
+        },
+        series: [{
+            data: data.series,
+            type: 'bar',
+            barWidth: '60%',
+            itemStyle: {
+                color: '#1890ff',
+                borderRadius: [4, 4, 0, 0]
+            },
+            emphasis: {
+                itemStyle: {
+                    color: '#40a9ff'
+                }
+            }
+        }]
+    };
+    
+    myChart.setOption(option);
+    
+    window.addEventListener('resize', function() {
+        myChart.resize();
+    });
+}
+
+function toggleDistributeRange(radio) {
+    var snGroup = document.getElementById('sn-input-group');
+    if (snGroup) {
+        snGroup.style.display = (radio.value === 'specific') ? 'block' : 'none';
+    }
 }
 
 function switchStudentTab(tabName) {

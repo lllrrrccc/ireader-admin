@@ -40,128 +40,46 @@ platformOverview: () => `
     </div>
 </div>
 
-<div class="two-col">
+<div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
     <div class="card">
         <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
             <span class="card-title">📈 设备数增长趋势</span>
             <div style="display:flex;gap:4px;">
-                <button class="btn btn-sm btn-secondary" style="padding:2px 8px;font-size:12px;">按月</button>
-                <button class="btn btn-sm btn-secondary" style="padding:2px 8px;font-size:12px;">按周</button>
-                <button class="btn btn-sm btn-primary" style="padding:2px 8px;font-size:12px;">按日</button>
+                <button class="btn btn-sm btn-primary device-btn-month" style="padding:2px 8px;font-size:12px;">按月</button>
+                <button class="btn btn-sm btn-secondary device-btn-day" style="padding:2px 8px;font-size:12px;">按日</button>
             </div>
         </div>
-        <div class="card-body">
-            <div style="height:200px;display:flex;align-items:flex-end;gap:8px;padding:0 8px;">
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:30%;background:var(--primary);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">1月</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:45%;background:var(--primary);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">2月</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:55%;background:var(--primary);border-radius:4px 4px 0 0;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">3月</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:65%;background:var(--primary);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">4月</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:80%;background:var(--primary);border-radius:4px 4px 0 0;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">5月</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:95%;background:var(--primary);border-radius:4px 4px 0 0;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">6月</span>
-                </div>
-            </div>
+        <div class="card-body" style="padding:0;height:260px;">
+            <div id="device-chart-container" style="width:100%;height:100%;"></div>
         </div>
     </div>
     <div class="card">
         <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
             <span class="card-title">👨‍🎓 使用学生增长趋势</span>
             <div style="display:flex;gap:4px;">
-                <button class="btn btn-sm btn-secondary" style="padding:2px 8px;font-size:12px;">按月</button>
-                <button class="btn btn-sm btn-secondary" style="padding:2px 8px;font-size:12px;">按周</button>
-                <button class="btn btn-sm btn-primary" style="padding:2px 8px;font-size:12px;">按日</button>
+                <button class="btn btn-sm btn-primary student-btn-month" style="padding:2px 8px;font-size:12px;">按月</button>
+                <button class="btn btn-sm btn-secondary student-btn-day" style="padding:2px 8px;font-size:12px;">按日</button>
             </div>
         </div>
-        <div class="card-body">
-            <div style="height:200px;display:flex;align-items:flex-end;gap:8px;padding:0 8px;">
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:35%;background:var(--success);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">1月</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:50%;background:var(--success);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">2月</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:60%;background:var(--success);border-radius:4px 4px 0 0;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">3月</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:70%;background:var(--success);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">4月</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:85%;background:var(--success);border-radius:4px 4px 0 0;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">5月</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:100%;background:var(--success);border-radius:4px 4px 0 0;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">6月</span>
-                </div>
-            </div>
+        <div class="card-body" style="padding:0;height:260px;">
+            <div id="student-chart-container" style="width:100%;height:100%;"></div>
         </div>
     </div>
 </div>
 
-<div class="two-col">
+<div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
     <div class="card">
         <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
             <span class="card-title">📊 每日活跃设备数</span>
-            <div class="filter-group" style="margin:0;">
-                <select class="form-select" style="min-width:120px;padding:4px 8px;font-size:12px;">
-                    <option>最近7天</option>
-                    <option>最近30天</option>
-                    <option>最近90天</option>
-                </select>
+            <div style="display:flex;gap:8px;align-items:center;">
+                <input type="date" class="form-input" style="width:130px;padding:4px 8px;font-size:12px;" value="2024-05-26">
+                <span style="color:var(--text-muted);font-size:12px;">至</span>
+                <input type="date" class="form-input" style="width:130px;padding:4px 8px;font-size:12px;" value="2024-06-24">
+                <button class="btn btn-sm btn-primary" style="padding:4px 12px;font-size:12px;">查询</button>
             </div>
         </div>
-        <div class="card-body">
-            <div style="height:200px;display:flex;align-items:flex-end;gap:6px;padding:0 8px;">
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:45%;background:var(--info);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:10px;color:var(--text-muted);">06-18</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:60%;background:var(--info);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:10px;color:var(--text-muted);">06-19</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:75%;background:var(--info);border-radius:4px 4px 0 0;"></div>
-                    <span style="font-size:10px;color:var(--text-muted);">06-20</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:55%;background:var(--info);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:10px;color:var(--text-muted);">06-21</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:85%;background:var(--info);border-radius:4px 4px 0 0;"></div>
-                    <span style="font-size:10px;color:var(--text-muted);">06-22</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:70%;background:var(--info);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:10px;color:var(--text-muted);">06-23</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:90%;background:var(--info);border-radius:4px 4px 0 0;"></div>
-                    <span style="font-size:10px;color:var(--text-muted);">06-24</span>
-                </div>
-            </div>
+        <div class="card-body" style="padding:0;height:400px;display:flex;align-items:flex-end;">
+            <div id="active-device-chart-container" style="width:100%;height:340px;"></div>
         </div>
     </div>
     <div class="card">
@@ -245,429 +163,6 @@ platformOverview: () => `
 `,
 
 
-bookAnalysis: () => `
-<div class="page-title">
-    <span>书籍数据分析</span>
-</div>
-
-<div class="filter-bar">
-    <div class="filter-group">
-        <label>时间范围</label>
-        <select class="form-select">
-            <option>最近7天</option>
-            <option>最近30天</option>
-            <option>最近90天</option>
-            <option>本年</option>
-        </select>
-    </div>
-    <div class="filter-group" style="align-self:flex-end;">
-        <button class="btn btn-primary"><i class="ri-search-line"></i> 查询</button>
-    </div>
-</div>
-
-<div class="two-col">
-    <div class="card">
-        <div class="card-header"><span class="card-title">📖 分类阅读分布</span></div>
-        <div class="card-body">
-            <div style="height:200px;display:flex;align-items:center;justify-content:center;gap:40px;">
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-                    <div style="width:100px;height:100px;border-radius:50%;background:conic-gradient(var(--primary) 0% 45%, var(--success) 45% 75%, var(--warning) 75% 100%);"></div>
-                    <div style="display:flex;gap:12px;font-size:12px;">
-                        <span><span style="display:inline-block;width:8px;height:8px;background:var(--primary);border-radius:50%;margin-right:4px;"></span>中文 45%</span>
-                        <span><span style="display:inline-block;width:8px;height:8px;background:var(--success);border-radius:50%;margin-right:4px;"></span>英文 30%</span>
-                        <span><span style="display:inline-block;width:8px;height:8px;background:var(--warning);border-radius:50%;margin-right:4px;"></span>其他 25%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header"><span class="card-title">📊 年级阅读分布</span></div>
-        <div class="card-body">
-            <div style="height:200px;display:flex;flex-direction:column;gap:12px;justify-content:center;">
-                <div style="display:flex;align-items:center;gap:8px;">
-                    <span style="width:80px;font-size:12px;">小学1-2</span>
-                    <div style="flex:1;height:16px;background:var(--bg);border-radius:8px;overflow:hidden;"><div style="width:20%;height:100%;background:var(--info);"></div></div>
-                    <span style="width:40px;font-size:12px;">20%</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:8px;">
-                    <span style="width:80px;font-size:12px;">小学3-4</span>
-                    <div style="flex:1;height:16px;background:var(--bg);border-radius:8px;overflow:hidden;"><div style="width:35%;height:100%;background:var(--primary);"></div></div>
-                    <span style="width:40px;font-size:12px;">35%</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:8px;">
-                    <span style="width:80px;font-size:12px;">小学5-6</span>
-                    <div style="flex:1;height:16px;background:var(--bg);border-radius:8px;overflow:hidden;"><div style="width:25%;height:100%;background:var(--success);"></div></div>
-                    <span style="width:40px;font-size:12px;">25%</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:8px;">
-                    <span style="width:80px;font-size:12px;">初中</span>
-                    <div style="flex:1;height:16px;background:var(--bg);border-radius:8px;overflow:hidden;"><div style="width:15%;height:100%;background:var(--warning);"></div></div>
-                    <span style="width:40px;font-size:12px;">15%</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:8px;">
-                    <span style="width:80px;font-size:12px;">高中</span>
-                    <div style="flex:1;height:16px;background:var(--bg);border-radius:8px;overflow:hidden;"><div style="width:5%;height:100%;background:var(--danger);"></div></div>
-                    <span style="width:40px;font-size:12px;">5%</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="card">
-    <div class="card-header"><span class="card-title">🏆 热门书籍排行</span></div>
-    <div class="card-body" style="overflow-x:auto;">
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>排名</th>
-                    <th>书籍名称</th>
-                    <th>分类</th>
-                    <th>阅读人数</th>
-                    <th>完读率</th>
-                    <th>平均评分</th>
-                    <th>阅读时长</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><span style="color:var(--danger);font-weight:700;">1</span></td>
-                    <td>小王子</td>
-                    <td><span class="tag">中文</span></td>
-                    <td>3,245</td>
-                    <td>86%</td>
-                    <td>4.8</td>
-                    <td>28,000h</td>
-                </tr>
-                <tr>
-                    <td><span style="color:var(--warning);font-weight:700;">2</span></td>
-                    <td>夏洛的网</td>
-                    <td><span class="tag">中文</span></td>
-                    <td>2,856</td>
-                    <td>82%</td>
-                    <td>4.7</td>
-                    <td>22,500h</td>
-                </tr>
-                <tr>
-                    <td><span style="color:var(--primary);font-weight:700;">3</span></td>
-                    <td>The Little Prince</td>
-                    <td><span class="tag tag-blue">英文</span></td>
-                    <td>2,412</td>
-                    <td>78%</td>
-                    <td>4.6</td>
-                    <td>18,200h</td>
-                </tr>
-                <tr>
-                    <td><span style="color:var(--text-muted);font-weight:700;">4</span></td>
-                    <td>西游记</td>
-                    <td><span class="tag">中文</span></td>
-                    <td>2,105</td>
-                    <td>65%</td>
-                    <td>4.5</td>
-                    <td>15,800h</td>
-                </tr>
-                <tr>
-                    <td><span style="color:var(--text-muted);font-weight:700;">5</span></td>
-                    <td>哈利·波特与魔法石</td>
-                    <td><span class="tag">中文</span></td>
-                    <td>1,890</td>
-                    <td>72%</td>
-                    <td>4.7</td>
-                    <td>14,200h</td>
-                </tr>
-                <tr>
-                    <td><span style="color:var(--text-muted);font-weight:700;">6</span></td>
-                    <td>草房子</td>
-                    <td><span class="tag">中文</span></td>
-                    <td>1,756</td>
-                    <td>80%</td>
-                    <td>4.4</td>
-                    <td>12,500h</td>
-                </tr>
-                <tr>
-                    <td><span style="color:var(--text-muted);font-weight:700;">7</span></td>
-                    <td>狼王梦</td>
-                    <td><span class="tag">中文</span></td>
-                    <td>1,520</td>
-                    <td>75%</td>
-                    <td>4.3</td>
-                    <td>10,800h</td>
-                </tr>
-                <tr>
-                    <td><span style="color:var(--text-muted);font-weight:700;">8</span></td>
-                    <td>Charlotte's Web</td>
-                    <td><span class="tag tag-blue">英文</span></td>
-                    <td>1,345</td>
-                    <td>70%</td>
-                    <td>4.5</td>
-                    <td>9,600h</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="pagination-bar">
-    <span>共 128 条记录</span>
-    <div class="pagination">
-        <button class="btn btn-sm btn-secondary" disabled><i class="ri-arrow-left-s-line"></i></button>
-        <button class="btn btn-sm btn-primary">1</button>
-        <button class="btn btn-sm btn-secondary">2</button>
-        <button class="btn btn-sm btn-secondary">3</button>
-        <button class="btn btn-sm btn-secondary">4</button>
-        <button class="btn btn-sm btn-secondary">5</button>
-        <button class="btn btn-sm btn-secondary"><i class="ri-arrow-right-s-line"></i></button>
-    </div>
-</div>
-`,
-
-
-userAnalysis: () => `
-<div class="page-title">
-    <span>用户数据分析</span>
-</div>
-
-<div class="filter-bar">
-    <div class="filter-group">
-        <label>时间范围</label>
-        <select class="form-select">
-            <option>最近7天</option>
-            <option>最近30天</option>
-            <option>最近90天</option>
-            <option>本年</option>
-        </select>
-    </div>
-    <div class="filter-group" style="align-self:flex-end;">
-        <button class="btn btn-primary"><i class="ri-search-line"></i> 查询</button>
-    </div>
-</div>
-
-<div class="two-col">
-    <div class="card">
-        <div class="card-header"><span class="card-title">🔽 用户转化漏斗</span></div>
-        <div class="card-body">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 0;">
-                <div style="width:80%;padding:12px;background:var(--primary);color:#fff;border-radius:8px;text-align:center;font-size:13px;">
-                    注册用户 12,856 <span style="opacity:0.7;">100%</span>
-                </div>
-                <div style="color:var(--text-muted);"><i class="ri-arrow-down-line"></i></div>
-                <div style="width:65%;padding:12px;background:var(--info);color:#fff;border-radius:8px;text-align:center;font-size:13px;">
-                    激活用户 10,284 <span style="opacity:0.7;">80%</span>
-                </div>
-                <div style="color:var(--text-muted);"><i class="ri-arrow-down-line"></i></div>
-                <div style="width:50%;padding:12px;background:var(--success);color:#fff;border-radius:8px;text-align:center;font-size:13px;">
-                    阅读用户 8,213 <span style="opacity:0.7;">64%</span>
-                </div>
-                <div style="color:var(--text-muted);"><i class="ri-arrow-down-line"></i></div>
-                <div style="width:35%;padding:12px;background:var(--warning);color:#fff;border-radius:8px;text-align:center;font-size:13px;">
-                    付费用户 4,500 <span style="opacity:0.7;">35%</span>
-                </div>
-                <div style="color:var(--text-muted);"><i class="ri-arrow-down-line"></i></div>
-                <div style="width:20%;padding:12px;background:var(--danger);color:#fff;border-radius:8px;text-align:center;font-size:13px;">
-                    续费用户 2,571 <span style="opacity:0.7;">20%</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header"><span class="card-title">📊 功能使用分布</span></div>
-        <div class="card-body">
-            <div style="display:flex;flex-direction:column;gap:16px;padding:16px 0;">
-                <div>
-                    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;">
-                        <span>阅读</span><span>85%</span>
-                    </div>
-                    <div style="width:100%;height:12px;background:var(--bg);border-radius:6px;overflow:hidden;"><div style="width:85%;height:100%;background:var(--primary);"></div></div>
-                </div>
-                <div>
-                    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;">
-                        <span>听力</span><span>62%</span>
-                    </div>
-                    <div style="width:100%;height:12px;background:var(--bg);border-radius:6px;overflow:hidden;"><div style="width:62%;height:100%;background:var(--success);"></div></div>
-                </div>
-                <div>
-                    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;">
-                        <span>AI对话</span><span>48%</span>
-                    </div>
-                    <div style="width:100%;height:12px;background:var(--bg);border-radius:6px;overflow:hidden;"><div style="width:48%;height:100%;background:var(--info);"></div></div>
-                </div>
-                <div>
-                    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;">
-                        <span>单词学习</span><span>35%</span>
-                    </div>
-                    <div style="width:100%;height:12px;background:var(--bg);border-radius:6px;overflow:hidden;"><div style="width:35%;height:100%;background:var(--warning);"></div></div>
-                </div>
-                <div>
-                    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;">
-                        <span>AI翻译</span><span>28%</span>
-                    </div>
-                    <div style="width:100%;height:12px;background:var(--bg);border-radius:6px;overflow:hidden;"><div style="width:28%;height:100%;background:var(--danger);"></div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="two-col">
-    <div class="card">
-        <div class="card-header"><span class="card-title">👦 用户年级分布</span></div>
-        <div class="card-body">
-            <div style="height:200px;display:flex;align-items:flex-end;gap:8px;padding:0 8px;">
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:30%;background:var(--info);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">1-2年级</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:50%;background:var(--primary);border-radius:4px 4px 0 0;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">3-4年级</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:70%;background:var(--success);border-radius:4px 4px 0 0;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">5-6年级</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:45%;background:var(--warning);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">初中</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:20%;background:var(--danger);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">高中</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header"><span class="card-title">📱 设备活跃分布</span></div>
-        <div class="card-body">
-            <div style="height:200px;display:flex;align-items:center;justify-content:center;gap:40px;">
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-                    <div style="width:100px;height:100px;border-radius:50%;background:conic-gradient(var(--primary) 0% 65%, var(--success) 65% 85%, var(--warning) 85% 100%);"></div>
-                    <div style="display:flex;gap:12px;font-size:12px;">
-                        <span><span style="display:inline-block;width:8px;height:8px;background:var(--primary);border-radius:50%;margin-right:4px;"></span>iReader Pro 65%</span>
-                        <span><span style="display:inline-block;width:8px;height:8px;background:var(--success);border-radius:50%;margin-right:4px;"></span>iReader Lite 20%</span>
-                        <span><span style="display:inline-block;width:8px;height:8px;background:var(--warning);border-radius:50%;margin-right:4px;"></span>App 15%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="card">
-    <div class="card-header"><span class="card-title">📋 用户活跃度排行</span></div>
-    <div class="card-body" style="overflow-x:auto;">
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>排名</th>
-                    <th>学生</th>
-                    <th>年级</th>
-                    <th>阅读时长</th>
-                    <th>听力时长</th>
-                    <th>单词掌握</th>
-                    <th>AI对话</th>
-                    <th>综合活跃度</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><span style="color:var(--danger);font-weight:700;">1</span></td>
-                    <td>钱七</td>
-                    <td>小学六年级</td>
-                    <td>145.6h</td>
-                    <td>32.5h</td>
-                    <td>450</td>
-                    <td>86</td>
-                    <td>
-                        <div style="display:flex;align-items:center;gap:8px;">
-                            <div style="width:80px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:95%;height:100%;background:var(--success);border-radius:3px;"></div></div>
-                            <span style="font-size:12px;">95%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span style="color:var(--warning);font-weight:700;">2</span></td>
-                    <td>王五</td>
-                    <td>小学四年级</td>
-                    <td>112.8h</td>
-                    <td>28.3h</td>
-                    <td>128</td>
-                    <td>62</td>
-                    <td>
-                        <div style="display:flex;align-items:center;gap:8px;">
-                            <div style="width:80px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:88%;height:100%;background:var(--success);border-radius:3px;"></div></div>
-                            <span style="font-size:12px;">88%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span style="color:var(--primary);font-weight:700;">3</span></td>
-                    <td>张三</td>
-                    <td>小学三年级</td>
-                    <td>86.5h</td>
-                    <td>18.2h</td>
-                    <td>86</td>
-                    <td>45</td>
-                    <td>
-                        <div style="display:flex;align-items:center;gap:8px;">
-                            <div style="width:80px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:75%;height:100%;background:var(--primary);border-radius:3px;"></div></div>
-                            <span style="font-size:12px;">75%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span style="color:var(--text-muted);font-weight:700;">4</span></td>
-                    <td>周九</td>
-                    <td>初中一年级</td>
-                    <td>98.2h</td>
-                    <td>22.1h</td>
-                    <td>180</td>
-                    <td>54</td>
-                    <td>
-                        <div style="display:flex;align-items:center;gap:8px;">
-                            <div style="width:80px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:70%;height:100%;background:var(--primary);border-radius:3px;"></div></div>
-                            <span style="font-size:12px;">70%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span style="color:var(--text-muted);font-weight:700;">5</span></td>
-                    <td>吴十</td>
-                    <td>小学四年级</td>
-                    <td>67.5h</td>
-                    <td>15.8h</td>
-                    <td>64</td>
-                    <td>38</td>
-                    <td>
-                        <div style="display:flex;align-items:center;gap:8px;">
-                            <div style="width:80px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:60%;height:100%;background:var(--warning);border-radius:3px;"></div></div>
-                            <span style="font-size:12px;">60%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span style="color:var(--text-muted);font-weight:700;">6</span></td>
-                    <td>李四</td>
-                    <td>小学三年级</td>
-                    <td>52.3h</td>
-                    <td>12.5h</td>
-                    <td>45</td>
-                    <td>28</td>
-                    <td>
-                        <div style="display:flex;align-items:center;gap:8px;">
-                            <div style="width:80px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:50%;height:100%;background:var(--warning);border-radius:3px;"></div></div>
-                            <span style="font-size:12px;">50%</span>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-`,
-
-
 version: () => `
 <div class="page-title">
     <span>版本管理</span>
@@ -678,24 +173,6 @@ version: () => `
     <div class="filter-group">
         <label>版本号</label>
         <input type="text" class="form-input" placeholder="如 2.3.1">
-    </div>
-    <div class="filter-group">
-        <label>平台</label>
-        <select class="form-select">
-            <option>全部</option>
-            <option>iReader Pro</option>
-            <option>iReader Lite</option>
-            <option>Android App</option>
-            <option>iOS App</option>
-        </select>
-    </div>
-    <div class="filter-group">
-        <label>类型</label>
-        <select class="form-select">
-            <option>全部</option>
-            <option>正式版</option>
-            <option>测试版</option>
-        </select>
     </div>
     <div class="filter-group" style="align-self:flex-end;">
         <button class="btn btn-primary"><i class="ri-search-line"></i> 查询</button>
@@ -710,8 +187,6 @@ version: () => `
                 <tr>
                     <th>ID</th>
                     <th>版本号</th>
-                    <th>平台</th>
-                    <th>类型</th>
                     <th>更新说明</th>
                     <th>发布时间</th>
                     <th>状态</th>
@@ -722,87 +197,31 @@ version: () => `
                 <tr>
                     <td>V001</td>
                     <td>v2.3.1</td>
-                    <td>iReader Pro</td>
-                    <td><span class="tag tag-green">正式版</span></td>
                     <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">优化阅读体验，修复已知问题</td>
                     <td>2024-03-10</td>
                     <td><span class="tag tag-green">已发布</span></td>
                     <td>
-                        <button class="btn btn-link btn-sm">查看</button>
-                        <button class="btn btn-link btn-sm">编辑</button>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-version')"><i class="ri-eye-line"></i> 查看</button>
                     </td>
                 </tr>
                 <tr>
                     <td>V002</td>
                     <td>v2.3.0</td>
-                    <td>iReader Pro</td>
-                    <td><span class="tag tag-green">正式版</span></td>
                     <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">新增AI导读功能，优化听力播放</td>
                     <td>2024-02-28</td>
                     <td><span class="tag tag-green">已发布</span></td>
                     <td>
-                        <button class="btn btn-link btn-sm">查看</button>
-                        <button class="btn btn-link btn-sm">编辑</button>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-version')"><i class="ri-eye-line"></i> 查看</button>
                     </td>
                 </tr>
                 <tr>
                     <td>V003</td>
                     <td>v1.8.2</td>
-                    <td>iReader Lite</td>
-                    <td><span class="tag tag-green">正式版</span></td>
                     <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">修复系统稳定性问题</td>
                     <td>2024-02-15</td>
                     <td><span class="tag tag-green">已发布</span></td>
                     <td>
-                        <button class="btn btn-link btn-sm">查看</button>
-                        <button class="btn btn-link btn-sm">编辑</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="card" style="margin-top:16px;">
-    <div class="card-header"><span class="card-title">📱 版本分布</span></div>
-    <div class="card-body">
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>平台</th>
-                    <th>最新版本</th>
-                    <th>设备总数</th>
-                    <th>最新版占比</th>
-                    <th>版本分布</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>iReader Pro</td>
-                    <td>v2.3.1</td>
-                    <td>8,500</td>
-                    <td>78%</td>
-                    <td>
-                        <div style="display:flex;align-items:center;gap:8px;">
-                            <div style="width:120px;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;">
-                                <div style="width:78%;height:100%;background:var(--success);"></div>
-                            </div>
-                            <span style="font-size:12px;">78%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>iReader Lite</td>
-                    <td>v1.8.2</td>
-                    <td>3,200</td>
-                    <td>65%</td>
-                    <td>
-                        <div style="display:flex;align-items:center;gap:8px;">
-                            <div style="width:120px;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;">
-                                <div style="width:65%;height:100%;background:var(--warning);"></div>
-                            </div>
-                            <span style="font-size:12px;">65%</span>
-                        </div>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-version')"><i class="ri-eye-line"></i> 查看</button>
                     </td>
                 </tr>
             </tbody>
@@ -829,24 +248,26 @@ version: () => `
         </div>
         <div class="modal-body">
             <div class="form-group">
-                <label class="form-label">平台</label>
-                <select class="form-select">
-                    <option>iReader Pro</option>
-                    <option>iReader Lite</option>
-                    <option>Android App</option>
-                    <option>iOS App</option>
-                </select>
-            </div>
-            <div class="form-group">
                 <label class="form-label">版本号</label>
                 <input type="text" class="form-input" placeholder="如 2.3.2">
             </div>
             <div class="form-group">
-                <label class="form-label">类型</label>
-                <select class="form-select">
-                    <option>正式版</option>
-                    <option>测试版</option>
-                </select>
+                <label class="form-label">分发范围</label>
+                <div style="display:flex;gap:16px;">
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+                        <input type="radio" name="distribute-range" value="all" checked onchange="toggleDistributeRange(this)">
+                        <span>所有设备</span>
+                    </label>
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+                        <input type="radio" name="distribute-range" value="specific" onchange="toggleDistributeRange(this)">
+                        <span>指定设备</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group" id="sn-input-group" style="display:none;">
+                <label class="form-label">设备SN码</label>
+                <textarea class="form-textarea" rows="4" placeholder="请输入设备SN码，回车隔开"></textarea>
+                <p style="margin-top:4px;font-size:12px;color:var(--text-muted);">提示：回车隔开设备SN码</p>
             </div>
             <div class="form-group">
                 <label class="form-label">更新说明</label>
@@ -863,6 +284,43 @@ version: () => `
         <div class="modal-footer">
             <button class="btn btn-secondary" onclick="closeModal('modal-add-version')">取消</button>
             <button class="btn btn-primary">确认发布</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modal-view-version">
+    <div class="modal" style="max-width:520px;">
+        <div class="modal-header">
+            <span class="modal-title">版本信息</span>
+            <button class="modal-close" onclick="closeModal('modal-view-version')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="form-label">版本号</label>
+                <input type="text" class="form-input" value="v2.3.1" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">分发范围</label>
+                <input type="text" class="form-input" value="所有设备" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">更新说明</label>
+                <textarea class="form-textarea" rows="4" readonly>优化阅读体验，修复已知问题</textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">安装包</label>
+                <div style="display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--bg);">
+                    <i class="ri-file-zip-line" style="font-size:24px;color:var(--primary);"></i>
+                    <div style="flex:1;">
+                        <div style="font-size:14px;font-weight:500;">iReader_v2.3.1.apk</div>
+                        <div style="font-size:12px;color:var(--text-muted);">48.5 MB</div>
+                    </div>
+                    <a href="#" class="btn btn-link btn-sm" style="color:var(--primary);"><i class="ri-download-line"></i> 下载</a>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-view-version')">关闭</button>
         </div>
     </div>
 </div>
