@@ -56,8 +56,8 @@ students: () => `
             </thead>
             <tbody>
                 <tr>
-                    <td>S0000001</td>
                     <td>26AA0001</td>
+                    <td>IRP20240001-01</td>
                     <td>IRP20240001</td>
                     <td>张三</td>
                     <td>小学三年级</td>
@@ -70,8 +70,8 @@ students: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>S0000002</td>
                     <td>26AA0002</td>
+                    <td>IRP20240001-02</td>
                     <td>IRP20240001</td>
                     <td>李四</td>
                     <td>小学三年级</td>
@@ -84,8 +84,8 @@ students: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>S0000003</td>
-                    <td>26AA0003</td>
+                    <td>26AB0001</td>
+                    <td>IRP20240002-01</td>
                     <td>IRP20240002</td>
                     <td>王五</td>
                     <td>小学四年级</td>
@@ -98,8 +98,8 @@ students: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>S0000004</td>
-                    <td>26AA0004</td>
+                    <td>26AB0002</td>
+                    <td>IRP20240001-01</td>
                     <td>IRP20240003</td>
                     <td>赵六</td>
                     <td>小学五年级</td>
@@ -112,8 +112,8 @@ students: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>S0000005</td>
-                    <td>26AA0005</td>
+                    <td>26AC0001</td>
+                    <td>IRP20240004-01</td>
                     <td>IRP20240004</td>
                     <td>钱七</td>
                     <td>小学六年级</td>
@@ -126,8 +126,8 @@ students: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>S0000006</td>
-                    <td>26AA0006</td>
+                    <td>26AC0002</td>
+                    <td>IRP20240005-01</td>
                     <td>IRP20240005</td>
                     <td>孙八</td>
                     <td>小学二年级</td>
@@ -140,8 +140,8 @@ students: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>S0000007</td>
-                    <td>26AB0001</td>
+                    <td>26AD0001</td>
+                    <td>IRP20240006-01</td>
                     <td>IRP20240006</td>
                     <td>周九</td>
                     <td>小学四年级</td>
@@ -154,8 +154,8 @@ students: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>S0000008</td>
-                    <td>26AB0002</td>
+                    <td>26AD0002</td>
+                    <td>IRP20240007-01</td>
                     <td>IRP20240007</td>
                     <td>吴十</td>
                     <td>小学五年级</td>
@@ -247,8 +247,8 @@ studentDetail: () => `
     <div class="card-header"><span class="card-title">👤 基本信息</span></div>
     <div class="card-body">
         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:16px;font-size:13px;">
-            <div><span style="color:var(--text-muted);">学生ID：</span>S0000001</div>
-            <div><span style="color:var(--text-muted);">用户ID：</span>26AA0001</div>
+            <div><span style="color:var(--text-muted);">学生ID：</span>26AA0001</div>
+            <div><span style="color:var(--text-muted);">用户ID：</span>IRP20240001-01</div>
             <div><span style="color:var(--text-muted);">昵称：</span>张三</div>
             <div><span style="color:var(--text-muted);">年级：</span>小学三年级</div>
             <div><span style="color:var(--text-muted);">状态：</span><span class="tag tag-green">使用中</span></div>
@@ -878,8 +878,8 @@ parents: () => `
                         <div style="display:flex;flex-direction:column;gap:4px;">
                             <span>2 位学员</span>
                             <div style="font-size:12px;color:var(--text-muted);">
-                                <div>S0000001 / IRP20240001-01 / 张三</div>
-                                <div>S0000002 / IRP20240001-02 / 李四</div>
+                                <div>26AA0001 / IRP20240001-01 / 张三</div>
+                                <div>26AA0002 / IRP20240001-02 / 李四</div>
                             </div>
                         </div>
                     </td>
@@ -901,7 +901,7 @@ parents: () => `
                     <td>
                         <div style="display:flex;flex-direction:column;gap:4px;">
                             <span>1 位学员</span>
-                            <div style="font-size:12px;color:var(--text-muted);">S0000003 / IRP20240002-01 / 王五</div>
+                            <div style="font-size:12px;color:var(--text-muted);">26AB0001 / IRP20240002-01 / 王五</div>
                         </div>
                     </td>
                     <td>
@@ -922,7 +922,7 @@ parents: () => `
                     <td>
                         <div style="display:flex;flex-direction:column;gap:4px;">
                             <span>1 位学员</span>
-                            <div style="font-size:12px;color:var(--text-muted);">S0000005 / IRP20240004-01 / 钱七</div>
+                            <div style="font-size:12px;color:var(--text-muted);">26AC0001 / IRP20240004-01 / 钱七</div>
                         </div>
                     </td>
                     <td>
@@ -985,8 +985,8 @@ parents: () => `
             <div><span style="color:var(--text-muted);">状态：</span><span class="tag tag-green">正常</span></div>
             <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
                 <div style="font-weight:600;margin-bottom:8px;">绑定学员</div>
-                <div>S0000001 / IRP20240001-01 / 张三</div>
-                <div>S0000002 / IRP20240001-02 / 李四</div>
+                <div>26AA0001 / IRP20240001-01 / 张三</div>
+                <div>26AA0002 / IRP20240001-02 / 李四</div>
             </div>
             <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
                 <div style="font-weight:600;margin-bottom:8px;">绑定设备</div>
@@ -1010,12 +1010,12 @@ parents: () => `
             <p style="margin:0 0 12px 0;color:var(--text);">请选择要解绑的学员：</p>
             <div style="display:flex;flex-direction:column;gap:8px;">
                 <label style="display:flex;align-items:center;gap:8px;padding:10px;border:1px solid var(--border);border-radius:6px;cursor:pointer;">
-                    <input type="checkbox" name="unbind-student" value="S0000001">
-                    <span style="font-size:13px;">S0000001 / 26AA0001 / 张三</span>
+                    <input type="checkbox" name="unbind-student" value="26AA0001">
+                    <span style="font-size:13px;">26AA0001 / IRP20240001-01 / 张三</span>
                 </label>
                 <label style="display:flex;align-items:center;gap:8px;padding:10px;border:1px solid var(--border);border-radius:6px;cursor:pointer;">
-                    <input type="checkbox" name="unbind-student" value="S0000002">
-                    <span style="font-size:13px;">S0000002 / 26AA0002 / 李四</span>
+                    <input type="checkbox" name="unbind-student" value="26AA0002">
+                    <span style="font-size:13px;">26AA0002 / IRP20240001-02 / 李四</span>
                 </label>
             </div>
             <p style="margin:12px 0 0 0;color:var(--danger);font-size:12px;"><i class="ri-alert-line"></i> 解绑后家长将无法查看已选学员的数据</p>
@@ -1069,8 +1069,8 @@ bindRecords: () => `
                 <tr>
                     <td>2024-03-15 10:30</td>
                     <td>138****0001</td>
-                    <td>S0000001</td>
                     <td>26AA0001</td>
+                    <td>IRP20240001-01</td>
                     <td>张三</td>
                     <td><span class="tag tag-green">绑定</span></td>
                     <td>家长扫码</td>
@@ -1078,8 +1078,8 @@ bindRecords: () => `
                 <tr>
                     <td>2024-03-14 16:20</td>
                     <td>139****0002</td>
-                    <td>S0000003</td>
-                    <td>26AA0003</td>
+                    <td>26AB0001</td>
+                    <td>IRP20240002-01</td>
                     <td>王五</td>
                     <td><span class="tag tag-green">绑定</span></td>
                     <td>家长扫码</td>
@@ -1087,8 +1087,8 @@ bindRecords: () => `
                 <tr>
                     <td>2024-03-13 09:15</td>
                     <td>138****0001</td>
-                    <td>S0000002</td>
                     <td>26AA0002</td>
+                    <td>IRP20240001-02</td>
                     <td>李四</td>
                     <td><span class="tag tag-green">绑定</span></td>
                     <td>后台操作</td>
@@ -1096,8 +1096,8 @@ bindRecords: () => `
                 <tr>
                     <td>2024-03-10 14:00</td>
                     <td>136****0004</td>
-                    <td>S0000004</td>
-                    <td>26AA0004</td>
+                    <td>26AB0002</td>
+                    <td>IRP20240001-01</td>
                     <td>赵六</td>
                     <td><span class="tag tag-red">解绑</span></td>
                     <td>后台操作</td>

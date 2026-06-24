@@ -2649,9 +2649,9 @@ wordbank: () => `
             <tbody>
                 <tr>
                     <td>WB001</td>
-                    <td>小王子核心词汇</td>
+                    <td>小学1年级核心词库</td>
                     <td>128</td>
-                    <td>小学3年级、小学4年级、小学5年级、小学6年级</td>
+                    <td>小学1年级</td>
                     <td>2024-01-15 10:23:45</td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('manageWords')"><i class="ri-translate-2"></i> 管理单词</button>
@@ -2661,9 +2661,9 @@ wordbank: () => `
                 </tr>
                 <tr>
                     <td>WB002</td>
-                    <td>夏洛的网高频词</td>
+                    <td>小学2年级核心词库</td>
                     <td>95</td>
-                    <td>小学3年级、小学4年级、小学5年级、小学6年级</td>
+                    <td>小学2年级</td>
                     <td>2024-01-20 14:30:12</td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('manageWords')"><i class="ri-translate-2"></i> 管理单词</button>
@@ -2673,9 +2673,9 @@ wordbank: () => `
                 </tr>
                 <tr>
                     <td>WB003</td>
-                    <td>西游记成语典故</td>
+                    <td>小学3年级核心词库</td>
                     <td>256</td>
-                    <td>小学1年级、小学2年级、小学3年级、小学4年级、小学5年级、小学6年级</td>
+                    <td>小学3年级</td>
                     <td>2024-02-01 09:15:33</td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('manageWords')"><i class="ri-translate-2"></i> 管理单词</button>
@@ -2685,9 +2685,9 @@ wordbank: () => `
                 </tr>
                 <tr>
                     <td>WB004</td>
-                    <td>哈利·波特魔法词汇</td>
+                    <td>小学4年级核心词库</td>
                     <td>168</td>
-                    <td>初中1年级、初中2年级、初中3年级</td>
+                    <td>小学4年级</td>
                     <td>2024-02-10 16:45:08</td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('manageWords')"><i class="ri-translate-2"></i> 管理单词</button>
@@ -2697,9 +2697,9 @@ wordbank: () => `
                 </tr>
                 <tr>
                     <td>WB005</td>
-                    <td>草房子优美词句</td>
+                    <td>小学5年级核心词库</td>
                     <td>88</td>
-                    <td>小学3年级、小学4年级、小学5年级、小学6年级</td>
+                    <td>小学5年级</td>
                     <td>2024-02-15 11:20:55</td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('manageWords')"><i class="ri-translate-2"></i> 管理单词</button>
@@ -2709,9 +2709,9 @@ wordbank: () => `
                 </tr>
                 <tr>
                     <td>WB006</td>
-                    <td>初中英语必背单词</td>
+                    <td>小学6年级核心词库</td>
                     <td>500</td>
-                    <td>初中1年级、初中2年级、初中3年级</td>
+                    <td>小学6年级</td>
                     <td>2024-02-20 08:50:22</td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('manageWords')"><i class="ri-translate-2"></i> 管理单词</button>
@@ -2721,9 +2721,9 @@ wordbank: () => `
                 </tr>
                 <tr>
                     <td>WB007</td>
-                    <td>小学语文成语大全</td>
+                    <td>初中1年级核心词库</td>
                     <td>320</td>
-                    <td>小学1年级、小学2年级、小学3年级、小学4年级、小学5年级、小学6年级</td>
+                    <td>初中1年级</td>
                     <td>2024-03-01 13:10:18</td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('manageWords')"><i class="ri-translate-2"></i> 管理单词</button>
@@ -2733,9 +2733,9 @@ wordbank: () => `
                 </tr>
                 <tr>
                     <td>WB008</td>
-                    <td>The Little Prince 词汇</td>
+                    <td>初中2年级核心词库</td>
                     <td>145</td>
-                    <td>初中1年级、初中2年级、初中3年级</td>
+                    <td>初中2年级</td>
                     <td>2024-03-05 15:35:42</td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('manageWords')"><i class="ri-translate-2"></i> 管理单词</button>

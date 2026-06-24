@@ -58,7 +58,7 @@ readingData: () => `
             <tbody>
                 <tr>
                     <td>240315A123</td>
-                    <td>S0000001</td>
+                    <td>26AA0001</td>
                     <td>小明</td>
                     <td>B001</td>
                     <td>小王子</td>
@@ -78,7 +78,7 @@ readingData: () => `
                 </tr>
                 <tr>
                     <td>240314B456</td>
-                    <td>S0000001</td>
+                    <td>26AA0001</td>
                     <td>小明</td>
                     <td>B002</td>
                     <td>夏洛的网</td>
@@ -98,7 +98,7 @@ readingData: () => `
                 </tr>
                 <tr>
                     <td>240313C789</td>
-                    <td>S0000002</td>
+                    <td>26AA0002</td>
                     <td>小红</td>
                     <td>B001</td>
                     <td>小王子</td>
@@ -118,7 +118,7 @@ readingData: () => `
                 </tr>
                 <tr>
                     <td>240312D012</td>
-                    <td>S0000003</td>
+                    <td>26AB0001</td>
                     <td>小刚</td>
                     <td>B003</td>
                     <td>西游记</td>
@@ -138,7 +138,7 @@ readingData: () => `
                 </tr>
                 <tr>
                     <td>240311E345</td>
-                    <td>S0000004</td>
+                    <td>26AB0002</td>
                     <td>小丽</td>
                     <td>B004</td>
                     <td>哈利·波特与魔法石</td>
@@ -158,7 +158,7 @@ readingData: () => `
                 </tr>
                 <tr>
                     <td>240310F678</td>
-                    <td>S0000005</td>
+                    <td>26AC0001</td>
                     <td>小华</td>
                     <td>B005</td>
                     <td>草房子</td>
@@ -178,7 +178,7 @@ readingData: () => `
                 </tr>
                 <tr>
                     <td>240309G901</td>
-                    <td>S0000006</td>
+                    <td>26AC0002</td>
                     <td>小芳</td>
                     <td>B006</td>
                     <td>狼王梦</td>
@@ -198,7 +198,7 @@ readingData: () => `
                 </tr>
                 <tr>
                     <td>240308H234</td>
-                    <td>S0000007</td>
+                    <td>26AD0001</td>
                     <td>小军</td>
                     <td>B007</td>
                     <td>The Little Prince</td>
@@ -483,7 +483,7 @@ taskDetail: () => `
             </thead>
             <tbody>
                 <tr>
-                    <td>S0012301</td>
+                    <td>26AA0001</td>
                     <td>张小明</td>
                     <td>三(1)班</td>
                     <td>
@@ -495,7 +495,7 @@ taskDetail: () => `
                     <td>2024-02-18 15:30</td>
                 </tr>
                 <tr>
-                    <td>S0012302</td>
+                    <td>26AA0002</td>
                     <td>李小红</td>
                     <td>三(1)班</td>
                     <td>
@@ -507,7 +507,7 @@ taskDetail: () => `
                     <td>2024-02-17 10:20</td>
                 </tr>
                 <tr>
-                    <td>S0012303</td>
+                    <td>26AB0001</td>
                     <td>王小刚</td>
                     <td>三(2)班</td>
                     <td>
@@ -519,7 +519,7 @@ taskDetail: () => `
                     <td>2024-02-16 08:45</td>
                 </tr>
                 <tr>
-                    <td>S0012304</td>
+                    <td>26AB0002</td>
                     <td>赵丽丽</td>
                     <td>三(2)班</td>
                     <td>
@@ -531,7 +531,7 @@ taskDetail: () => `
                     <td>2024-02-14 19:10</td>
                 </tr>
                 <tr>
-                    <td>S0012305</td>
+                    <td>26AC0001</td>
                     <td>陈浩浩</td>
                     <td>三(1)班</td>
                     <td>
@@ -570,30 +570,15 @@ wordLearning: () => `
         <input type="text" class="form-input" placeholder="输入学生ID">
     </div>
     <div class="filter-group">
-        <label>设备SN码</label>
-        <input type="text" class="form-input" placeholder="输入设备SN码">
+        <label>词库ID</label>
+        <input type="text" class="form-input" placeholder="输入词库ID">
     </div>
     <div class="filter-group">
-        <label>词表ID</label>
-        <input type="text" class="form-input" placeholder="输入词表ID">
-    </div>
-    <div class="filter-group">
-        <label>词表名称</label>
+        <label>词库名称</label>
         <input type="text" class="form-input" placeholder="词库名称">
     </div>
     <div class="filter-group">
-        <label>阅读级别</label>
-        <select class="form-select">
-            <option>全部</option>
-            <option>Level 1</option>
-            <option>Level 2</option>
-            <option>Level 3</option>
-            <option>Level 4</option>
-            <option>Level 5</option>
-        </select>
-    </div>
-    <div class="filter-group">
-        <label>状态</label>
+        <label>掌握状态</label>
         <select class="form-select">
             <option>全部</option>
             <option>未学习</option>
@@ -612,6 +597,7 @@ wordLearning: () => `
         <table class="data-table">
             <thead>
                 <tr>
+                    <th>背单词ID</th>
                     <th>学生ID</th>
                     <th>学生姓名</th>
                     <th>词库ID</th>
@@ -623,11 +609,12 @@ wordLearning: () => `
             </thead>
             <tbody>
                 <tr>
-                    <td>S001</td>
+                    <td>26AA0001001</td>
+                    <td>26AA0001</td>
                     <td>张三</td>
-                    <td>W001</td>
-                    <td>小王子核心词汇</td>
-                    <td>2024-03-15</td>
+                    <td>WB001</td>
+                    <td>小学3年级核心词库</td>
+                    <td>2024-03-15 14:23:15</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:8px;">
                             <div style="width:120px;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;">
@@ -639,11 +626,12 @@ wordLearning: () => `
                     <td><span class="tag tag-blue">学习中</span></td>
                 </tr>
                 <tr>
-                    <td>S002</td>
+                    <td>26AA0002001</td>
+                    <td>26AA0002</td>
                     <td>李四</td>
-                    <td>W002</td>
-                    <td>夏洛的网高频词</td>
-                    <td>2024-03-14</td>
+                    <td>WB002</td>
+                    <td>小学3年级核心词库</td>
+                    <td>2024-03-14 09:15:30</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:8px;">
                             <div style="width:120px;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;">
@@ -655,11 +643,12 @@ wordLearning: () => `
                     <td><span class="tag tag-blue">学习中</span></td>
                 </tr>
                 <tr>
-                    <td>S003</td>
+                    <td>26AB0001001</td>
+                    <td>26AB0001</td>
                     <td>王五</td>
-                    <td>W001</td>
-                    <td>小王子核心词汇</td>
-                    <td>2024-03-15</td>
+                    <td>WB003</td>
+                    <td>小学4年级核心词库</td>
+                    <td>2024-03-15 16:45:08</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:8px;">
                             <div style="width:120px;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;">
@@ -671,11 +660,12 @@ wordLearning: () => `
                     <td><span class="tag tag-blue">学习中</span></td>
                 </tr>
                 <tr>
-                    <td>S004</td>
+                    <td>26AB0002001</td>
+                    <td>26AB0002</td>
                     <td>赵六</td>
-                    <td>W003</td>
-                    <td>哈利波特魔法词汇</td>
-                    <td>2024-03-13</td>
+                    <td>WB004</td>
+                    <td>小学5年级核心词库</td>
+                    <td>2024-03-13 11:20:45</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:8px;">
                             <div style="width:120px;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;">
@@ -687,11 +677,12 @@ wordLearning: () => `
                     <td><span class="tag tag-blue">学习中</span></td>
                 </tr>
                 <tr>
-                    <td>S005</td>
+                    <td>26AC0001001</td>
+                    <td>26AC0001</td>
                     <td>钱七</td>
-                    <td>W004</td>
-                    <td>小学英语基础词汇</td>
-                    <td>2024-03-12</td>
+                    <td>WB005</td>
+                    <td>小学6年级核心词库</td>
+                    <td>2024-03-12 08:30:15</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:8px;">
                             <div style="width:120px;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;">
@@ -703,11 +694,12 @@ wordLearning: () => `
                     <td><span class="tag tag-blue">学习中</span></td>
                 </tr>
                 <tr>
-                    <td>S006</td>
+                    <td>26AC0002001</td>
+                    <td>26AC0002</td>
                     <td>孙八</td>
-                    <td>W005</td>
-                    <td>外研社分级词汇 L1</td>
-                    <td>2024-03-11</td>
+                    <td>WB001</td>
+                    <td>小学2年级核心词库</td>
+                    <td>2024-03-11 10:05:22</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:8px;">
                             <div style="width:120px;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;">
@@ -719,11 +711,12 @@ wordLearning: () => `
                     <td><span class="tag tag-blue">学习中</span></td>
                 </tr>
                 <tr>
-                    <td>S007</td>
+                    <td>26AD0001001</td>
+                    <td>26AD0001</td>
                     <td>周九</td>
-                    <td>W006</td>
-                    <td>外研社分级词汇 L3</td>
-                    <td>2024-03-15</td>
+                    <td>WB003</td>
+                    <td>小学4年级核心词库</td>
+                    <td>2024-03-15 13:10:05</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:8px;">
                             <div style="width:120px;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;">
@@ -735,11 +728,12 @@ wordLearning: () => `
                     <td><span class="tag tag-blue">学习中</span></td>
                 </tr>
                 <tr>
-                    <td>S008</td>
+                    <td>26AD0002001</td>
+                    <td>26AD0002</td>
                     <td>吴十</td>
-                    <td>W007</td>
-                    <td>西游记成语典故</td>
-                    <td>2024-03-10</td>
+                    <td>WB004</td>
+                    <td>小学5年级核心词库</td>
+                    <td>2024-03-10 15:20:30</td>
                     <td>
                         <div style="display:flex;align-items:center;gap:8px;">
                             <div style="width:120px;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;">
@@ -820,7 +814,7 @@ listeningData: () => `
             </thead>
             <tbody>
                 <tr>
-                    <td>S001</td>
+                    <td>26AA0001</td>
                     <td>张三</td>
                     <td>L001</td>
                     <td>小王子 - 第一章</td>
@@ -835,7 +829,7 @@ listeningData: () => `
                     <td><span class="tag tag-green">已完成</span></td>
                 </tr>
                 <tr>
-                    <td>S002</td>
+                    <td>26AA0002</td>
                     <td>李四</td>
                     <td>L002</td>
                     <td>夏洛的网 - 第一章</td>
@@ -850,7 +844,7 @@ listeningData: () => `
                     <td><span class="tag tag-blue">进行中</span></td>
                 </tr>
                 <tr>
-                    <td>S003</td>
+                    <td>26AB0001</td>
                     <td>王五</td>
                     <td>L003</td>
                     <td>The Little Prince - Ch.1</td>
@@ -865,7 +859,7 @@ listeningData: () => `
                     <td><span class="tag tag-gray">未开始</span></td>
                 </tr>
                 <tr>
-                    <td>S004</td>
+                    <td>26AB0002</td>
                     <td>赵六</td>
                     <td>L004</td>
                     <td>哈利波特 - 第一章</td>
@@ -880,7 +874,7 @@ listeningData: () => `
                     <td><span class="tag tag-blue">进行中</span></td>
                 </tr>
                 <tr>
-                    <td>S005</td>
+                    <td>26AC0001</td>
                     <td>钱七</td>
                     <td>L005</td>
                     <td>草房子 - 第一章</td>
@@ -895,7 +889,7 @@ listeningData: () => `
                     <td><span class="tag tag-green">已完成</span></td>
                 </tr>
                 <tr>
-                    <td>S006</td>
+                    <td>26AC0002</td>
                     <td>孙八</td>
                     <td>L006</td>
                     <td>狼王梦 - 第一章</td>
@@ -910,7 +904,7 @@ listeningData: () => `
                     <td><span class="tag tag-gray">未开始</span></td>
                 </tr>
                 <tr>
-                    <td>S007</td>
+                    <td>26AD0001</td>
                     <td>周九</td>
                     <td>L007</td>
                     <td>小王子 - 第二章</td>
@@ -925,7 +919,7 @@ listeningData: () => `
                     <td><span class="tag tag-green">已完成</span></td>
                 </tr>
                 <tr>
-                    <td>S008</td>
+                    <td>26AD0002</td>
                     <td>吴十</td>
                     <td>L008</td>
                     <td>宝葫芦的秘密 - 第一章</td>
@@ -971,7 +965,7 @@ studentReadingDetail: () => `
             <div style="width:48px;height:48px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;">明</div>
             <div>
                 <div style="font-size:16px;font-weight:600;">小明</div>
-                <div style="font-size:13px;color:var(--text-secondary);">S0000001 · 小学三年级</div>
+                <div style="font-size:13px;color:var(--text-secondary);">26AA0001 · 小学三年级</div>
             </div>
         </div>
         <div style="width:1px;height:40px;background:var(--border);"></div>
