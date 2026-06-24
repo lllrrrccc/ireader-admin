@@ -877,7 +877,7 @@ parents: () => `
             </thead>
             <tbody>
                 <tr>
-                    <td>230901P001</td>
+                    <td>230901PA001</td>
                     <td>
                         <span class="phone-text" data-masked="138****0001" data-full="13812340001">138****0001</span>
                         <button class="btn btn-link btn-sm" style="padding:0 4px;margin-left:4px;" onclick="toggleParentPhone(this)"><i class="ri-eye-line"></i></button>
@@ -905,7 +905,7 @@ parents: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>230905P002</td>
+                    <td>230901PA002</td>
                     <td>
                         <span class="phone-text" data-masked="139****0002" data-full="13912340002">139****0002</span>
                         <button class="btn btn-link btn-sm" style="padding:0 4px;margin-left:4px;" onclick="toggleParentPhone(this)"><i class="ri-eye-line"></i></button>
@@ -930,7 +930,7 @@ parents: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>230910P003</td>
+                    <td>230901PA003</td>
                     <td>
                         <span class="phone-text" data-masked="137****0003" data-full="13712340003">137****0003</span>
                         <button class="btn btn-link btn-sm" style="padding:0 4px;margin-left:4px;" onclick="toggleParentPhone(this)"><i class="ri-eye-line"></i></button>
@@ -955,7 +955,7 @@ parents: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>230912P004</td>
+                    <td>230901PA004</td>
                     <td>
                         <span class="phone-text" data-masked="136****0004" data-full="13612340004">136****0004</span>
                         <button class="btn btn-link btn-sm" style="padding:0 4px;margin-left:4px;" onclick="toggleParentPhone(this)"><i class="ri-eye-line"></i></button>
@@ -1001,7 +1001,7 @@ parents: () => `
             <button class="modal-close" onclick="closeModal('modal-parent-detail')"><i class="ri-close-line"></i></button>
         </div>
         <div class="modal-body" style="font-size:13px;line-height:1.8;">
-            <div><span style="color:var(--text-muted);">家长ID：</span>230901P001</div>
+            <div><span style="color:var(--text-muted);">家长ID：</span>230901PA001</div>
             <div><span style="color:var(--text-muted);">手机号：</span>13812340001</div>
             <div><span style="color:var(--text-muted);">注册时间：</span>2023-09-01</div>
             <div><span style="color:var(--text-muted);">状态：</span><span class="tag tag-green">正常</span></div>
@@ -1095,7 +1095,7 @@ bindRecords: () => `
             <tbody>
                 <tr>
                     <td>2024-03-15 10:30</td>
-                    <td>230901P001</td>
+                    <td>230901PA001</td>
                     <td>138****0001</td>
                     <td>26AA0001</td>
                     <td>IRP20240001-01</td>
@@ -1105,7 +1105,7 @@ bindRecords: () => `
                 </tr>
                 <tr>
                     <td>2024-03-14 16:20</td>
-                    <td>230905P002</td>
+                    <td>230901PA002</td>
                     <td>139****0002</td>
                     <td>26AB0001</td>
                     <td>IRP20240002-01</td>
@@ -1115,8 +1115,8 @@ bindRecords: () => `
                 </tr>
                 <tr>
                     <td>2024-03-13 09:15</td>
-                    <td>230901P001</td>
-                    <td>138****0001</td>
+                    <td>230901PA003</td>
+                    <td>137****0003</td>
                     <td>26AA0002</td>
                     <td>IRP20240001-02</td>
                     <td>李四</td>
@@ -1125,7 +1125,7 @@ bindRecords: () => `
                 </tr>
                 <tr>
                     <td>2024-03-10 14:00</td>
-                    <td>230912P004</td>
+                    <td>230901PA004</td>
                     <td>136****0004</td>
                     <td>26AB0002</td>
                     <td>IRP20240001-01</td>

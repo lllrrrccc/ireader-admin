@@ -511,6 +511,24 @@ function toggleParentPhone(btn) {
     }
 }
 
+function togglePasswordVisibility(inputId, btn) {
+    var input = document.getElementById(inputId);
+    if (!input) return;
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        btn.innerHTML = '<i class="ri-eye-off-line"></i>';
+    } else {
+        input.type = 'password';
+        btn.innerHTML = '<i class="ri-eye-line"></i>';
+    }
+}
+
+function showResetSuccess() {
+    closeModal('modal-reset-password');
+    openModal('modal-reset-success');
+}
+
 function switchStudentTab(tabName) {
     const tabs = ['reading', 'english', 'tasks', 'logs'];
     tabs.forEach(t => {

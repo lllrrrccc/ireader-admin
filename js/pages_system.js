@@ -441,12 +441,12 @@ accounts: () => `
                     <td>admin</td>
                     <td>系统管理员</td>
                     <td><span class="tag tag-red">超级管理员</span></td>
-                    <td>240315 083015</td>
+                    <td>2024-03-15 08:30:15</td>
                     <td>2024-03-15 10:00</td>
                     <td><span class="tag tag-green">正常</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
-                        <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-reset-password')"><i class="ri-lock-password-line"></i> 重置密码</button>
                         <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="toggleAccountStatus(this)"><i class="ri-forbid-line"></i> 停用</button>
                     </td>
                 </tr>
@@ -455,12 +455,12 @@ accounts: () => `
                     <td>operator1</td>
                     <td>运营小张</td>
                     <td><span class="tag tag-blue">管理员</span></td>
-                    <td>240314 093022</td>
+                    <td>2024-03-14 09:30:22</td>
                     <td>2024-03-14 16:30</td>
                     <td><span class="tag tag-green">正常</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
-                        <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-reset-password')"><i class="ri-lock-password-line"></i> 重置密码</button>
                         <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="toggleAccountStatus(this)"><i class="ri-forbid-line"></i> 停用</button>
                     </td>
                 </tr>
@@ -469,12 +469,12 @@ accounts: () => `
                     <td>content1</td>
                     <td>内容小李</td>
                     <td><span class="tag tag-yellow">内容管理员</span></td>
-                    <td>240313 101508</td>
+                    <td>2024-03-13 10:15:08</td>
                     <td>2024-03-13 09:15</td>
                     <td><span class="tag tag-green">正常</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
-                        <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-reset-password')"><i class="ri-lock-password-line"></i> 重置密码</button>
                         <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="toggleAccountStatus(this)"><i class="ri-forbid-line"></i> 停用</button>
                     </td>
                 </tr>
@@ -483,12 +483,12 @@ accounts: () => `
                     <td>operator2</td>
                     <td>运营小王</td>
                     <td><span class="tag tag-blue">管理员</span></td>
-                    <td>240312 142035</td>
+                    <td>2024-03-12 14:20:35</td>
                     <td>2024-03-12 14:20</td>
                     <td><span class="tag tag-green">正常</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
-                        <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-reset-password')"><i class="ri-lock-password-line"></i> 重置密码</button>
                         <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="toggleAccountStatus(this)"><i class="ri-forbid-line"></i> 停用</button>
                     </td>
                 </tr>
@@ -497,12 +497,12 @@ accounts: () => `
                     <td>content2</td>
                     <td>内容小陈</td>
                     <td><span class="tag tag-yellow">内容管理员</span></td>
-                    <td>240311 114525</td>
+                    <td>2024-03-11 11:45:25</td>
                     <td>2024-03-11 11:45</td>
                     <td><span class="tag tag-green">正常</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
-                        <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-reset-password')"><i class="ri-lock-password-line"></i> 重置密码</button>
                         <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="toggleAccountStatus(this)"><i class="ri-forbid-line"></i> 停用</button>
                     </td>
                 </tr>
@@ -511,12 +511,12 @@ accounts: () => `
                     <td>admin2</td>
                     <td>系统管理员2</td>
                     <td><span class="tag tag-red">超级管理员</span></td>
-                    <td>240310 083015</td>
+                    <td>2024-03-10 08:30:15</td>
                     <td>2024-03-10 08:30</td>
                     <td><span class="tag tag-red">停用</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
-                        <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-reset-password')"><i class="ri-lock-password-line"></i> 重置密码</button>
                         <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="toggleAccountStatus(this)"><i class="ri-check-line"></i> 启用</button>
                     </td>
                 </tr>
@@ -525,12 +525,12 @@ accounts: () => `
                     <td>operator3</td>
                     <td>运营小刘</td>
                     <td><span class="tag tag-blue">管理员</span></td>
-                    <td>240309 170022</td>
+                    <td>2024-03-09 17:00:22</td>
                     <td>2024-03-09 17:00</td>
                     <td><span class="tag tag-green">正常</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
-                        <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-reset-password')"><i class="ri-lock-password-line"></i> 重置密码</button>
                         <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="toggleAccountStatus(this)"><i class="ri-forbid-line"></i> 停用</button>
                     </td>
                 </tr>
@@ -539,12 +539,12 @@ accounts: () => `
                     <td>content3</td>
                     <td>内容小林</td>
                     <td><span class="tag tag-yellow">内容管理员</span></td>
-                    <td>240308 101508</td>
+                    <td>2024-03-08 10:15:08</td>
                     <td>2024-03-08 10:15</td>
                     <td><span class="tag tag-green">正常</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
-                        <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-reset-password')"><i class="ri-lock-password-line"></i> 重置密码</button>
                         <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="toggleAccountStatus(this)"><i class="ri-forbid-line"></i> 停用</button>
                     </td>
                 </tr>
@@ -629,10 +629,6 @@ accounts: () => `
                         <option>内容管理员</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">初始密码</label>
-                    <input type="text" class="form-input" value="********" readonly style="background:var(--bg);color:var(--text-muted);">
-                </div>
             </div>
             <div class="form-group">
                 <label class="form-label">状态</label>
@@ -645,6 +641,62 @@ accounts: () => `
         <div class="modal-footer">
             <button class="btn btn-secondary" onclick="closeModal('modal-edit-account')">取消</button>
             <button class="btn btn-primary">保存修改</button>
+        </div>
+    </div>
+</div>
+
+<!-- 重置密码模态框 -->
+<div class="modal-overlay" id="modal-reset-password">
+    <div class="modal" style="max-width:480px;">
+        <div class="modal-header">
+            <span class="modal-title">重置密码</span>
+            <button class="modal-close" onclick="closeModal('modal-reset-password')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="form-label">ID</label>
+                <input type="text" class="form-input" value="24031501" readonly style="background:var(--bg);color:var(--text-muted);">
+            </div>
+            <div class="form-group">
+                <label class="form-label">用户名</label>
+                <input type="text" class="form-input" value="admin" readonly style="background:var(--bg);color:var(--text-muted);">
+            </div>
+            <div class="form-group">
+                <label class="form-label">姓名</label>
+                <input type="text" class="form-input" value="系统管理员" readonly style="background:var(--bg);color:var(--text-muted);">
+            </div>
+            <div class="form-group">
+                <label class="form-label">当前密码</label>
+                <div style="position:relative;">
+                    <input type="password" id="current-password" class="form-input" value="Admin@123" readonly style="background:var(--bg);color:var(--text-muted);padding-right:36px;">
+                    <button type="button" onclick="togglePasswordVisibility('current-password', this)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-muted);padding:4px;">
+                        <i class="ri-eye-line"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">新密码 <span style="color:var(--danger);">*</span></label>
+                <div style="position:relative;">
+                    <input type="text" id="new-password" class="form-input" placeholder="请输入新密码">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-reset-password')">取消</button>
+            <button class="btn btn-primary" onclick="showResetSuccess()">保存</button>
+        </div>
+    </div>
+</div>
+
+<!-- 重置密码成功提示 -->
+<div class="modal-overlay" id="modal-reset-success">
+    <div class="modal" style="max-width:360px;text-align:center;">
+        <div class="modal-body" style="padding:40px 24px;">
+            <i class="ri-check-circle-line" style="font-size:48px;color:var(--success);"></i>
+            <p style="margin:16px 0 0 0;font-size:16px;font-weight:500;">重置密码成功</p>
+        </div>
+        <div class="modal-footer" style="justify-content:center;">
+            <button class="btn btn-primary" onclick="closeModal('modal-reset-success')">确定</button>
         </div>
     </div>
 </div>
