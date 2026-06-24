@@ -478,6 +478,39 @@ function toggleDistributeRange(radio) {
     }
 }
 
+function toggleAccountStatus(btn) {
+    var row = btn.closest('tr');
+    var statusCell = row.querySelector('td:nth-child(7)');
+    var isDisabling = btn.textContent.trim().includes('停用');
+    
+    if (isDisabling) {
+        statusCell.innerHTML = '<span class="tag tag-red">停用</span>';
+        btn.innerHTML = '<i class="ri-check-line"></i> 启用';
+        btn.style.color = 'var(--success)';
+    } else {
+        statusCell.innerHTML = '<span class="tag tag-green">正常</span>';
+        btn.innerHTML = '<i class="ri-forbid-line"></i> 停用';
+        btn.style.color = 'var(--danger)';
+    }
+}
+
+function toggleParentPhone(btn) {
+    var cell = btn.closest('td');
+    var phoneSpan = cell.querySelector('.phone-text');
+    if (!phoneSpan) return;
+    
+    var masked = phoneSpan.dataset.masked;
+    var full = phoneSpan.dataset.full;
+    
+    if (phoneSpan.textContent.includes('*')) {
+        phoneSpan.textContent = full;
+        btn.innerHTML = '<i class="ri-eye-off-line"></i>';
+    } else {
+        phoneSpan.textContent = masked;
+        btn.innerHTML = '<i class="ri-eye-line"></i>';
+    }
+}
+
 function switchStudentTab(tabName) {
     const tabs = ['reading', 'english', 'tasks', 'logs'];
     tabs.forEach(t => {

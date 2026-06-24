@@ -832,6 +832,10 @@ parents: () => `
 
 <div class="filter-bar">
     <div class="filter-group">
+        <label>家长ID</label>
+        <input type="text" class="form-input" placeholder="输入家长ID">
+    </div>
+    <div class="filter-group">
         <label>手机号</label>
         <input type="text" class="form-input" placeholder="输入家长手机号">
     </div>
@@ -862,6 +866,7 @@ parents: () => `
         <table class="data-table">
             <thead>
                 <tr>
+                    <th>家长ID</th>
                     <th>手机号</th>
                     <th>注册时间</th>
                     <th>绑定学员数</th>
@@ -872,7 +877,11 @@ parents: () => `
             </thead>
             <tbody>
                 <tr>
-                    <td>138****0001</td>
+                    <td>230901P001</td>
+                    <td>
+                        <span class="phone-text" data-masked="138****0001" data-full="13812340001">138****0001</span>
+                        <button class="btn btn-link btn-sm" style="padding:0 4px;margin-left:4px;" onclick="toggleParentPhone(this)"><i class="ri-eye-line"></i></button>
+                    </td>
                     <td>2023-09-01 10:15:30</td>
                     <td>
                         <div style="display:flex;flex-direction:column;gap:4px;">
@@ -896,7 +905,11 @@ parents: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>139****0002</td>
+                    <td>230905P002</td>
+                    <td>
+                        <span class="phone-text" data-masked="139****0002" data-full="13912340002">139****0002</span>
+                        <button class="btn btn-link btn-sm" style="padding:0 4px;margin-left:4px;" onclick="toggleParentPhone(this)"><i class="ri-eye-line"></i></button>
+                    </td>
                     <td>2023-09-05 14:20:18</td>
                     <td>
                         <div style="display:flex;flex-direction:column;gap:4px;">
@@ -917,7 +930,11 @@ parents: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>137****0003</td>
+                    <td>230910P003</td>
+                    <td>
+                        <span class="phone-text" data-masked="137****0003" data-full="13712340003">137****0003</span>
+                        <button class="btn btn-link btn-sm" style="padding:0 4px;margin-left:4px;" onclick="toggleParentPhone(this)"><i class="ri-eye-line"></i></button>
+                    </td>
                     <td>2023-09-10 09:05:42</td>
                     <td>
                         <div style="display:flex;flex-direction:column;gap:4px;">
@@ -938,7 +955,11 @@ parents: () => `
                     </td>
                 </tr>
                 <tr>
-                    <td>136****0004</td>
+                    <td>230912P004</td>
+                    <td>
+                        <span class="phone-text" data-masked="136****0004" data-full="13612340004">136****0004</span>
+                        <button class="btn btn-link btn-sm" style="padding:0 4px;margin-left:4px;" onclick="toggleParentPhone(this)"><i class="ri-eye-line"></i></button>
+                    </td>
                     <td>2023-09-12 16:30:00</td>
                     <td>
                         <div style="display:flex;flex-direction:column;gap:4px;">
@@ -980,7 +1001,8 @@ parents: () => `
             <button class="modal-close" onclick="closeModal('modal-parent-detail')"><i class="ri-close-line"></i></button>
         </div>
         <div class="modal-body" style="font-size:13px;line-height:1.8;">
-            <div><span style="color:var(--text-muted);">手机号：</span>138****0001</div>
+            <div><span style="color:var(--text-muted);">家长ID：</span>230901P001</div>
+            <div><span style="color:var(--text-muted);">手机号：</span>13812340001</div>
             <div><span style="color:var(--text-muted);">注册时间：</span>2023-09-01</div>
             <div><span style="color:var(--text-muted);">状态：</span><span class="tag tag-green">正常</span></div>
             <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
@@ -1038,6 +1060,10 @@ bindRecords: () => `
 
 <div class="filter-bar">
     <div class="filter-group">
+        <label>家长ID</label>
+        <input type="text" class="form-input" placeholder="输入家长ID">
+    </div>
+    <div class="filter-group">
         <label>家长手机号</label>
         <input type="text" class="form-input" placeholder="输入家长手机号">
     </div>
@@ -1057,6 +1083,7 @@ bindRecords: () => `
             <thead>
                 <tr>
                     <th>时间</th>
+                    <th>家长ID</th>
                     <th>家长手机号</th>
                     <th>学员ID</th>
                     <th>用户ID</th>
@@ -1068,6 +1095,7 @@ bindRecords: () => `
             <tbody>
                 <tr>
                     <td>2024-03-15 10:30</td>
+                    <td>230901P001</td>
                     <td>138****0001</td>
                     <td>26AA0001</td>
                     <td>IRP20240001-01</td>
@@ -1077,6 +1105,7 @@ bindRecords: () => `
                 </tr>
                 <tr>
                     <td>2024-03-14 16:20</td>
+                    <td>230905P002</td>
                     <td>139****0002</td>
                     <td>26AB0001</td>
                     <td>IRP20240002-01</td>
@@ -1086,6 +1115,7 @@ bindRecords: () => `
                 </tr>
                 <tr>
                     <td>2024-03-13 09:15</td>
+                    <td>230901P001</td>
                     <td>138****0001</td>
                     <td>26AA0002</td>
                     <td>IRP20240001-02</td>
@@ -1095,6 +1125,7 @@ bindRecords: () => `
                 </tr>
                 <tr>
                     <td>2024-03-10 14:00</td>
+                    <td>230912P004</td>
                     <td>136****0004</td>
                     <td>26AB0002</td>
                     <td>IRP20240001-01</td>

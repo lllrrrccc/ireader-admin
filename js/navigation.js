@@ -40,14 +40,14 @@ const navConfig = [
     {
         group: "数据统计",
         items: [
-            { id: "platform-overview", label: "平台概览", icon: "ri-bar-chart-box-line", page: "platformOverview" },
-            { id: "version", label: "版本管理", icon: "ri-git-branch-line", page: "version" }
+            { id: "platform-overview", label: "平台概览", icon: "ri-bar-chart-box-line", page: "platformOverview" }
         ]
     },
     {
         group: "基础设置",
         items: [
             { id: "permissions", label: "权限管理", icon: "ri-shield-keyhole-line", page: "permissions" },
+            { id: "version", label: "版本管理", icon: "ri-git-branch-line", page: "version" },
             { id: "accounts", label: "后台账号", icon: "ri-admin-line", page: "accounts" }
         ]
     }

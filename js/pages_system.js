@@ -330,7 +330,6 @@ version: () => `
 permissions: () => `
 <div class="page-title">
     <span>权限管理</span>
-    <button class="btn btn-primary" onclick="openModal('modal-add-role')"><i class="ri-add-line"></i> 新增角色</button>
 </div>
 
 <div class="card">
@@ -344,7 +343,6 @@ permissions: () => `
                     <th>用户数量</th>
                     <th>创建时间</th>
                     <th>状态</th>
-                    <th style="width:200px;">操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -353,66 +351,24 @@ permissions: () => `
                     <td><span class="tag tag-red">超级管理员</span></td>
                     <td>拥有平台所有权限，可进行系统配置和管理</td>
                     <td>2</td>
-                    <td>2023-01-01</td>
+                    <td>2023-01-01 08:00:00</td>
                     <td><span class="tag tag-green">启用</span></td>
-                    <td style="white-space:nowrap;">
-                        <button class="btn btn-link btn-sm" onclick="openModal('modal-edit-permission')"><i class="ri-settings-line"></i> 编辑权限</button>
-                    </td>
                 </tr>
                 <tr>
                     <td>R002</td>
-                    <td><span class="tag tag-blue">运营管理员</span></td>
-                    <td>负责平台日常运营、用户管理和数据统计</td>
+                    <td><span class="tag tag-blue">管理员</span></td>
+                    <td>无法新增超管账号，其他页面和功能均可操作</td>
                     <td>5</td>
-                    <td>2023-01-15</td>
+                    <td>2023-01-15 09:30:00</td>
                     <td><span class="tag tag-green">启用</span></td>
-                    <td style="white-space:nowrap;">
-                        <button class="btn btn-link btn-sm" onclick="openModal('modal-edit-permission')"><i class="ri-settings-line"></i> 编辑权限</button>
-                    </td>
                 </tr>
                 <tr>
                     <td>R003</td>
                     <td><span class="tag tag-yellow">内容管理员</span></td>
-                    <td>负责书籍、听力、词库等内容的维护和管理</td>
+                    <td>可以进行内容管理中的操作</td>
                     <td>8</td>
-                    <td>2023-02-01</td>
+                    <td>2023-02-01 14:15:00</td>
                     <td><span class="tag tag-green">启用</span></td>
-                    <td style="white-space:nowrap;">
-                        <button class="btn btn-link btn-sm" onclick="openModal('modal-edit-permission')"><i class="ri-settings-line"></i> 编辑权限</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>R004</td>
-                    <td><span class="tag">教师</span></td>
-                    <td>可查看学生数据、布置阅读任务、查看班级统计</td>
-                    <td>45</td>
-                    <td>2023-03-01</td>
-                    <td><span class="tag tag-green">启用</span></td>
-                    <td style="white-space:nowrap;">
-                        <button class="btn btn-link btn-sm" onclick="openModal('modal-edit-permission')"><i class="ri-settings-line"></i> 编辑权限</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>R005</td>
-                    <td><span class="tag">家长</span></td>
-                    <td>可查看绑定学生的学习数据和阅读报告</td>
-                    <td>320</td>
-                    <td>2023-03-15</td>
-                    <td><span class="tag tag-green">启用</span></td>
-                    <td style="white-space:nowrap;">
-                        <button class="btn btn-link btn-sm" onclick="openModal('modal-edit-permission')"><i class="ri-settings-line"></i> 编辑权限</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>R006</td>
-                    <td><span class="tag tag-gray">测试人员</span></td>
-                    <td>仅用于测试环境，查看所有功能但不可修改数据</td>
-                    <td>3</td>
-                    <td>2023-06-01</td>
-                    <td><span class="tag tag-red">停用</span></td>
-                    <td style="white-space:nowrap;">
-                        <button class="btn btn-link btn-sm" onclick="openModal('modal-edit-permission')"><i class="ri-settings-line"></i> 编辑权限</button>
-                    </td>
                 </tr>
             </tbody>
         </table>
@@ -420,173 +376,11 @@ permissions: () => `
 </div>
 
 <div class="pagination-bar">
-    <span>共 6 条记录</span>
+    <span>共 3 条记录</span>
     <div class="pagination">
         <button class="btn btn-sm btn-secondary" disabled><i class="ri-arrow-left-s-line"></i></button>
         <button class="btn btn-sm btn-primary">1</button>
         <button class="btn btn-sm btn-secondary" disabled><i class="ri-arrow-right-s-line"></i></button>
-    </div>
-</div>
-
-<div class="two-col">
-    <div class="card" style="flex:1;">
-        <div class="card-header"><span class="card-title">👤 角色信息</span></div>
-        <div class="card-body">
-            <div class="form-group">
-                <label class="form-label">角色名称</label>
-                <input type="text" class="form-input" value="超级管理员" readonly>
-            </div>
-            <div class="form-group">
-                <label class="form-label">角色描述</label>
-                <textarea class="form-textarea" rows="2" readonly>拥有平台所有权限，可进行系统配置和管理</textarea>
-            </div>
-            <div class="form-group" style="text-align:right;">
-                <button class="btn btn-primary">保存角色</button>
-            </div>
-        </div>
-    </div>
-    <div class="card" style="flex:2;">
-        <div class="card-header"><span class="card-title">🔐 权限配置</span></div>
-        <div class="card-body">
-            <div style="display:flex;flex-direction:column;gap:8px;">
-                <div style="padding:8px 12px;background:var(--bg);border-radius:6px;">
-                    <label style="display:flex;align-items:center;gap:8px;font-weight:500;">
-                        <input type="checkbox" checked> 书籍管理
-                    </label>
-                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;padding-left:24px;">
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 查看书籍</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 新增书籍</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 编辑书籍</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 删除书籍</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 上下架</label>
-                    </div>
-                </div>
-                <div style="padding:8px 12px;background:var(--bg);border-radius:6px;">
-                    <label style="display:flex;align-items:center;gap:8px;font-weight:500;">
-                        <input type="checkbox" checked> 学生管理
-                    </label>
-                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;padding-left:24px;">
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 查看学生</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 编辑学生</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 停用/启用</label>
-                    </div>
-                </div>
-                <div style="padding:8px 12px;background:var(--bg);border-radius:6px;">
-                    <label style="display:flex;align-items:center;gap:8px;font-weight:500;">
-                        <input type="checkbox" checked> 数据统计
-                    </label>
-                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;padding-left:24px;">
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 平台概览</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 书籍分析</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 用户分析</label>
-                    </div>
-                </div>
-                <div style="padding:8px 12px;background:var(--bg);border-radius:6px;">
-                    <label style="display:flex;align-items:center;gap:8px;font-weight:500;">
-                        <input type="checkbox" checked> 系统设置
-                    </label>
-                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;padding-left:24px;">
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 权限管理</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 版本管理</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 账户管理</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- 新增角色模态框 -->
-<div class="modal-overlay" id="modal-add-role">
-    <div class="modal" style="max-width:520px;">
-        <div class="modal-header">
-            <span class="modal-title">新增角色</span>
-            <button class="modal-close" onclick="closeModal('modal-add-role')"><i class="ri-close-line"></i></button>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-                <label class="form-label">角色名称 <span style="color:var(--danger);">*</span></label>
-                <input type="text" class="form-input" placeholder="请输入角色名称">
-            </div>
-            <div class="form-group">
-                <label class="form-label">角色描述</label>
-                <textarea class="form-textarea" rows="2" placeholder="请输入角色描述"></textarea>
-            </div>
-            <div class="form-group">
-                <label class="form-label">角色颜色</label>
-                <div style="display:flex;gap:8px;">
-                    <div style="width:28px;height:28px;border-radius:50%;background:var(--danger);cursor:pointer;border:2px solid #fff;box-shadow:0 0 0 2px var(--danger);"></div>
-                    <div style="width:28px;height:28px;border-radius:50%;background:var(--primary);cursor:pointer;"></div>
-                    <div style="width:28px;height:28px;border-radius:50%;background:var(--warning);cursor:pointer;"></div>
-                    <div style="width:28px;height:28px;border-radius:50%;background:var(--success);cursor:pointer;"></div>
-                    <div style="width:28px;height:28px;border-radius:50%;background:var(--info);cursor:pointer;"></div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-secondary" onclick="closeModal('modal-add-role')">取消</button>
-            <button class="btn btn-primary">确认创建</button>
-        </div>
-    </div>
-</div>
-
-<!-- 编辑权限模态框 -->
-<div class="modal-overlay" id="modal-edit-permission">
-    <div class="modal" style="max-width:640px;">
-        <div class="modal-header">
-            <span class="modal-title">编辑权限 - 超级管理员</span>
-            <button class="modal-close" onclick="closeModal('modal-edit-permission')"><i class="ri-close-line"></i></button>
-        </div>
-        <div class="modal-body">
-            <div style="display:flex;flex-direction:column;gap:8px;">
-                <div style="padding:8px 12px;background:var(--bg);border-radius:6px;">
-                    <label style="display:flex;align-items:center;gap:8px;font-weight:500;">
-                        <input type="checkbox" checked> 书籍管理
-                    </label>
-                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;padding-left:24px;">
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 查看书籍</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 新增书籍</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 编辑书籍</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 删除书籍</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 上下架</label>
-                    </div>
-                </div>
-                <div style="padding:8px 12px;background:var(--bg);border-radius:6px;">
-                    <label style="display:flex;align-items:center;gap:8px;font-weight:500;">
-                        <input type="checkbox" checked> 学生管理
-                    </label>
-                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;padding-left:24px;">
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 查看学生</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 编辑学生</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 停用/启用</label>
-                    </div>
-                </div>
-                <div style="padding:8px 12px;background:var(--bg);border-radius:6px;">
-                    <label style="display:flex;align-items:center;gap:8px;font-weight:500;">
-                        <input type="checkbox" checked> 数据统计
-                    </label>
-                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;padding-left:24px;">
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 平台概览</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 书籍分析</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 用户分析</label>
-                    </div>
-                </div>
-                <div style="padding:8px 12px;background:var(--bg);border-radius:6px;">
-                    <label style="display:flex;align-items:center;gap:8px;font-weight:500;">
-                        <input type="checkbox" checked> 系统设置
-                    </label>
-                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;padding-left:24px;">
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 权限管理</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 版本管理</label>
-                        <label style="display:flex;align-items:center;gap:4px;font-size:13px;"><input type="checkbox" checked> 账户管理</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-secondary" onclick="closeModal('modal-edit-permission')">取消</button>
-            <button class="btn btn-primary">保存权限</button>
-        </div>
     </div>
 </div>
 `,
@@ -594,7 +388,7 @@ permissions: () => `
 
 accounts: () => `
 <div class="page-title">
-    <span>管理员账户</span>
+    <span>后台账号</span>
     <button class="btn btn-primary" onclick="openModal('modal-add-account')"><i class="ri-add-line"></i> 新增账户</button>
 </div>
 
@@ -608,7 +402,7 @@ accounts: () => `
         <select class="form-select">
             <option>全部</option>
             <option>超级管理员</option>
-            <option>运营管理员</option>
+            <option>管理员</option>
             <option>内容管理员</option>
         </select>
     </div>
@@ -635,7 +429,7 @@ accounts: () => `
                     <th>用户名</th>
                     <th>姓名</th>
                     <th>角色</th>
-                    <th>联系电话</th>
+                    <th>注册时间</th>
                     <th>最后登录</th>
                     <th>状态</th>
                     <th style="width:200px;">操作</th>
@@ -643,115 +437,115 @@ accounts: () => `
             </thead>
             <tbody>
                 <tr>
-                    <td>A001</td>
+                    <td>24031501</td>
                     <td>admin</td>
                     <td>系统管理员</td>
                     <td><span class="tag tag-red">超级管理员</span></td>
-                    <td>138****0000</td>
+                    <td>240315 083015</td>
                     <td>2024-03-15 10:00</td>
                     <td><span class="tag tag-green">正常</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
                         <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--danger);"><i class="ri-delete-bin-line"></i> 删除</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="toggleAccountStatus(this)"><i class="ri-forbid-line"></i> 停用</button>
                     </td>
                 </tr>
                 <tr>
-                    <td>A002</td>
+                    <td>24031401</td>
                     <td>operator1</td>
                     <td>运营小张</td>
-                    <td><span class="tag tag-blue">运营管理员</span></td>
-                    <td>139****1234</td>
+                    <td><span class="tag tag-blue">管理员</span></td>
+                    <td>240314 093022</td>
                     <td>2024-03-14 16:30</td>
                     <td><span class="tag tag-green">正常</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
                         <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--danger);"><i class="ri-delete-bin-line"></i> 删除</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="toggleAccountStatus(this)"><i class="ri-forbid-line"></i> 停用</button>
                     </td>
                 </tr>
                 <tr>
-                    <td>A003</td>
+                    <td>24031301</td>
                     <td>content1</td>
                     <td>内容小李</td>
                     <td><span class="tag tag-yellow">内容管理员</span></td>
-                    <td>136****5678</td>
+                    <td>240313 101508</td>
                     <td>2024-03-13 09:15</td>
                     <td><span class="tag tag-green">正常</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
                         <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--danger);"><i class="ri-delete-bin-line"></i> 删除</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="toggleAccountStatus(this)"><i class="ri-forbid-line"></i> 停用</button>
                     </td>
                 </tr>
                 <tr>
-                    <td>A004</td>
+                    <td>24031201</td>
                     <td>operator2</td>
                     <td>运营小王</td>
-                    <td><span class="tag tag-blue">运营管理员</span></td>
-                    <td>137****9012</td>
+                    <td><span class="tag tag-blue">管理员</span></td>
+                    <td>240312 142035</td>
                     <td>2024-03-12 14:20</td>
                     <td><span class="tag tag-green">正常</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
                         <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--danger);"><i class="ri-delete-bin-line"></i> 删除</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="toggleAccountStatus(this)"><i class="ri-forbid-line"></i> 停用</button>
                     </td>
                 </tr>
                 <tr>
-                    <td>A005</td>
+                    <td>24031101</td>
                     <td>content2</td>
                     <td>内容小陈</td>
                     <td><span class="tag tag-yellow">内容管理员</span></td>
-                    <td>135****3456</td>
+                    <td>240311 114525</td>
                     <td>2024-03-11 11:45</td>
                     <td><span class="tag tag-green">正常</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
                         <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--danger);"><i class="ri-delete-bin-line"></i> 删除</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="toggleAccountStatus(this)"><i class="ri-forbid-line"></i> 停用</button>
                     </td>
                 </tr>
                 <tr>
-                    <td>A006</td>
+                    <td>24031001</td>
                     <td>admin2</td>
                     <td>系统管理员2</td>
                     <td><span class="tag tag-red">超级管理员</span></td>
-                    <td>138****7890</td>
+                    <td>240310 083015</td>
                     <td>2024-03-10 08:30</td>
                     <td><span class="tag tag-red">停用</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
                         <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--danger);"><i class="ri-delete-bin-line"></i> 删除</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="toggleAccountStatus(this)"><i class="ri-check-line"></i> 启用</button>
                     </td>
                 </tr>
                 <tr>
-                    <td>A007</td>
+                    <td>24030901</td>
                     <td>operator3</td>
                     <td>运营小刘</td>
-                    <td><span class="tag tag-blue">运营管理员</span></td>
-                    <td>139****2345</td>
+                    <td><span class="tag tag-blue">管理员</span></td>
+                    <td>240309 170022</td>
                     <td>2024-03-09 17:00</td>
                     <td><span class="tag tag-green">正常</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
                         <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--danger);"><i class="ri-delete-bin-line"></i> 删除</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="toggleAccountStatus(this)"><i class="ri-forbid-line"></i> 停用</button>
                     </td>
                 </tr>
                 <tr>
-                    <td>A008</td>
+                    <td>24030801</td>
                     <td>content3</td>
                     <td>内容小林</td>
                     <td><span class="tag tag-yellow">内容管理员</span></td>
-                    <td>136****6789</td>
+                    <td>240308 101508</td>
                     <td>2024-03-08 10:15</td>
                     <td><span class="tag tag-green">正常</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
                         <button class="btn btn-link btn-sm"><i class="ri-lock-password-line"></i> 重置密码</button>
-                        <button class="btn btn-link btn-sm" style="color:var(--danger);"><i class="ri-delete-bin-line"></i> 删除</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="toggleAccountStatus(this)"><i class="ri-forbid-line"></i> 停用</button>
                     </td>
                 </tr>
             </tbody>
@@ -776,7 +570,7 @@ accounts: () => `
 <div class="modal-overlay" id="modal-add-account">
     <div class="modal" style="max-width:560px;">
         <div class="modal-header">
-            <span class="modal-title">新增管理员账户</span>
+            <span class="modal-title">新增账户</span>
             <button class="modal-close" onclick="closeModal('modal-add-account')"><i class="ri-close-line"></i></button>
         </div>
         <div class="modal-body">
@@ -793,18 +587,14 @@ accounts: () => `
                     <label class="form-label">角色 <span style="color:var(--danger);">*</span></label>
                     <select class="form-select">
                         <option>超级管理员</option>
-                        <option>运营管理员</option>
+                        <option>管理员</option>
                         <option>内容管理员</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">联系电话</label>
-                    <input type="text" class="form-input" placeholder="请输入手机号">
+                    <label class="form-label">初始密码 <span style="color:var(--danger);">*</span></label>
+                    <input type="password" class="form-input" placeholder="请输入初始密码">
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">初始密码 <span style="color:var(--danger);">*</span></label>
-                <input type="password" class="form-input" placeholder="请输入初始密码">
             </div>
         </div>
         <div class="modal-footer">
@@ -818,7 +608,7 @@ accounts: () => `
 <div class="modal-overlay" id="modal-edit-account">
     <div class="modal" style="max-width:560px;">
         <div class="modal-header">
-            <span class="modal-title">编辑管理员账户</span>
+            <span class="modal-title">编辑账户</span>
             <button class="modal-close" onclick="closeModal('modal-edit-account')"><i class="ri-close-line"></i></button>
         </div>
         <div class="modal-body">
@@ -835,13 +625,13 @@ accounts: () => `
                     <label class="form-label">角色 <span style="color:var(--danger);">*</span></label>
                     <select class="form-select">
                         <option selected>超级管理员</option>
-                        <option>运营管理员</option>
+                        <option>管理员</option>
                         <option>内容管理员</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">联系电话</label>
-                    <input type="text" class="form-input" value="138****0000">
+                    <label class="form-label">初始密码</label>
+                    <input type="text" class="form-input" value="********" readonly style="background:var(--bg);color:var(--text-muted);">
                 </div>
             </div>
             <div class="form-group">
