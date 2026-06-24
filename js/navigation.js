@@ -40,7 +40,8 @@ const navConfig = [
     {
         group: "数据统计",
         items: [
-            { id: "platform-overview", label: "平台概览", icon: "ri-bar-chart-box-line", page: "platformOverview" }
+            { id: "platform-overview", label: "平台概览", icon: "ri-bar-chart-box-line", page: "platformOverview" },
+            { id: "book-analysis", label: "书籍分析", icon: "ri-book-open-line", page: "bookAnalysis" }
         ]
     },
     {

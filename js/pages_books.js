@@ -67,7 +67,7 @@ books: () => `
         <table class="data-table">
             <thead>
                 <tr>
-                    <th style="width:120px;">ID</th>
+                    <th style="width:120px;cursor:pointer;" onclick="sortBooks('id')">ID <i class="ri-arrow-down-line" id="sort-icon-id" style="font-size:12px;color:var(--primary);"></i></th>
                     <th style="width:120px;">ISBN</th>
                     <th>书籍名称</th>
                     <th>作者</th>
@@ -75,6 +75,8 @@ books: () => `
                     <th>适用年级</th>
                     <th>文件类型</th>
                     <th>状态</th>
+                    <th>新增时间</th>
+                    <th style="cursor:pointer;" onclick="sortBooks('editTime')">最近编辑时间 <i class="ri-arrow-down-line" id="sort-icon-editTime" style="font-size:12px;color:var(--primary);"></i></th>
                     <th style="width:180px;">操作</th>
                 </tr>
             </thead>
@@ -88,6 +90,8 @@ books: () => `
                     <td>小学3-4年级</td>
                     <td><span class="tag tag-blue">电子书</span></td>
                     <td><span class="tag tag-green">可见</span></td>
+                    <td>2024-06-12 09:15:32</td>
+                    <td>2024-06-15 14:22:18</td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" onclick="navigateTo('bookDetail')"><i class="ri-eye-line"></i> 查看</button>
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openBookStatusModal('modal-book-hide', 'CH2606120001')"><i class="ri-eye-off-line"></i> 隐藏</button>
@@ -105,6 +109,8 @@ books: () => `
                     <td>小学3-4年级</td>
                     <td><span class="tag tag-blue">电子书</span></td>
                     <td><span class="tag tag-green">可见</span></td>
+                    <td>2024-06-12 10:22:45</td>
+                    <td>2024-06-14 16:35:09</td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" onclick="navigateTo('bookDetail')"><i class="ri-eye-line"></i> 查看</button>
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openBookStatusModal('modal-book-hide', 'CH2606120002')"><i class="ri-eye-off-line"></i> 隐藏</button>
@@ -122,6 +128,8 @@ books: () => `
                     <td>小学5-6年级</td>
                     <td><span class="tag tag-blue">电子书</span></td>
                     <td><span class="tag tag-green">可见</span></td>
+                    <td>2024-06-12 11:05:18</td>
+                    <td>2024-06-16 09:12:33</td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" onclick="navigateTo('bookDetail')"><i class="ri-eye-line"></i> 查看</button>
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openBookStatusModal('modal-book-hide', 'CH2606120003')"><i class="ri-eye-off-line"></i> 隐藏</button>
@@ -139,6 +147,8 @@ books: () => `
                     <td>初中</td>
                     <td><span class="tag tag-purple">文章</span></td>
                     <td><span class="tag tag-green">可见</span></td>
+                    <td>2024-06-12 14:30:22</td>
+                    <td>2024-06-18 11:45:56</td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" onclick="navigateTo('bookDetail')"><i class="ri-eye-line"></i> 查看</button>
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openBookStatusModal('modal-book-hide', 'EN2606120001')"><i class="ri-eye-off-line"></i> 隐藏</button>
@@ -156,6 +166,8 @@ books: () => `
                     <td>初中</td>
                     <td><span class="tag tag-blue">电子书</span></td>
                     <td><span class="tag tag-gray">隐藏</span></td>
+                    <td>2024-06-12 16:45:08</td>
+                    <td>2024-06-20 15:18:42</td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" onclick="navigateTo('bookDetail')"><i class="ri-eye-line"></i> 查看</button>
                         <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="openBookStatusModal('modal-book-show', 'CH2606120004')"><i class="ri-eye-line"></i> 可见</button>
@@ -1647,6 +1659,146 @@ bookTranslation: () => `
 
 <div id="translation-import-toast" style="display:none;position:fixed;top:20px;right:20px;padding:12px 20px;background:var(--success);color:#fff;border-radius:8px;font-size:13px;z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
     <i class="ri-checkbox-circle-line" style="margin-right:6px;"></i>译文导入成功！已按段落自动匹配
+</div>
+`,
+
+bookAnalysis: () => `
+<div class="page-title">
+    <span>书籍分析</span>
+    <button class="btn btn-primary" onclick="exportBookAnalysis()"><i class="ri-download-line"></i> 导出数据</button>
+</div>
+
+<div class="filter-bar">
+    <div class="filter-group">
+        <label>书籍ID</label>
+        <input type="text" class="form-input" placeholder="输入书籍ID">
+    </div>
+    <div class="filter-group">
+        <label>书籍名称</label>
+        <input type="text" class="form-input" placeholder="模糊搜索">
+    </div>
+    <div class="filter-group" style="margin-left:100px;">
+        <label>基础分类</label>
+        <div class="multiselect-dropdown" id="book-analysis-filter-cat" style="position:relative;width:160px;">
+            <div class="multiselect-trigger" style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;background:#fff;" onclick="toggleDropdown(this, 'book-analysis-filter-cat-opts')">
+                <span id="book-analysis-filter-cat-text" style="font-size:13px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0;">全部</span>
+                <i class="ri-arrow-down-s-line" style="color:var(--text-muted);flex-shrink:0;margin-left:4px;"></i>
+            </div>
+            <div class="multiselect-options" id="book-analysis-filter-cat-opts" style="display:none;position:fixed;z-index:10000;background:#fff;border:1px solid var(--border);border-radius:var(--radius);max-height:240px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,0.15);min-width:180px;">
+                <div style="padding:8px 12px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-muted);font-weight:600;">中文</div>
+                <label style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;font-size:13px;transition:background 0.2s;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''"><input type="checkbox" onchange="updateGradeText('book-analysis-filter-cat')"> 文学</label>
+                <label style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;font-size:13px;transition:background 0.2s;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''"><input type="checkbox" onchange="updateGradeText('book-analysis-filter-cat')"> 艺术</label>
+                <label style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;font-size:13px;transition:background 0.2s;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''"><input type="checkbox" onchange="updateGradeText('book-analysis-filter-cat')"> 人文社科</label>
+                <label style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;font-size:13px;transition:background 0.2s;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''"><input type="checkbox" onchange="updateGradeText('book-analysis-filter-cat')"> 自然科学</label>
+                <div style="padding:8px 12px;border-bottom:1px solid var(--border);border-top:1px solid var(--border);font-size:12px;color:var(--text-muted);font-weight:600;">英文</div>
+                <label style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;font-size:13px;transition:background 0.2s;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''"><input type="checkbox" onchange="updateGradeText('book-analysis-filter-cat')"> 英语周报时文</label>
+                <label style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;font-size:13px;transition:background 0.2s;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''"><input type="checkbox" onchange="updateGradeText('book-analysis-filter-cat')"> 外研社分级阅读</label>
+                <label style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;font-size:13px;transition:background 0.2s;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''"><input type="checkbox" onchange="updateGradeText('book-analysis-filter-cat')"> 原版名著</label>
+            </div>
+        </div>
+    </div>
+    <div class="filter-group">
+        <label>时间范围</label>
+        <div style="display:flex;align-items:center;gap:6px;">
+            <input type="date" class="form-input" style="width:130px;" placeholder="开始日期">
+            <span style="color:var(--text-muted);font-size:13px;">~</span>
+            <input type="date" class="form-input" style="width:130px;" placeholder="结束日期">
+        </div>
+    </div>
+    <div class="filter-group" style="align-self:flex-end;">
+        <button class="btn btn-primary"><i class="ri-search-line"></i> 查询</button>
+        <button class="btn btn-secondary">重置</button>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body" style="overflow-x:auto;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>书籍ID</th>
+                    <th>书籍名称</th>
+                    <th>作者</th>
+                    <th>基础分类</th>
+                    <th style="cursor:pointer;" onclick="sortBookAnalysis('reach')">触达学生数 <i class="ri-arrow-up-down-line" style="font-size:12px;color:var(--text-muted);"></i></th>
+                    <th style="cursor:pointer;" onclick="sortBookAnalysis('browse')">浏览学生数 <i class="ri-arrow-up-down-line" style="font-size:12px;color:var(--text-muted);"></i></th>
+                    <th style="cursor:pointer;" onclick="sortBookAnalysis('ai')">AI导读学生数 <i class="ri-arrow-up-down-line" style="font-size:12px;color:var(--text-muted);"></i></th>
+                    <th style="cursor:pointer;" onclick="sortBookAnalysis('read')">阅读学生数 <i class="ri-arrow-up-down-line" style="font-size:12px;color:var(--text-muted);"></i></th>
+                    <th style="cursor:pointer;" onclick="sortBookAnalysis('complete')">完成阅读学生数 <i class="ri-arrow-up-down-line" style="font-size:12px;color:var(--text-muted);"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CH2606120001</td>
+                    <td>小王子</td>
+                    <td>圣埃克苏佩里</td>
+                    <td>中文-文学</td>
+                    <td>3,256</td>
+                    <td>2,891</td>
+                    <td>1,876</td>
+                    <td>2,543</td>
+                    <td>1,654</td>
+                </tr>
+                <tr>
+                    <td>CH2606120002</td>
+                    <td>夏洛的网</td>
+                    <td>E·B·怀特</td>
+                    <td>中文-文学</td>
+                    <td>2,891</td>
+                    <td>2,543</td>
+                    <td>1,432</td>
+                    <td>2,108</td>
+                    <td>1,215</td>
+                </tr>
+                <tr>
+                    <td>CH2606120003</td>
+                    <td>哈利·波特与魔法石</td>
+                    <td>J.K.罗琳</td>
+                    <td>中文-文学</td>
+                    <td>2,543</td>
+                    <td>2,108</td>
+                    <td>1,215</td>
+                    <td>1,876</td>
+                    <td>987</td>
+                </tr>
+                <tr>
+                    <td>EN2606120001</td>
+                    <td>The Little Prince</td>
+                    <td>Antoine de Saint-Exupéry</td>
+                    <td>英文-原版名著</td>
+                    <td>2,108</td>
+                    <td>1,876</td>
+                    <td>987</td>
+                    <td>1,654</td>
+                    <td>856</td>
+                </tr>
+                <tr>
+                    <td>CH2606120004</td>
+                    <td>西游记</td>
+                    <td>吴承恩</td>
+                    <td>中文-文学</td>
+                    <td>1,876</td>
+                    <td>1,654</td>
+                    <td>856</td>
+                    <td>1,432</td>
+                    <td>723</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="pagination-bar">
+    <span>共 128 条记录</span>
+    <div class="pagination">
+        <button class="btn btn-sm btn-secondary" disabled><i class="ri-arrow-left-s-line"></i></button>
+        <button class="btn btn-sm btn-primary">1</button>
+        <button class="btn btn-sm btn-secondary">2</button>
+        <button class="btn btn-sm btn-secondary">3</button>
+        <button class="btn btn-sm btn-secondary">4</button>
+        <button class="btn btn-sm btn-secondary">5</button>
+        <button class="btn btn-sm btn-secondary"><i class="ri-arrow-right-s-line"></i></button>
+    </div>
 </div>
 `,
 

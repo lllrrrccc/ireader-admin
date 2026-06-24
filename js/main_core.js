@@ -529,6 +529,69 @@ function showResetSuccess() {
     openModal('modal-reset-success');
 }
 
+function sortBookAnalysis(column) {
+    // 模拟排序功能，实际项目中应该根据列名重新排序表格数据
+    console.log('排序列：' + column);
+}
+
+function exportBookAnalysis() {
+    alert('导出数据成功！');
+}
+
+var bookSortState = { column: 'editTime', order: 'desc' };
+
+function sortBooks(column) {
+    var tbody = document.querySelector('.data-table tbody');
+    if (!tbody) return;
+    
+    var rows = Array.from(tbody.querySelectorAll('tr'));
+    if (rows.length === 0) return;
+    
+    var idIcon = document.getElementById('sort-icon-id');
+    var editIcon = document.getElementById('sort-icon-editTime');
+    
+    if (bookSortState.column === column) {
+        bookSortState.order = (bookSortState.order === 'asc') ? 'desc' : 'asc';
+    } else {
+        bookSortState.column = column;
+        bookSortState.order = (column === 'editTime') ? 'desc' : 'asc';
+    }
+    
+    if (idIcon) {
+        idIcon.className = (bookSortState.column === 'id') 
+            ? (bookSortState.order === 'asc' ? 'ri-arrow-up-line' : 'ri-arrow-down-line')
+            : 'ri-arrow-up-down-line';
+        idIcon.style.color = (bookSortState.column === 'id') ? 'var(--primary)' : 'var(--text-muted)';
+    }
+    if (editIcon) {
+        editIcon.className = (bookSortState.column === 'editTime') 
+            ? (bookSortState.order === 'asc' ? 'ri-arrow-up-line' : 'ri-arrow-down-line')
+            : 'ri-arrow-up-down-line';
+        editIcon.style.color = (bookSortState.column === 'editTime') ? 'var(--primary)' : 'var(--text-muted)';
+    }
+    
+    rows.sort(function(a, b) {
+        var valA, valB;
+        if (column === 'id') {
+            valA = a.cells[0].textContent.trim();
+            valB = b.cells[0].textContent.trim();
+        } else if (column === 'editTime') {
+            valA = a.cells[9].textContent.trim();
+            valB = b.cells[9].textContent.trim();
+        }
+        
+        if (bookSortState.order === 'asc') {
+            return valA > valB ? 1 : -1;
+        } else {
+            return valA < valB ? 1 : -1;
+        }
+    });
+    
+    rows.forEach(function(row) {
+        tbody.appendChild(row);
+    });
+}
+
 function switchStudentTab(tabName) {
     const tabs = ['reading', 'english', 'tasks', 'logs'];
     tabs.forEach(t => {
