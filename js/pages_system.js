@@ -7,58 +7,65 @@ platformOverview: () => `
 
 <div class="stat-cards" style="grid-template-columns:repeat(4,1fr);">
     <div class="stat-card">
-        <span class="stat-value">12,856</span>
-        <span class="stat-label">总注册用户</span>
+        <span class="stat-value">32,944</span>
+        <span class="stat-label">激活总设备数</span>
     </div>
     <div class="stat-card">
-        <span class="stat-value">3,245</span>
-        <span class="stat-label">今日活跃用户</span>
+        <span class="stat-value">39,844</span>
+        <span class="stat-label">使用中的学生数</span>
     </div>
     <div class="stat-card">
-        <span class="stat-value">8,521</span>
-        <span class="stat-label">总阅读书籍</span>
+        <span class="stat-value">29,414</span>
+        <span class="stat-label">绑定家长数</span>
     </div>
     <div class="stat-card">
-        <span class="stat-value">156,280</span>
-        <span class="stat-label">总阅读时长(小时)</span>
+        <span class="stat-value">329</span>
+        <span class="stat-label">使用教师数</span>
     </div>
     <div class="stat-card">
-        <span class="stat-value">45,200</span>
-        <span class="stat-label">总听力时长(小时)</span>
+        <span class="stat-value">8,453</span>
+        <span class="stat-label">书籍总数</span>
     </div>
     <div class="stat-card">
-        <span class="stat-value">98.5%</span>
-        <span class="stat-label">系统可用率</span>
+        <span class="stat-value">8,062</span>
+        <span class="stat-label">学生阅读书籍总量</span>
     </div>
     <div class="stat-card">
-        <span class="stat-value">2,450</span>
-        <span class="stat-label">本月新增用户</span>
+        <span class="stat-value">183,429</span>
+        <span class="stat-label">学生总阅读时长(小时)</span>
     </div>
     <div class="stat-card">
-        <span class="stat-value">86.2%</span>
-        <span class="stat-label">用户留存率</span>
+        <span class="stat-value">1,053</span>
+        <span class="stat-label">阅读任务总数</span>
     </div>
 </div>
 
 <div class="two-col">
     <div class="card">
-        <div class="card-header"><span class="card-title">📈 用户增长趋势</span></div>
+        <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
+            <span class="card-title">📈 设备数增长趋势</span>
+            <div style="display:flex;gap:4px;">
+                <button class="btn btn-sm btn-secondary" style="padding:2px 8px;font-size:12px;">按月</button>
+                <button class="btn btn-sm btn-secondary" style="padding:2px 8px;font-size:12px;">按周</button>
+                <button class="btn btn-sm btn-primary" style="padding:2px 8px;font-size:12px;">按日</button>
+            </div>
+        </div>
         <div class="card-body">
             <div style="height:200px;display:flex;align-items:flex-end;gap:8px;padding:0 8px;">
                 <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:40%;background:var(--primary);border-radius:4px 4px 0 0;opacity:0.7;"></div>
+                    <div style="width:100%;height:30%;background:var(--primary);border-radius:4px 4px 0 0;opacity:0.7;"></div>
                     <span style="font-size:11px;color:var(--text-muted);">1月</span>
                 </div>
                 <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:55%;background:var(--primary);border-radius:4px 4px 0 0;opacity:0.7;"></div>
+                    <div style="width:100%;height:45%;background:var(--primary);border-radius:4px 4px 0 0;opacity:0.7;"></div>
                     <span style="font-size:11px;color:var(--text-muted);">2月</span>
                 </div>
                 <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:70%;background:var(--primary);border-radius:4px 4px 0 0;"></div>
+                    <div style="width:100%;height:55%;background:var(--primary);border-radius:4px 4px 0 0;"></div>
                     <span style="font-size:11px;color:var(--text-muted);">3月</span>
                 </div>
                 <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:60%;background:var(--primary);border-radius:4px 4px 0 0;opacity:0.7;"></div>
+                    <div style="width:100%;height:65%;background:var(--primary);border-radius:4px 4px 0 0;opacity:0.7;"></div>
                     <span style="font-size:11px;color:var(--text-muted);">4月</span>
                 </div>
                 <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
@@ -66,26 +73,33 @@ platformOverview: () => `
                     <span style="font-size:11px;color:var(--text-muted);">5月</span>
                 </div>
                 <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:90%;background:var(--primary);border-radius:4px 4px 0 0;"></div>
+                    <div style="width:100%;height:95%;background:var(--primary);border-radius:4px 4px 0 0;"></div>
                     <span style="font-size:11px;color:var(--text-muted);">6月</span>
                 </div>
             </div>
         </div>
     </div>
     <div class="card">
-        <div class="card-header"><span class="card-title">📚 阅读时长趋势</span></div>
+        <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
+            <span class="card-title">👨‍🎓 使用学生增长趋势</span>
+            <div style="display:flex;gap:4px;">
+                <button class="btn btn-sm btn-secondary" style="padding:2px 8px;font-size:12px;">按月</button>
+                <button class="btn btn-sm btn-secondary" style="padding:2px 8px;font-size:12px;">按周</button>
+                <button class="btn btn-sm btn-primary" style="padding:2px 8px;font-size:12px;">按日</button>
+            </div>
+        </div>
         <div class="card-body">
             <div style="height:200px;display:flex;align-items:flex-end;gap:8px;padding:0 8px;">
                 <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:50%;background:var(--success);border-radius:4px 4px 0 0;opacity:0.7;"></div>
+                    <div style="width:100%;height:35%;background:var(--success);border-radius:4px 4px 0 0;opacity:0.7;"></div>
                     <span style="font-size:11px;color:var(--text-muted);">1月</span>
                 </div>
                 <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:65%;background:var(--success);border-radius:4px 4px 0 0;opacity:0.7;"></div>
+                    <div style="width:100%;height:50%;background:var(--success);border-radius:4px 4px 0 0;opacity:0.7;"></div>
                     <span style="font-size:11px;color:var(--text-muted);">2月</span>
                 </div>
                 <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:75%;background:var(--success);border-radius:4px 4px 0 0;"></div>
+                    <div style="width:100%;height:60%;background:var(--success);border-radius:4px 4px 0 0;"></div>
                     <span style="font-size:11px;color:var(--text-muted);">3月</span>
                 </div>
                 <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
@@ -97,7 +111,7 @@ platformOverview: () => `
                     <span style="font-size:11px;color:var(--text-muted);">5月</span>
                 </div>
                 <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:95%;background:var(--success);border-radius:4px 4px 0 0;"></div>
+                    <div style="width:100%;height:100%;background:var(--success);border-radius:4px 4px 0 0;"></div>
                     <span style="font-size:11px;color:var(--text-muted);">6月</span>
                 </div>
             </div>
@@ -107,79 +121,124 @@ platformOverview: () => `
 
 <div class="two-col">
     <div class="card">
-        <div class="card-header"><span class="card-title">📊 功能使用分布</span></div>
+        <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
+            <span class="card-title">📊 每日活跃设备数</span>
+            <div class="filter-group" style="margin:0;">
+                <select class="form-select" style="min-width:120px;padding:4px 8px;font-size:12px;">
+                    <option>最近7天</option>
+                    <option>最近30天</option>
+                    <option>最近90天</option>
+                </select>
+            </div>
+        </div>
         <div class="card-body">
-            <div style="display:flex;flex-direction:column;gap:16px;padding:16px 0;">
-                <div>
-                    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;">
-                        <span>阅读</span><span>85%</span>
-                    </div>
-                    <div style="width:100%;height:12px;background:var(--bg);border-radius:6px;overflow:hidden;"><div style="width:85%;height:100%;background:var(--primary);"></div></div>
+            <div style="height:200px;display:flex;align-items:flex-end;gap:6px;padding:0 8px;">
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                    <div style="width:100%;height:45%;background:var(--info);border-radius:4px 4px 0 0;opacity:0.7;"></div>
+                    <span style="font-size:10px;color:var(--text-muted);">06-18</span>
                 </div>
-                <div>
-                    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;">
-                        <span>听力</span><span>62%</span>
-                    </div>
-                    <div style="width:100%;height:12px;background:var(--bg);border-radius:6px;overflow:hidden;"><div style="width:62%;height:100%;background:var(--success);"></div></div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                    <div style="width:100%;height:60%;background:var(--info);border-radius:4px 4px 0 0;opacity:0.7;"></div>
+                    <span style="font-size:10px;color:var(--text-muted);">06-19</span>
                 </div>
-                <div>
-                    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;">
-                        <span>AI对话</span><span>48%</span>
-                    </div>
-                    <div style="width:100%;height:12px;background:var(--bg);border-radius:6px;overflow:hidden;"><div style="width:48%;height:100%;background:var(--info);"></div></div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                    <div style="width:100%;height:75%;background:var(--info);border-radius:4px 4px 0 0;"></div>
+                    <span style="font-size:10px;color:var(--text-muted);">06-20</span>
                 </div>
-                <div>
-                    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;">
-                        <span>单词学习</span><span>35%</span>
-                    </div>
-                    <div style="width:100%;height:12px;background:var(--bg);border-radius:6px;overflow:hidden;"><div style="width:35%;height:100%;background:var(--warning);"></div></div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                    <div style="width:100%;height:55%;background:var(--info);border-radius:4px 4px 0 0;opacity:0.7;"></div>
+                    <span style="font-size:10px;color:var(--text-muted);">06-21</span>
                 </div>
-                <div>
-                    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;">
-                        <span>AI翻译</span><span>28%</span>
-                    </div>
-                    <div style="width:100%;height:12px;background:var(--bg);border-radius:6px;overflow:hidden;"><div style="width:28%;height:100%;background:var(--danger);"></div></div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                    <div style="width:100%;height:85%;background:var(--info);border-radius:4px 4px 0 0;"></div>
+                    <span style="font-size:10px;color:var(--text-muted);">06-22</span>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                    <div style="width:100%;height:70%;background:var(--info);border-radius:4px 4px 0 0;opacity:0.7;"></div>
+                    <span style="font-size:10px;color:var(--text-muted);">06-23</span>
+                </div>
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                    <div style="width:100%;height:90%;background:var(--info);border-radius:4px 4px 0 0;"></div>
+                    <span style="font-size:10px;color:var(--text-muted);">06-24</span>
                 </div>
             </div>
         </div>
     </div>
     <div class="card">
-        <div class="card-header"><span class="card-title">👥 用户活跃时段</span></div>
-        <div class="card-body">
-            <div style="height:200px;display:flex;align-items:flex-end;gap:4px;padding:0 8px;">
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:20%;background:var(--info);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">6时</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:35%;background:var(--info);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">8时</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:55%;background:var(--info);border-radius:4px 4px 0 0;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">10时</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:70%;background:var(--info);border-radius:4px 4px 0 0;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">12时</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:85%;background:var(--info);border-radius:4px 4px 0 0;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">14时</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:95%;background:var(--info);border-radius:4px 4px 0 0;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">16时</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:80%;background:var(--info);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">18时</span>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-                    <div style="width:100%;height:60%;background:var(--info);border-radius:4px 4px 0 0;opacity:0.7;"></div>
-                    <span style="font-size:11px;color:var(--text-muted);">20时</span>
-                </div>
-            </div>
+        <div class="card-header"><span class="card-title">🔥 最近30天热门书籍Top10</span></div>
+        <div class="card-body" style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width:50px;">排名</th>
+                        <th>书籍ID</th>
+                        <th>书籍名称</th>
+                        <th style="width:80px;">阅读次数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span style="color:var(--danger);font-weight:700;">1</span></td>
+                        <td>B001</td>
+                        <td>小王子</td>
+                        <td>3,256</td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:var(--danger);font-weight:700;">2</span></td>
+                        <td>B003</td>
+                        <td>西游记</td>
+                        <td>2,891</td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:var(--warning);font-weight:700;">3</span></td>
+                        <td>B007</td>
+                        <td>The Little Prince</td>
+                        <td>2,543</td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:var(--text-muted);font-weight:700;">4</span></td>
+                        <td>B002</td>
+                        <td>夏洛的网</td>
+                        <td>2,108</td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:var(--text-muted);font-weight:700;">5</span></td>
+                        <td>B004</td>
+                        <td>哈利·波特与魔法石</td>
+                        <td>1,876</td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:var(--text-muted);font-weight:700;">6</span></td>
+                        <td>B005</td>
+                        <td>草房子</td>
+                        <td>1,654</td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:var(--text-muted);font-weight:700;">7</span></td>
+                        <td>B008</td>
+                        <td>Charlotte's Web</td>
+                        <td>1,432</td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:var(--text-muted);font-weight:700;">8</span></td>
+                        <td>B006</td>
+                        <td>狼王梦</td>
+                        <td>1,215</td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:var(--text-muted);font-weight:700;">9</span></td>
+                        <td>B009</td>
+                        <td>宝葫芦的秘密</td>
+                        <td>987</td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:var(--text-muted);font-weight:700;">10</span></td>
+                        <td>B010</td>
+                        <td>哈利·波特与密室</td>
+                        <td>856</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
