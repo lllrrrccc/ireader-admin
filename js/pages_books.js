@@ -176,6 +176,101 @@ books: () => `
                         <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="navigateTo('bookTranslation')"><i class="ri-translate-2"></i> 译文</button>
                     </td>
                 </tr>
+                <tr>
+                    <td>CH2606120005</td>
+                    <td>978-7-020-00005-1</td>
+                    <td>草房子</td>
+                    <td>曹文轩</td>
+                    <td>中文-文学</td>
+                    <td>小学5-6年级</td>
+                    <td><span class="tag tag-blue">电子书</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td>2024-06-13 09:22:15</td>
+                    <td>2024-06-19 10:33:48</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('bookDetail')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openBookStatusModal('modal-book-hide', 'CH2606120005')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('bookAudio')"><i class="ri-music-2-line"></i> 音频</button>
+                    
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="navigateTo('bookTranslation')"><i class="ri-translate-2"></i> 译文</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>CH2606120006</td>
+                    <td>978-7-020-00006-8</td>
+                    <td>狼王梦</td>
+                    <td>沈石溪</td>
+                    <td>中文-文学</td>
+                    <td>小学5-6年级</td>
+                    <td><span class="tag tag-blue">电子书</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td>2024-06-13 11:08:36</td>
+                    <td>2024-06-21 14:15:22</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('bookDetail')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openBookStatusModal('modal-book-hide', 'CH2606120006')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('bookAudio')"><i class="ri-music-2-line"></i> 音频</button>
+                    
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="navigateTo('bookTranslation')"><i class="ri-translate-2"></i> 译文</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>CH2606120007</td>
+                    <td>978-7-020-00007-5</td>
+                    <td>宝葫芦的秘密</td>
+                    <td>张天翼</td>
+                    <td>中文-文学</td>
+                    <td>小学3-4年级</td>
+                    <td><span class="tag tag-blue">电子书</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td>2024-06-13 13:45:50</td>
+                    <td>2024-06-18 16:20:10</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('bookDetail')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openBookStatusModal('modal-book-hide', 'CH2606120007')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('bookAudio')"><i class="ri-music-2-line"></i> 音频</button>
+                    
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="navigateTo('bookTranslation')"><i class="ri-translate-2"></i> 译文</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>CH2606120008</td>
+                    <td>978-7-020-00008-2</td>
+                    <td>哈利·波特与密室</td>
+                    <td>J.K.罗琳</td>
+                    <td>中文-文学</td>
+                    <td>初中</td>
+                    <td><span class="tag tag-blue">电子书</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td>2024-06-13 15:30:12</td>
+                    <td>2024-06-22 09:45:33</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('bookDetail')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openBookStatusModal('modal-book-hide', 'CH2606120008')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('bookAudio')"><i class="ri-music-2-line"></i> 音频</button>
+                    
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="navigateTo('bookTranslation')"><i class="ri-translate-2"></i> 译文</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>EN2606120002</td>
+                    <td>978-0-15-601-220-1</td>
+                    <td><span style="display:block;">Charlotte's Web</span><span style="font-size:12px;color:var(--text-muted);">夏洛的网</span></td>
+                    <td><span style="display:block;">E.B. White</span><span style="font-size:12px;color:var(--text-muted);">E·B·怀特</span></td>
+                    <td>英文-原版名著</td>
+                    <td>小学3-4年级</td>
+                    <td><span class="tag tag-purple">文章</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td>2024-06-14 10:15:28</td>
+                    <td>2024-06-20 11:30:45</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('bookDetail')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openBookStatusModal('modal-book-hide', 'EN2606120002')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('bookAudioEn')"><i class="ri-music-2-line"></i> 音频</button>
+                    
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="navigateTo('bookTranslation')"><i class="ri-translate-2"></i> 译文</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -1782,6 +1877,61 @@ bookAnalysis: () => `
                     <td>856</td>
                     <td>1,432</td>
                     <td>723</td>
+                </tr>
+                <tr>
+                    <td>CH2606120005</td>
+                    <td>三国演义</td>
+                    <td>罗贯中</td>
+                    <td>中文-文学</td>
+                    <td>1,543</td>
+                    <td>1,376</td>
+                    <td>876</td>
+                    <td>1,154</td>
+                    <td>687</td>
+                </tr>
+                <tr>
+                    <td>CH2606120006</td>
+                    <td>水浒传</td>
+                    <td>施耐庵</td>
+                    <td>中文-文学</td>
+                    <td>1,287</td>
+                    <td>1,154</td>
+                    <td>723</td>
+                    <td>987</td>
+                    <td>543</td>
+                </tr>
+                <tr>
+                    <td>CH2606120007</td>
+                    <td>红楼梦</td>
+                    <td>曹雪芹</td>
+                    <td>中文-文学</td>
+                    <td>1,098</td>
+                    <td>987</td>
+                    <td>654</td>
+                    <td>856</td>
+                    <td>432</td>
+                </tr>
+                <tr>
+                    <td>CH2606120008</td>
+                    <td>十万个为什么</td>
+                    <td>米·伊林</td>
+                    <td>中文-自然科学</td>
+                    <td>2,432</td>
+                    <td>2,108</td>
+                    <td>1,543</td>
+                    <td>1,876</td>
+                    <td>1,109</td>
+                </tr>
+                <tr>
+                    <td>EN2606120002</td>
+                    <td>Charlotte's Web</td>
+                    <td>E.B. White</td>
+                    <td>英文-原版名著</td>
+                    <td>1,876</td>
+                    <td>1,654</td>
+                    <td>987</td>
+                    <td>1,432</td>
+                    <td>765</td>
                 </tr>
             </tbody>
         </table>

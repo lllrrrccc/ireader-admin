@@ -224,6 +224,76 @@ version: () => `
                         <button class="btn btn-link btn-sm" onclick="openModal('modal-view-version')"><i class="ri-eye-line"></i> 查看</button>
                     </td>
                 </tr>
+                <tr>
+                    <td>V004</td>
+                    <td>v2.2.0</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">适配平板横屏模式，优化书架布局</td>
+                    <td>2024-01-30</td>
+                    <td><span class="tag tag-green">已发布</span></td>
+                    <td>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-version')"><i class="ri-eye-line"></i> 查看</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>V005</td>
+                    <td>v2.1.3</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">修复部分设备闪退问题，提升稳定性</td>
+                    <td>2024-01-15</td>
+                    <td><span class="tag tag-green">已发布</span></td>
+                    <td>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-version')"><i class="ri-eye-line"></i> 查看</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>V006</td>
+                    <td>v2.1.2</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">优化离线下载功能，修复下载失败问题</td>
+                    <td>2024-01-02</td>
+                    <td><span class="tag tag-green">已发布</span></td>
+                    <td>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-version')"><i class="ri-eye-line"></i> 查看</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>V007</td>
+                    <td>v2.1.1</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">新增夜间模式，优化护眼体验</td>
+                    <td>2023-12-20</td>
+                    <td><span class="tag tag-green">已发布</span></td>
+                    <td>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-version')"><i class="ri-eye-line"></i> 查看</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>V008</td>
+                    <td>v2.1.0</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">版本大更新，全新UI界面</td>
+                    <td>2023-12-10</td>
+                    <td><span class="tag tag-green">已发布</span></td>
+                    <td>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-version')"><i class="ri-eye-line"></i> 查看</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>V009</td>
+                    <td>v2.0.0</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">全面升级，新增班级阅读管理功能</td>
+                    <td>2023-11-25</td>
+                    <td><span class="tag tag-green">已发布</span></td>
+                    <td>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-version')"><i class="ri-eye-line"></i> 查看</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>V010</td>
+                    <td>v1.9.2</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">修复若干Bug，提升系统性能</td>
+                    <td>2023-11-10</td>
+                    <td><span class="tag tag-green">已发布</span></td>
+                    <td>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-version')"><i class="ri-eye-line"></i> 查看</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -368,6 +438,62 @@ permissions: () => `
                     <td>可以进行内容管理中的操作</td>
                     <td>8</td>
                     <td>2023-02-01 14:15:00</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                </tr>
+                <tr>
+                    <td>R004</td>
+                    <td><span class="tag tag-yellow">教师</span></td>
+                    <td>可以管理班级学生和阅读任务</td>
+                    <td>15</td>
+                    <td>2023-02-15 10:30:00</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                </tr>
+                <tr>
+                    <td>R005</td>
+                    <td><span class="tag tag-blue">学生管理员</span></td>
+                    <td>管理学生账号信息和班级分配</td>
+                    <td>10</td>
+                    <td>2023-03-01 09:00:00</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                </tr>
+                <tr>
+                    <td>R006</td>
+                    <td><span class="tag tag-blue">数据查看员</span></td>
+                    <td>仅可查看数据统计报表，无法进行任何操作</td>
+                    <td>6</td>
+                    <td>2023-03-10 11:20:00</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                </tr>
+                <tr>
+                    <td>R007</td>
+                    <td><span class="tag tag-yellow">书籍管理员</span></td>
+                    <td>负责书籍上架、下架和分类管理</td>
+                    <td>4</td>
+                    <td>2023-03-20 14:00:00</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                </tr>
+                <tr>
+                    <td>R008</td>
+                    <td><span class="tag tag-blue">客服</span></td>
+                    <td>处理用户反馈和问题工单</td>
+                    <td>3</td>
+                    <td>2023-04-01 08:45:00</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                </tr>
+                <tr>
+                    <td>R009</td>
+                    <td><span class="tag tag-blue">审计员</span></td>
+                    <td>查看系统操作日志和审计记录</td>
+                    <td>2</td>
+                    <td>2023-04-15 16:30:00</td>
+                    <td><span class="tag tag-yellow">停用</span></td>
+                </tr>
+                <tr>
+                    <td>R010</td>
+                    <td><span class="tag tag-blue">设备管理员</span></td>
+                    <td>管理设备注册、激活和固件更新</td>
+                    <td>7</td>
+                    <td>2023-05-01 10:00:00</td>
                     <td><span class="tag tag-green">启用</span></td>
                 </tr>
             </tbody>
@@ -541,6 +667,34 @@ accounts: () => `
                     <td><span class="tag tag-yellow">内容管理员</span></td>
                     <td>2024-03-08 10:15:08</td>
                     <td>2024-03-08 10:15</td>
+                    <td><span class="tag tag-green">正常</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-reset-password')"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="toggleAccountStatus(this)"><i class="ri-forbid-line"></i> 停用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>24030701</td>
+                    <td>operator4</td>
+                    <td>运营小赵</td>
+                    <td><span class="tag tag-blue">管理员</span></td>
+                    <td>2024-03-07 09:20:15</td>
+                    <td>2024-03-07 09:20</td>
+                    <td><span class="tag tag-red">停用</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-reset-password')"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="toggleAccountStatus(this)"><i class="ri-check-line"></i> 启用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>24030601</td>
+                    <td>content4</td>
+                    <td>内容小黄</td>
+                    <td><span class="tag tag-yellow">内容管理员</span></td>
+                    <td>2024-03-06 14:30:42</td>
+                    <td>2024-03-06 14:30</td>
                     <td><span class="tag tag-green">正常</span></td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-edit-account')"><i class="ri-edit-line"></i> 编辑</button>

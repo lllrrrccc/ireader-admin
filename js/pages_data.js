@@ -403,6 +403,82 @@ readingTasks: () => `
                         <button class="btn btn-link btn-sm" onclick="navigateTo('taskDetail')"><i class="ri-eye-line"></i> 查看</button>
                     </td>
                 </tr>
+                <tr>
+                    <td style="font-size:12px;">231005T01TG901</td>
+                    <td>童话故事分享会</td>
+                    <td>231005T01</td>
+                    <td>刘老师</td>
+                    <td>四(2)班</td>
+                    <td>2024-05-01</td>
+                    <td>2024-05-15</td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:60px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:50%;height:100%;background:var(--primary);border-radius:3px;"></div></div>
+                            <span style="font-size:12px;">50%</span>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-blue">进行中</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('taskDetail')"><i class="ri-eye-line"></i> 查看</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size:12px;">231006T01TH234</td>
+                    <td>科普阅读月</td>
+                    <td>231006T01</td>
+                    <td>陈老师</td>
+                    <td>四(3)班</td>
+                    <td>2024-04-15</td>
+                    <td>2024-05-15</td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:60px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:10%;height:100%;background:var(--primary);border-radius:3px;"></div></div>
+                            <span style="font-size:12px;">10%</span>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-blue">进行中</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('taskDetail')"><i class="ri-eye-line"></i> 查看</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size:12px;">231006T01TI567</td>
+                    <td>亲子阅读打卡</td>
+                    <td>231006T01</td>
+                    <td>陈老师</td>
+                    <td>五(1)班, 五(2)班</td>
+                    <td>2024-06-01</td>
+                    <td>2024-06-30</td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:60px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:0%;height:100%;background:var(--text-muted);border-radius:3px;"></div></div>
+                            <span style="font-size:12px;">0%</span>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-yellow">未开始</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('taskDetail')"><i class="ri-eye-line"></i> 查看</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size:12px;">230820T01TJ890</td>
+                    <td>古诗词背诵赛</td>
+                    <td>230820T01</td>
+                    <td>王老师</td>
+                    <td>三(2)班</td>
+                    <td>2024-02-01</td>
+                    <td>2024-02-28</td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:60px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:100%;height:100%;background:var(--success);border-radius:3px;"></div></div>
+                            <span style="font-size:12px;">100%</span>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-green">已结束</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('taskDetail')"><i class="ri-eye-line"></i> 查看</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -744,6 +820,40 @@ wordLearning: () => `
                     </td>
                     <td><span class="tag tag-blue">学习中</span></td>
                 </tr>
+                <tr>
+                    <td>26AE0001WI567</td>
+                    <td>26AE0001</td>
+                    <td>郑宇</td>
+                    <td>WB002</td>
+                    <td>小学3年级核心词库</td>
+                    <td>2024-03-09 09:30:00</td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:120px;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;">
+                                <div style="width:32%;height:100%;background:var(--warning);"></div>
+                            </div>
+                            <span style="font-size:12px;">30/95</span>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-blue">学习中</span></td>
+                </tr>
+                <tr>
+                    <td>26AE0002WJ890</td>
+                    <td>26AE0002</td>
+                    <td>冯婷</td>
+                    <td>WB005</td>
+                    <td>小学6年级核心词库</td>
+                    <td>2024-03-08 14:15:30</td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:120px;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;">
+                                <div style="width:40%;height:100%;background:var(--primary);"></div>
+                            </div>
+                            <span style="font-size:12px;">200/500</span>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-blue">学习中</span></td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -940,6 +1050,38 @@ listeningData: () => `
                     </td>
                     <td>1</td>
                     <td>20240311100522</td>
+                    <td><span class="tag tag-blue">进行中</span></td>
+                </tr>
+                <tr>
+                    <td>26AE0001LI567</td>
+                    <td>26AE0001</td>
+                    <td>郑宇</td>
+                    <td>L009</td>
+                    <td>成语故事 - 守株待兔</td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:80px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:100%;height:100%;background:var(--success);border-radius:3px;"></div></div>
+                            <span style="font-size:12px;">100%</span>
+                        </div>
+                    </td>
+                    <td>2</td>
+                    <td>20240309103045</td>
+                    <td><span class="tag tag-green">已完成</span></td>
+                </tr>
+                <tr>
+                    <td>26AE0002LJ890</td>
+                    <td>26AE0002</td>
+                    <td>冯婷</td>
+                    <td>L010</td>
+                    <td>寓言故事 - 狐狸和葡萄</td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="width:80px;height:6px;background:var(--bg);border-radius:3px;"><div style="width:60%;height:100%;background:var(--primary);border-radius:3px;"></div></div>
+                            <span style="font-size:12px;">60%</span>
+                        </div>
+                    </td>
+                    <td>1</td>
+                    <td>20240308164520</td>
                     <td><span class="tag tag-blue">进行中</span></td>
                 </tr>
             </tbody>

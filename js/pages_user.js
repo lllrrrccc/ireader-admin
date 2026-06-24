@@ -167,6 +167,34 @@ students: () => `
                         <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-stop-student')"><i class="ri-forbid-line"></i> 终止使用</button>
                     </td>
                 </tr>
+                <tr>
+                    <td>26AE0001</td>
+                    <td>IRP20240010-01</td>
+                    <td>IRP20240010</td>
+                    <td>陈小美</td>
+                    <td>小学一年级</td>
+                    <td><span class="tag tag-green">使用中</span></td>
+                    <td>2023-10-10 08:00:00</td>
+                    <td>—</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('studentDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-stop-student')"><i class="ri-forbid-line"></i> 终止使用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>26AE0002</td>
+                    <td>IRP20240011-01</td>
+                    <td>IRP20240011</td>
+                    <td>林小华</td>
+                    <td>小学二年级</td>
+                    <td><span class="tag tag-green">使用中</span></td>
+                    <td>2023-10-15 09:20:30</td>
+                    <td>—</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('studentDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-stop-student')"><i class="ri-forbid-line"></i> 终止使用</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -592,6 +620,86 @@ teachers: () => `
                         <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-disable-teacher')"><i class="ri-forbid-line"></i> 禁用</button>
                     </td>
                 </tr>
+                <tr>
+                    <td>231105T01</td>
+                    <td>134****5678</td>
+                    <td>赵老师</td>
+                    <td>北京市第三实验小学</td>
+                    <td>小学六年级</td>
+                    <td>语文</td>
+                    <td>2023-11-05 08:30:00</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="copyTeacherLink()"><i class="ri-links-line"></i> 复制登录信息</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('teacherDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-reset-teacher-pwd')"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-disable-teacher')"><i class="ri-forbid-line"></i> 禁用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>231120T01</td>
+                    <td>133****9012</td>
+                    <td>孙老师</td>
+                    <td>北京市第一实验小学</td>
+                    <td>小学一年级</td>
+                    <td>英语</td>
+                    <td>2023-11-20 10:00:00</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="copyTeacherLink()"><i class="ri-links-line"></i> 复制登录信息</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('teacherDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-reset-teacher-pwd')"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-disable-teacher')"><i class="ri-forbid-line"></i> 禁用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>231201T01</td>
+                    <td>132****3456</td>
+                    <td>周老师</td>
+                    <td>北京市第二实验中学</td>
+                    <td>初中</td>
+                    <td>数学</td>
+                    <td>2023-12-01 09:15:00</td>
+                    <td><span class="tag tag-red">禁用</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="copyTeacherLink()"><i class="ri-links-line"></i> 复制登录信息</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('teacherDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-reset-teacher-pwd')"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="openModal('modal-enable-teacher')"><i class="ri-check-line"></i> 启用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>231215T01</td>
+                    <td>131****7890</td>
+                    <td>吴老师</td>
+                    <td>北京市第三实验小学</td>
+                    <td>小学二年级</td>
+                    <td>数学</td>
+                    <td>2023-12-15 11:30:00</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="copyTeacherLink()"><i class="ri-links-line"></i> 复制登录信息</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('teacherDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-reset-teacher-pwd')"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-disable-teacher')"><i class="ri-forbid-line"></i> 禁用</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>240105T01</td>
+                    <td>130****1234</td>
+                    <td>郑老师</td>
+                    <td>北京市第二实验中学</td>
+                    <td>高中</td>
+                    <td>语文</td>
+                    <td>2024-01-05 13:45:00</td>
+                    <td><span class="tag tag-green">启用</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="copyTeacherLink()"><i class="ri-links-line"></i> 复制登录信息</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('teacherDetail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-reset-teacher-pwd')"><i class="ri-lock-password-line"></i> 重置密码</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-disable-teacher')"><i class="ri-forbid-line"></i> 禁用</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -977,6 +1085,154 @@ parents: () => `
                         <button class="btn btn-link btn-sm" disabled style="color:var(--text-muted);"><i class="ri-link-unlink-m-line"></i> 解绑</button>
                     </td>
                 </tr>
+                <tr>
+                    <td>230901PA005</td>
+                    <td>
+                        <span class="phone-text" data-masked="135****0005" data-full="13512340005">135****0005</span>
+                        <button class="btn btn-link btn-sm" style="padding:0 4px;margin-left:4px;" onclick="toggleParentPhone(this)"><i class="ri-eye-line"></i></button>
+                    </td>
+                    <td>2023-09-15 11:20:33</td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 位学员</span>
+                            <div style="font-size:12px;color:var(--text-muted);">26AC0002 / IRP20240005-01 / 孙八</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 台设备</span>
+                            <div style="font-size:12px;color:var(--text-muted);">IRP20240005</div>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-green">正常</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-parent-detail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-unbind-parent')"><i class="ri-link-unlink-m-line"></i> 解绑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>230901PA006</td>
+                    <td>
+                        <span class="phone-text" data-masked="134****0006" data-full="13412340006">134****0006</span>
+                        <button class="btn btn-link btn-sm" style="padding:0 4px;margin-left:4px;" onclick="toggleParentPhone(this)"><i class="ri-eye-line"></i></button>
+                    </td>
+                    <td>2023-09-18 08:45:12</td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 位学员</span>
+                            <div style="font-size:12px;color:var(--text-muted);">26AD0001 / IRP20240006-01 / 周九</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 台设备</span>
+                            <div style="font-size:12px;color:var(--text-muted);">IRP20240006</div>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-green">正常</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-parent-detail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-unbind-parent')"><i class="ri-link-unlink-m-line"></i> 解绑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>230901PA007</td>
+                    <td>
+                        <span class="phone-text" data-masked="133****0007" data-full="13312340007">133****0007</span>
+                        <button class="btn btn-link btn-sm" style="padding:0 4px;margin-left:4px;" onclick="toggleParentPhone(this)"><i class="ri-eye-line"></i></button>
+                    </td>
+                    <td>2023-09-20 15:30:55</td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 位学员</span>
+                            <div style="font-size:12px;color:var(--text-muted);">26AD0002 / IRP20240007-01 / 吴十</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 台设备</span>
+                            <div style="font-size:12px;color:var(--text-muted);">IRP20240007</div>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-green">正常</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-parent-detail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-unbind-parent')"><i class="ri-link-unlink-m-line"></i> 解绑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>230901PA008</td>
+                    <td>
+                        <span class="phone-text" data-masked="132****0008" data-full="13212340008">132****0008</span>
+                        <button class="btn btn-link btn-sm" style="padding:0 4px;margin-left:4px;" onclick="toggleParentPhone(this)"><i class="ri-eye-line"></i></button>
+                    </td>
+                    <td>2023-09-22 10:10:10</td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 位学员</span>
+                            <div style="font-size:12px;color:var(--text-muted);">26AE0001 / IRP20240010-01 / 陈小美</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 台设备</span>
+                            <div style="font-size:12px;color:var(--text-muted);">IRP20240010</div>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-red">已解绑</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-parent-detail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" disabled style="color:var(--text-muted);"><i class="ri-link-unlink-m-line"></i> 解绑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>230901PA009</td>
+                    <td>
+                        <span class="phone-text" data-masked="131****0009" data-full="13112340009">131****0009</span>
+                        <button class="btn btn-link btn-sm" style="padding:0 4px;margin-left:4px;" onclick="toggleParentPhone(this)"><i class="ri-eye-line"></i></button>
+                    </td>
+                    <td>2023-09-25 17:00:00</td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>0 位学员</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>0 台设备</span>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-red">已解绑</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-parent-detail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" disabled style="color:var(--text-muted);"><i class="ri-link-unlink-m-line"></i> 解绑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>230901PA010</td>
+                    <td>
+                        <span class="phone-text" data-masked="130****0010" data-full="13012340010">130****0010</span>
+                        <button class="btn btn-link btn-sm" style="padding:0 4px;margin-left:4px;" onclick="toggleParentPhone(this)"><i class="ri-eye-line"></i></button>
+                    </td>
+                    <td>2023-10-01 09:30:22</td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 位学员</span>
+                            <div style="font-size:12px;color:var(--text-muted);">26AE0002 / IRP20240011-01 / 林小华</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:4px;">
+                            <span>1 台设备</span>
+                            <div style="font-size:12px;color:var(--text-muted);">IRP20240011</div>
+                        </div>
+                    </td>
+                    <td><span class="tag tag-green">正常</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-parent-detail')"><i class="ri-eye-line"></i> 详情</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-unbind-parent')"><i class="ri-link-unlink-m-line"></i> 解绑</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -1132,6 +1388,66 @@ bindRecords: () => `
                     <td>赵六</td>
                     <td><span class="tag tag-red">解绑</span></td>
                     <td>后台操作</td>
+                </tr>
+                <tr>
+                    <td>2024-03-08 11:30</td>
+                    <td>230901PA005</td>
+                    <td>135****0005</td>
+                    <td>26AC0001</td>
+                    <td>IRP20240004-01</td>
+                    <td>钱七</td>
+                    <td><span class="tag tag-green">绑定</span></td>
+                    <td>家长扫码</td>
+                </tr>
+                <tr>
+                    <td>2024-03-05 16:45</td>
+                    <td>230901PA001</td>
+                    <td>138****0001</td>
+                    <td>26AC0002</td>
+                    <td>IRP20240005-01</td>
+                    <td>孙八</td>
+                    <td><span class="tag tag-green">绑定</span></td>
+                    <td>家长扫码</td>
+                </tr>
+                <tr>
+                    <td>2024-03-01 08:20</td>
+                    <td>230901PA006</td>
+                    <td>134****0006</td>
+                    <td>26AD0001</td>
+                    <td>IRP20240006-01</td>
+                    <td>周九</td>
+                    <td><span class="tag tag-green">绑定</span></td>
+                    <td>家长扫码</td>
+                </tr>
+                <tr>
+                    <td>2024-02-26 10:30</td>
+                    <td>230901PA007</td>
+                    <td>133****0007</td>
+                    <td>26AD0002</td>
+                    <td>IRP20240007-01</td>
+                    <td>吴十</td>
+                    <td><span class="tag tag-green">绑定</span></td>
+                    <td>家长扫码</td>
+                </tr>
+                <tr>
+                    <td>2024-02-20 14:00</td>
+                    <td>230901PA004</td>
+                    <td>136****0004</td>
+                    <td>26AB0001</td>
+                    <td>IRP20240002-01</td>
+                    <td>王五</td>
+                    <td><span class="tag tag-red">解绑</span></td>
+                    <td>后台操作</td>
+                </tr>
+                <tr>
+                    <td>2024-02-15 09:30</td>
+                    <td>230901PA008</td>
+                    <td>132****0008</td>
+                    <td>26AE0001</td>
+                    <td>IRP20240010-01</td>
+                    <td>陈小美</td>
+                    <td><span class="tag tag-green">绑定</span></td>
+                    <td>管理员操作</td>
                 </tr>
             </tbody>
         </table>

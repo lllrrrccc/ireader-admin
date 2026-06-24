@@ -211,6 +211,40 @@ aiGuide: () => `
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-guide-GD008')"><i class="ri-eye-off-line"></i> 隐藏</button>
                     </td>
                 </tr>
+                <tr>
+                    <td>GD009</td>
+                    <td>S0000009</td>
+                    <td>郑十一</td>
+                    <td>小学五年级</td>
+                    <td>B003</td>
+                    <td>西游记</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">从石猴出世到孙悟空大闹天宫的传奇故事，充满想象力和冒险精神...</td>
+                    <td>2024-03-16 09:30:12</td>
+                    <td>2.4s</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-guide-GD009')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-guide-GD009')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>GD010</td>
+                    <td>S0000010</td>
+                    <td>冯十二</td>
+                    <td>初中三年级</td>
+                    <td>B007</td>
+                    <td>The Little Prince</td>
+                    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">An allegorical tale about love, responsibility, and the meaning of life...</td>
+                    <td>2024-03-16 10:15:45</td>
+                    <td>1.7s</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-guide-GD010')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-guide-GD010')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -667,6 +701,78 @@ aiTranslate: () => `
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" onclick="openModal('modal-view-translate-TR006')"><i class="ri-eye-line"></i> 查看</button>
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-translate-TR006')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TR007</td>
+                    <td>S0000007</td>
+                    <td>周九</td>
+                    <td>小学三年级</td>
+                    <td>B007</td>
+                    <td>The Little Prince</td>
+                    <td>Chapter 27</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">All grown-ups were once children, but only few of them remember it.</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">所有大人都曾经是小孩，可惜只有少数人记得这一点。</td>
+                    <td>2024-03-16 10:30:18</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-translate-TR007')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-translate-TR007')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TR008</td>
+                    <td>S0000008</td>
+                    <td>吴十</td>
+                    <td>小学四年级</td>
+                    <td>B002</td>
+                    <td>Charlotte's Web</td>
+                    <td>Chapter 8</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">It is not often that someone comes along who is a true friend and a good writer.</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">真正的朋友和好作家都不常遇到。</td>
+                    <td>2024-03-16 11:05:33</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-translate-TR008')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-translate-TR008')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TR009</td>
+                    <td>S0000009</td>
+                    <td>郑十一</td>
+                    <td>小学五年级</td>
+                    <td>B004</td>
+                    <td>Harry Potter</td>
+                    <td>Chapter 5</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">It does not do to dwell on dreams and forget to live.</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">不要沉溺于幻想而忘了生活。</td>
+                    <td>2024-03-16 14:20:10</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-translate-TR009')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-translate-TR009')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TR010</td>
+                    <td>S0000010</td>
+                    <td>冯十二</td>
+                    <td>初中三年级</td>
+                    <td>B007</td>
+                    <td>The Little Prince</td>
+                    <td>Chapter 6</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">You know, one loves the sunset, when one is so sad.</td>
+                    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">你知道，当一个人感到忧伤的时候，他就喜欢看日落。</td>
+                    <td>2024-03-16 15:45:22</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-translate-TR010')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-translate-TR010')"><i class="ri-eye-off-line"></i> 隐藏</button>
                     </td>
                 </tr>
             </tbody>
@@ -1147,6 +1253,42 @@ aiExplain: () => `
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" onclick="openModal('modal-dialog-EX008')"><i class="ri-chat-1-line"></i> 查看对话</button>
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-explain-EX008')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>EX009</td>
+                    <td>S0000009</td>
+                    <td style="min-width:100px;">郑十一</td>
+                    <td style="min-width:100px;">小学五年级</td>
+                    <td>B003</td>
+                    <td>西游记</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">唐僧为什么相信孙悟空？</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">唐僧在五行山救出孙悟空后，相信菩萨的指引，愿用紧箍咒约束顽猴...</td>
+                    <td>2</td>
+                    <td>2024-03-16 09:45:10</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-dialog-EX009')"><i class="ri-chat-1-line"></i> 查看对话</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-explain-EX009')"><i class="ri-eye-off-line"></i> 隐藏</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>EX010</td>
+                    <td>S0000010</td>
+                    <td style="min-width:100px;">冯十二</td>
+                    <td style="min-width:100px;">初中三年级</td>
+                    <td>B007</td>
+                    <td>The Little Prince</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Why does the little prince leave his planet?</td>
+                    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">The little prince leaves because he feels misunderstood by his rose...</td>
+                    <td>3</td>
+                    <td>2024-03-16 10:30:55</td>
+                    <td><span class="tag tag-green">成功</span></td>
+                    <td><span class="tag tag-green">可见</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-dialog-EX010')"><i class="ri-chat-1-line"></i> 查看对话</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="openModal('modal-hide-explain-EX010')"><i class="ri-eye-off-line"></i> 隐藏</button>
                     </td>
                 </tr>
             </tbody>
@@ -1688,6 +1830,34 @@ knowledge: () => `
                     <td><span class="tag tag-yellow">解析中</span></td>
                     <td><span class="tag">调研</span><span class="tag">数据</span></td>
                     <td>2024-03-10</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-knowledge')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-delete-knowledge-ref')"><i class="ri-delete-bin-line"></i> 删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>KB009</td>
+                    <td><i class="ri-file-pdf-line" style="color:var(--danger);"></i> 语文课程标准解读.pdf</td>
+                    <td>PDF</td>
+                    <td>4.2 MB</td>
+                    <td>95</td>
+                    <td><span class="tag tag-green">已解析</span></td>
+                    <td><span class="tag">课程</span><span class="tag">标准</span></td>
+                    <td>2024-03-12</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-view-knowledge')"><i class="ri-eye-line"></i> 查看</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-delete-knowledge-ref')"><i class="ri-delete-bin-line"></i> 删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>KB010</td>
+                    <td><i class="ri-file-word-line" style="color:var(--primary);"></i> 英语阅读教学策略.docx</td>
+                    <td>Word</td>
+                    <td>1.8 MB</td>
+                    <td>55</td>
+                    <td><span class="tag tag-green">已解析</span></td>
+                    <td><span class="tag">英语</span><span class="tag">阅读</span><span class="tag">策略</span></td>
+                    <td>2024-03-15</td>
                     <td style="white-space:nowrap;">
                         <button class="btn btn-link btn-sm" onclick="openModal('modal-view-knowledge')"><i class="ri-eye-line"></i> 查看</button>
                         <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-delete-knowledge-ref')"><i class="ri-delete-bin-line"></i> 删除</button>
@@ -2743,6 +2913,30 @@ wordbank: () => `
                         <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-delete-wordbank')"><i class="ri-delete-bin-line"></i> 删除</button>
                     </td>
                 </tr>
+                <tr>
+                    <td>WB009</td>
+                    <td>初中3年级核心词库</td>
+                    <td>210</td>
+                    <td>初中3年级</td>
+                    <td>2024-03-10 10:15:33</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('manageWords')"><i class="ri-translate-2"></i> 管理单词</button>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-edit-wordbank')"><i class="ri-edit-line"></i> 编辑</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-delete-wordbank')"><i class="ri-delete-bin-line"></i> 删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>WB010</td>
+                    <td>高中一年级核心词库</td>
+                    <td>280</td>
+                    <td>高中一年级</td>
+                    <td>2024-03-12 14:20:45</td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('manageWords')"><i class="ri-translate-2"></i> 管理单词</button>
+                        <button class="btn btn-link btn-sm" onclick="openModal('modal-edit-wordbank')"><i class="ri-edit-line"></i> 编辑</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);" onclick="openModal('modal-delete-wordbank')"><i class="ri-delete-bin-line"></i> 删除</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -3279,6 +3473,62 @@ listening: () => `
                         <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('listeningTranslation')"><i class="ri-translate-2"></i> 译文</button>
                         <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="navigateTo('listeningAlignment')"><i class="ri-time-line"></i> 音文对齐</button>
                         <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="alert('已上架')"><i class="ri-arrow-up-circle-line"></i> 上架</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('listeningEdit')"><i class="ri-edit-line"></i> 编辑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>L240305007</td>
+                    <td>三字经 - 全文诵读</td>
+                    <td>王应麟</td>
+                    <td>小学1年级、小学2年级、小学3年级</td>
+                    <td>中国传统启蒙经典，三字一句的韵律诵读</td>
+                    <td><span class="tag tag-green">已上架</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('listeningTranslation')"><i class="ri-translate-2"></i> 译文</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="navigateTo('listeningAlignment')"><i class="ri-time-line"></i> 音文对齐</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="alert('已下架')"><i class="ri-arrow-down-circle-line"></i> 下架</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('listeningEdit')"><i class="ri-edit-line"></i> 编辑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>L240310008</td>
+                    <td>论语 - 学而篇</td>
+                    <td>孔子</td>
+                    <td>初中1年级、初中2年级、初中3年级</td>
+                    <td>儒家经典语录，学而时习之的智慧</td>
+                    <td><span class="tag tag-green">已上架</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('listeningTranslation')"><i class="ri-translate-2"></i> 译文</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="navigateTo('listeningAlignment')"><i class="ri-time-line"></i> 音文对齐</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="alert('已下架')"><i class="ri-arrow-down-circle-line"></i> 下架</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('listeningEdit')"><i class="ri-edit-line"></i> 编辑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>L240315009</td>
+                    <td>The Little Prince - Ch.21</td>
+                    <td>Antoine de Saint-Exupéry</td>
+                    <td>初中1年级、初中2年级、初中3年级、高中一年级</td>
+                    <td>The fox teaches the little prince about taming</td>
+                    <td><span class="tag tag-green">已上架</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('listeningTranslation')"><i class="ri-translate-2"></i> 译文</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="navigateTo('listeningAlignment')"><i class="ri-time-line"></i> 音文对齐</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="alert('已下架')"><i class="ri-arrow-down-circle-line"></i> 下架</button>
+                        <button class="btn btn-link btn-sm" onclick="navigateTo('listeningEdit')"><i class="ri-edit-line"></i> 编辑</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>L240320010</td>
+                    <td>哈利·波特 - 大结局片段</td>
+                    <td>J.K.罗琳</td>
+                    <td>初中1年级、初中2年级、初中3年级</td>
+                    <td>哈利与伏地魔最终对决的经典片段</td>
+                    <td><span class="tag tag-green">已上架</span></td>
+                    <td style="white-space:nowrap;">
+                        <button class="btn btn-link btn-sm" style="color:var(--info);" onclick="navigateTo('listeningTranslation')"><i class="ri-translate-2"></i> 译文</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--warning);" onclick="navigateTo('listeningAlignment')"><i class="ri-time-line"></i> 音文对齐</button>
+                        <button class="btn btn-link btn-sm" style="color:var(--success);" onclick="alert('已下架')"><i class="ri-arrow-down-circle-line"></i> 下架</button>
                         <button class="btn btn-link btn-sm" onclick="navigateTo('listeningEdit')"><i class="ri-edit-line"></i> 编辑</button>
                     </td>
                 </tr>
