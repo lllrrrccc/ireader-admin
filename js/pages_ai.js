@@ -3710,75 +3710,211 @@ listeningAddStep3: () => `
     <span>新增听力 - 音文对齐</span>
 </div>
 
-<div style="max-width:900px;margin:0 auto;">
-    <div style="display:flex;gap:8px;margin-bottom:24px;">
-        <div style="flex:1;text-align:center;padding:12px;background:var(--bg);border-radius:var(--radius);font-size:13px;color:var(--text-muted);">1. 填写听力信息</div>
-        <div style="flex:1;text-align:center;padding:12px;background:var(--bg);border-radius:var(--radius);font-size:13px;color:var(--text-muted);">2. 译文匹配</div>
-        <div style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:var(--radius);font-size:13px;font-weight:500;">3. 音文对齐</div>
-    </div>
-
-    <div class="card" style="margin-bottom:16px;">
-        <div class="card-body">
-            <div style="display:flex;align-items:center;gap:12px;padding:16px;background:var(--bg);border-radius:8px;border:1px solid var(--border);">
-                <i class="ri-file-music-line" style="font-size:24px;color:var(--info);"></i>
-                <div style="flex:1;">
-                    <div style="font-size:13px;font-weight:500;">listening_audio.mp3</div>
-                    <div style="font-size:12px;color:var(--text-muted);">12.5 MB · 待上传音频</div>
-                </div>
-                <button class="btn btn-primary btn-sm" onclick="document.getElementById('listening-audio-upload').click()"><i class="ri-upload-2-line"></i> 上传音频</button>
-                <input type="file" id="listening-audio-upload" accept="audio/mp3,audio/wav" style="display:none;" onchange="alert('音频已上传')">
+<div style="display:flex;flex-direction:column;gap:16px;height:calc(100vh - 160px);min-height:500px;">
+    <!-- 步骤指示器 -->
+    <div class="card" style="flex-shrink:0;">
+        <div class="card-body" style="padding:12px 16px;">
+            <div style="display:flex;gap:8px;">
+                <div style="flex:1;text-align:center;padding:12px;background:var(--bg);border-radius:var(--radius);font-size:13px;color:var(--text-muted);">1. 填写听力信息</div>
+                <div style="flex:1;text-align:center;padding:12px;background:var(--bg);border-radius:var(--radius);font-size:13px;color:var(--text-muted);">2. 译文匹配</div>
+                <div style="flex:1;text-align:center;padding:12px;background:var(--primary);color:#fff;border-radius:var(--radius);font-size:13px;font-weight:500;">3. 音文对齐</div>
             </div>
         </div>
     </div>
 
-    <div class="card" style="margin-bottom:12px;">
-        <div class="card-body" style="display:flex;gap:12px;align-items:center;padding:12px 16px;">
-            <div style="width:28px;height:28px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;">1</div>
-            <div style="font-family:monospace;font-size:13px;color:var(--text-secondary);min-width:90px;flex-shrink:0;" id="timestamp-1">00:00:00.000</div>
-            <button class="btn btn-link btn-sm" style="color:var(--primary);flex-shrink:0;" onclick="markTimestamp(1)"><i class="ri-flag-line"></i> 标记</button>
-            <div style="flex:1;font-size:14px;color:var(--text-primary);">When I was six years old, in a book about primeval forests called 'True Stories', I saw a magnificent illustration.</div>
+    <!-- 音频信息卡片 -->
+    <div class="card" style="flex-shrink:0;">
+        <div class="card-body">
+            <div id="listening-add-audio-card" style="display:flex;align-items:center;gap:12px;padding:16px;background:var(--bg);border-radius:8px;border:1px solid var(--border);">
+                <i class="ri-file-music-line" style="font-size:24px;color:var(--info);"></i>
+                <div id="listening-add-audio-info" style="flex:1;">
+                    <div style="font-size:13px;color:var(--text-muted);">待上传音频</div>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="document.getElementById('listening-audio-upload').click()"><i class="ri-upload-2-line"></i> 上传音频</button>
+                <input type="file" id="listening-audio-upload" accept="audio/mp3,audio/wav" style="display:none;" onchange="handleListeningAudioUpload(this)">
+            </div>
         </div>
     </div>
 
-    <div class="card" style="margin-bottom:12px;">
-        <div class="card-body" style="display:flex;gap:12px;align-items:center;padding:12px 16px;">
-            <div style="width:28px;height:28px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;">2</div>
-            <div style="font-family:monospace;font-size:13px;color:var(--text-secondary);min-width:90px;flex-shrink:0;" id="timestamp-2">00:00:00.000</div>
-            <button class="btn btn-link btn-sm" style="color:var(--primary);flex-shrink:0;" onclick="markTimestamp(2)"><i class="ri-flag-line"></i> 标记</button>
-            <div style="flex:1;font-size:14px;color:var(--text-primary);">It was a picture of a boa constrictor in the act of swallowing an animal.</div>
+    <!-- 时间轴编辑区域 -->
+    <div class="card" style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
+        <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
+            <span class="card-title">📝 时间轴编辑</span>
+            <div style="display:flex;gap:8px;">
+                <button class="btn btn-secondary btn-sm" onclick="addTimelineRow()"><i class="ri-add-line"></i> 新增分句</button>
+                <button class="btn btn-primary btn-sm" onclick="saveTimeline()"><i class="ri-save-line"></i> 保存</button>
+            </div>
+        </div>
+        <div class="card-body" style="flex:1;overflow-y:auto;padding:12px;">
+            <div style="display:flex;flex-direction:column;gap:8px;" id="timeline-list">
+                <div style="display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--bg);border-radius:8px;border:1px solid transparent;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='transparent'" data-timeline-index="1">
+                    <span style="flex-shrink:0;width:24px;height:24px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;">1</span>
+                    <div style="flex-shrink:0;width:100px;">
+                        <input type="text" class="form-input" style="font-size:12px;padding:5px 6px;text-align:center;font-variant-numeric:tabular-nums;" value="00:00:00.000" placeholder="HH:MM:SS.mmm">
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:column;gap:4px;">
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:12px;" onclick="markTimelineTime(this)"><i class="ri-flag-line"></i> 标记</button>
+                    </div>
+                    <div style="flex:1;max-width:840px;">
+                        <textarea class="form-textarea" rows="2" style="font-size:13px;line-height:1.5;resize:vertical;min-height:60px;" placeholder="对应文本段落">When I was six years old, in a book about primeval forests called 'True Stories', I saw a magnificent illustration.</textarea>
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:row;gap:8px;align-items:center;">
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);padding:2px 6px;font-size:14px;" onclick="showDeleteSentenceModal(this)" title="删除分句"><i class="ri-delete-bin-line"></i></button>
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:14px;" onclick="addTimelineAfter(this)" title="添加分句"><i class="ri-add-line"></i></button>
+                    </div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--bg);border-radius:8px;border:1px solid transparent;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='transparent'" data-timeline-index="2">
+                    <span style="flex-shrink:0;width:24px;height:24px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;">2</span>
+                    <div style="flex-shrink:0;width:100px;">
+                        <input type="text" class="form-input" style="font-size:12px;padding:5px 6px;text-align:center;font-variant-numeric:tabular-nums;" value="00:00:15.320" placeholder="HH:MM:SS.mmm">
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:column;gap:4px;">
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:12px;" onclick="markTimelineTime(this)"><i class="ri-flag-line"></i> 标记</button>
+                    </div>
+                    <div style="flex:1;max-width:840px;">
+                        <textarea class="form-textarea" rows="2" style="font-size:13px;line-height:1.5;resize:vertical;min-height:60px;" placeholder="对应文本段落">It was a picture of a boa constrictor in the act of swallowing an animal.</textarea>
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:row;gap:8px;align-items:center;">
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);padding:2px 6px;font-size:14px;" onclick="showDeleteSentenceModal(this)" title="删除分句"><i class="ri-delete-bin-line"></i></button>
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:14px;" onclick="addTimelineAfter(this)" title="添加分句"><i class="ri-add-line"></i></button>
+                    </div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--bg);border-radius:8px;border:1px solid transparent;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='transparent'" data-timeline-index="3">
+                    <span style="flex-shrink:0;width:24px;height:24px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;">3</span>
+                    <div style="flex-shrink:0;width:100px;">
+                        <input type="text" class="form-input" style="font-size:12px;padding:5px 6px;text-align:center;font-variant-numeric:tabular-nums;" value="00:00:28.150" placeholder="HH:MM:SS.mmm">
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:column;gap:4px;">
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:12px;" onclick="markTimelineTime(this)"><i class="ri-flag-line"></i> 标记</button>
+                    </div>
+                    <div style="flex:1;max-width:840px;">
+                        <textarea class="form-textarea" rows="2" style="font-size:13px;line-height:1.5;resize:vertical;min-height:60px;" placeholder="对应文本段落">Here is a copy of the drawing. In the book it said: "Boa constrictors swallow their prey whole, without chewing it."</textarea>
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:row;gap:8px;align-items:center;">
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);padding:2px 6px;font-size:14px;" onclick="showDeleteSentenceModal(this)" title="删除分句"><i class="ri-delete-bin-line"></i></button>
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:14px;" onclick="addTimelineAfter(this)" title="添加分句"><i class="ri-add-line"></i></button>
+                    </div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--bg);border-radius:8px;border:1px solid transparent;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='transparent'" data-timeline-index="4">
+                    <span style="flex-shrink:0;width:24px;height:24px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;">4</span>
+                    <div style="flex-shrink:0;width:100px;">
+                        <input type="text" class="form-input" style="font-size:12px;padding:5px 6px;text-align:center;font-variant-numeric:tabular-nums;" value="00:00:42.890" placeholder="HH:MM:SS.mmm">
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:column;gap:4px;">
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:12px;" onclick="markTimelineTime(this)"><i class="ri-flag-line"></i> 标记</button>
+                    </div>
+                    <div style="flex:1;max-width:840px;">
+                        <textarea class="form-textarea" rows="2" style="font-size:13px;line-height:1.5;resize:vertical;min-height:60px;" placeholder="对应文本段落">I pondered deeply, then, over the adventures of the jungle. And after some work with a colored pencil I succeeded in making my first drawing.</textarea>
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:row;gap:8px;align-items:center;">
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);padding:2px 6px;font-size:14px;" onclick="showDeleteSentenceModal(this)" title="删除分句"><i class="ri-delete-bin-line"></i></button>
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:14px;" onclick="addTimelineAfter(this)" title="添加分句"><i class="ri-add-line"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
-    <div class="card" style="margin-bottom:12px;">
-        <div class="card-body" style="display:flex;gap:12px;align-items:center;padding:12px 16px;">
-            <div style="width:28px;height:28px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;">3</div>
-            <div style="font-family:monospace;font-size:13px;color:var(--text-secondary);min-width:90px;flex-shrink:0;" id="timestamp-3">00:00:00.000</div>
-            <button class="btn btn-link btn-sm" style="color:var(--primary);flex-shrink:0;" onclick="markTimestamp(3)"><i class="ri-flag-line"></i> 标记</button>
-            <div style="flex:1;font-size:14px;color:var(--text-primary);">Here is a copy of the drawing. In the book it said: "Boa constrictors swallow their prey whole, without chewing it."</div>
+<!-- 底部音频播放器 -->
+<div style="position:fixed;bottom:0;left:var(--sidebar-width);right:0;background:#fff;border-top:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:12px;z-index:100;">
+    <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;min-width:120px;">
+        <i class="ri-music-2-line" style="color:var(--primary);font-size:16px;"></i>
+        <span style="font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px;" id="audio-name-display">listening_audio.mp3</span>
+    </div>
+    <button class="btn btn-secondary" style="width:32px;height:32px;border-radius:50%;padding:0;flex-shrink:0;font-size:14px;display:flex;align-items:center;justify-content:center;" title="回退 5s"><i class="ri-rewind-fill" style="font-size:16px;"></i></button>
+    <button class="btn btn-secondary" style="width:32px;height:32px;border-radius:50%;padding:0;flex-shrink:0;font-size:14px;display:flex;align-items:center;justify-content:center;" title="回退 0.5s"><i class="ri-rewind-mini-fill" style="font-size:16px;"></i></button>
+    <button class="btn btn-primary" style="width:36px;height:36px;border-radius:50%;padding:0;font-size:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><i class="ri-play-fill" style="font-size:18px;"></i></button>
+    <button class="btn btn-secondary" style="width:32px;height:32px;border-radius:50%;padding:0;flex-shrink:0;font-size:14px;display:flex;align-items:center;justify-content:center;" title="快进 0.5s"><i class="ri-speed-mini-fill" style="font-size:16px;"></i></button>
+    <button class="btn btn-secondary" style="width:32px;height:32px;border-radius:50%;padding:0;flex-shrink:0;font-size:14px;display:flex;align-items:center;justify-content:center;" title="快进 5s"><i class="ri-speed-fill" style="font-size:16px;"></i></button>
+    <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+        <!-- 波形背景 -->
+        <div style="height:20px;background:var(--bg);border-radius:10px;position:relative;overflow:hidden;display:flex;align-items:center;gap:1px;padding:0 4px;">
+            <div style="width:2px;height:6px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:12px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:18px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:15px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:20px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:10px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:16px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:14px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:19px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:11px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:15px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:18px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:8px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:21px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:12px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:16px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:14px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:19px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:10px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:15px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:18px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:11px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:21px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:12px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:16px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:14px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:19px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:10px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:15px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:18px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:11px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:21px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:12px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:16px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:14px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:19px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:10px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:15px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:18px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:11px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:21px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:12px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:16px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:14px;background:var(--primary);opacity:0.3;"></div>
+        </div>
+        <!-- 进度条（高度8px，不超过10px） -->
+        <div style="height:8px;background:var(--bg);border-radius:4px;position:relative;overflow:hidden;">
+            <div style="position:absolute;left:0;top:0;bottom:0;width:35%;background:var(--primary);border-radius:4px;"></div>
+            <div style="position:absolute;left:35%;top:0;bottom:0;width:2px;background:#fff;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);font-variant-numeric:tabular-nums;">
+            <span>01:23:456</span>
+            <span>06:15:789</span>
         </div>
     </div>
+</div>
 
-    <div class="card" style="margin-bottom:12px;">
-        <div class="card-body" style="display:flex;gap:12px;align-items:center;padding:12px 16px;">
-            <div style="width:28px;height:28px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;">4</div>
-            <div style="font-family:monospace;font-size:13px;color:var(--text-secondary);min-width:90px;flex-shrink:0;" id="timestamp-4">00:00:00.000</div>
-            <button class="btn btn-link btn-sm" style="color:var(--primary);flex-shrink:0;" onclick="markTimestamp(4)"><i class="ri-flag-line"></i> 标记</button>
-            <div style="flex:1;font-size:14px;color:var(--text-primary);">I pondered deeply, then, over the adventures of the jungle. And after some work with a colored pencil I succeeded in making my first drawing.</div>
+<!-- 删除分句确认弹窗 -->
+<div class="modal-overlay" id="modal-delete-sentence">
+    <div class="modal" style="max-width:400px;">
+        <div class="modal-header">
+            <span class="modal-title">确认删除</span>
+            <button class="modal-close" onclick="closeModal('modal-delete-sentence')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body" style="text-align:center;padding:24px 20px;">
+            <i class="ri-error-warning-line" style="font-size:40px;color:var(--danger);margin-bottom:12px;"></i>
+            <div style="font-size:14px;color:var(--text-primary);line-height:1.6;">删除当前分句后，将无法恢复，是否确认删除？</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-delete-sentence')">取消</button>
+            <button class="btn btn-danger" onclick="confirmDeleteSentence()">确认删除</button>
         </div>
     </div>
+</div>
 
-    <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);border-radius:8px;border:1px solid var(--border);margin-top:16px;">
-        <button class="btn btn-primary btn-sm" id="listening-play-btn" style="width:40px;height:40px;border-radius:50%;padding:0;display:flex;align-items:center;justify-content:center;" onclick="toggleListeningPlay(this)"><i class="ri-play-fill" style="font-size:18px;"></i></button>
-        <div style="flex:1;height:4px;background:var(--border);border-radius:2px;position:relative;">
-            <div style="width:30%;height:100%;background:var(--primary);border-radius:2px;"></div>
-        </div>
-        <span style="font-size:12px;color:var(--text-muted);font-family:monospace;">01:23:456 / 06:15:789</span>
-    </div>
+<style>
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+</style>
 
-    <div style="display:flex;justify-content:space-between;margin-top:24px;">
-        <button class="btn btn-secondary" onclick="navigateTo('listeningAddStep2')">上一步</button>
-        <button class="btn btn-primary" onclick="alert('保存成功');navigateTo('listening')">保存</button>
-    </div>
+<div style="display:flex;justify-content:space-between;margin-top:24px;">
+    <button class="btn btn-secondary" onclick="navigateTo('listeningAddStep2')">上一步</button>
+    <button class="btn btn-primary" onclick="alert('保存成功');navigateTo('listening')">保存</button>
 </div>
 `,
 
@@ -3909,69 +4045,221 @@ listeningAlignment: () => `
     <span>音文对齐</span>
 </div>
 
-<div style="max-width:900px;margin:0 auto;">
-    <div class="card" style="margin-bottom:16px;">
+<div style="display:flex;flex-direction:column;gap:16px;height:calc(100vh - 160px);min-height:500px;">
+    <!-- 音频信息卡片 -->
+    <div class="card" style="flex-shrink:0;">
         <div class="card-body">
-            <div style="display:flex;align-items:center;gap:12px;padding:16px;background:var(--bg);border-radius:8px;border:1px solid var(--border);">
+            <div id="listening-alignment-audio-card" style="display:flex;align-items:center;gap:12px;padding:16px;background:var(--bg);border-radius:8px;border:1px solid var(--border);">
                 <i class="ri-file-music-line" style="font-size:24px;color:var(--info);"></i>
-                <div style="flex:1;">
-                    <div style="font-size:13px;font-weight:500;">小王子_第一章.mp3</div>
-                    <div style="font-size:12px;color:var(--text-muted);">12.5 MB · 已上传</div>
+                <div id="listening-alignment-audio-info" style="flex:1;">
+                    <div style="font-size:13px;font-weight:500;">listening_audio.mp3</div>
+                    <div style="font-size:12px;color:var(--text-muted);">12.5 MB · 06:15</div>
                 </div>
-                <button class="btn btn-primary btn-sm" onclick="document.getElementById('alignment-audio-upload').click()"><i class="ri-upload-2-line"></i> 替换音频</button>
-                <input type="file" id="alignment-audio-upload" accept="audio/mp3,audio/wav" style="display:none;" onchange="alert('音频已替换')">
+                <button class="btn btn-primary btn-sm" onclick="document.getElementById('listening-audio-upload').click()"><i class="ri-upload-2-line"></i> 替换音频</button>
+                <input type="file" id="listening-audio-upload" accept="audio/mp3,audio/wav" style="display:none;" onchange="handleListeningAudioUpload(this)">
             </div>
         </div>
     </div>
 
-    <div class="card" style="margin-bottom:12px;">
-        <div class="card-body" style="display:flex;gap:12px;align-items:center;padding:12px 16px;">
-            <div style="width:28px;height:28px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;">1</div>
-            <div style="font-family:monospace;font-size:13px;color:var(--text-secondary);min-width:90px;flex-shrink:0;" id="align-timestamp-1">00:00:00.000</div>
-            <div style="flex:1;font-size:14px;color:var(--text-primary);">When I was six years old, in a book about primeval forests called 'True Stories', I saw a magnificent illustration.</div>
-            <button class="btn btn-link btn-sm" style="color:var(--primary);" onclick="markTimestamp(1)"><i class="ri-flag-line"></i> 标记</button>
+    <!-- 时间轴编辑区域 -->
+    <div class="card" style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
+        <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
+            <span class="card-title">📝 时间轴编辑</span>
+            <div style="display:flex;gap:8px;">
+                <button class="btn btn-secondary btn-sm" onclick="addTimelineRow()"><i class="ri-add-line"></i> 新增分句</button>
+                <button class="btn btn-primary btn-sm" onclick="saveTimeline()"><i class="ri-save-line"></i> 保存</button>
+            </div>
         </div>
-    </div>
-
-    <div class="card" style="margin-bottom:12px;">
-        <div class="card-body" style="display:flex;gap:12px;align-items:center;padding:12px 16px;">
-            <div style="width:28px;height:28px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;">2</div>
-            <div style="font-family:monospace;font-size:13px;color:var(--text-secondary);min-width:90px;flex-shrink:0;" id="align-timestamp-2">00:00:15.320</div>
-            <div style="flex:1;font-size:14px;color:var(--text-primary);">It was a picture of a boa constrictor in the act of swallowing an animal.</div>
-            <button class="btn btn-link btn-sm" style="color:var(--primary);" onclick="markTimestamp(2)"><i class="ri-flag-line"></i> 标记</button>
+        <div class="card-body" style="flex:1;overflow-y:auto;padding:12px;">
+            <div style="display:flex;flex-direction:column;gap:8px;" id="timeline-list">
+                <div style="display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--bg);border-radius:8px;border:1px solid transparent;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='transparent'" data-timeline-index="1">
+                    <span style="flex-shrink:0;width:24px;height:24px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;">1</span>
+                    <div style="flex-shrink:0;width:100px;">
+                        <input type="text" class="form-input" style="font-size:12px;padding:5px 6px;text-align:center;font-variant-numeric:tabular-nums;" value="00:00:00.000" placeholder="HH:MM:SS.mmm">
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:column;gap:4px;">
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:12px;" onclick="markTimelineTime(this)"><i class="ri-flag-line"></i> 标记</button>
+                    </div>
+                    <div style="flex:1;max-width:840px;">
+                        <textarea class="form-textarea" rows="2" style="font-size:13px;line-height:1.5;resize:vertical;min-height:60px;" placeholder="对应文本段落">When I was six years old, in a book about primeval forests called 'True Stories', I saw a magnificent illustration.</textarea>
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:row;gap:8px;align-items:center;">
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);padding:2px 6px;font-size:14px;" onclick="showDeleteSentenceModal(this)" title="删除分句"><i class="ri-delete-bin-line"></i></button>
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:14px;" onclick="addTimelineAfter(this)" title="添加分句"><i class="ri-add-line"></i></button>
+                    </div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--bg);border-radius:8px;border:1px solid transparent;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='transparent'" data-timeline-index="2">
+                    <span style="flex-shrink:0;width:24px;height:24px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;">2</span>
+                    <div style="flex-shrink:0;width:100px;">
+                        <input type="text" class="form-input" style="font-size:12px;padding:5px 6px;text-align:center;font-variant-numeric:tabular-nums;" value="00:00:15.320" placeholder="HH:MM:SS.mmm">
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:column;gap:4px;">
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:12px;" onclick="markTimelineTime(this)"><i class="ri-flag-line"></i> 标记</button>
+                    </div>
+                    <div style="flex:1;max-width:840px;">
+                        <textarea class="form-textarea" rows="2" style="font-size:13px;line-height:1.5;resize:vertical;min-height:60px;" placeholder="对应文本段落">It was a picture of a boa constrictor in the act of swallowing an animal.</textarea>
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:row;gap:8px;align-items:center;">
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);padding:2px 6px;font-size:14px;" onclick="showDeleteSentenceModal(this)" title="删除分句"><i class="ri-delete-bin-line"></i></button>
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:14px;" onclick="addTimelineAfter(this)" title="添加分句"><i class="ri-add-line"></i></button>
+                    </div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--bg);border-radius:8px;border:1px solid transparent;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='transparent'" data-timeline-index="3">
+                    <span style="flex-shrink:0;width:24px;height:24px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;">3</span>
+                    <div style="flex-shrink:0;width:100px;">
+                        <input type="text" class="form-input" style="font-size:12px;padding:5px 6px;text-align:center;font-variant-numeric:tabular-nums;" value="00:00:28.150" placeholder="HH:MM:SS.mmm">
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:column;gap:4px;">
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:12px;" onclick="markTimelineTime(this)"><i class="ri-flag-line"></i> 标记</button>
+                    </div>
+                    <div style="flex:1;max-width:840px;">
+                        <textarea class="form-textarea" rows="2" style="font-size:13px;line-height:1.5;resize:vertical;min-height:60px;" placeholder="对应文本段落">Here is a copy of the drawing. In the book it said: "Boa constrictors swallow their prey whole, without chewing it."</textarea>
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:row;gap:8px;align-items:center;">
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);padding:2px 6px;font-size:14px;" onclick="showDeleteSentenceModal(this)" title="删除分句"><i class="ri-delete-bin-line"></i></button>
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:14px;" onclick="addTimelineAfter(this)" title="添加分句"><i class="ri-add-line"></i></button>
+                    </div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:flex-start;padding:10px;background:var(--bg);border-radius:8px;border:1px solid transparent;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='transparent'" data-timeline-index="4">
+                    <span style="flex-shrink:0;width:24px;height:24px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;">4</span>
+                    <div style="flex-shrink:0;width:100px;">
+                        <input type="text" class="form-input" style="font-size:12px;padding:5px 6px;text-align:center;font-variant-numeric:tabular-nums;" value="00:00:42.890" placeholder="HH:MM:SS.mmm">
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:column;gap:4px;">
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:12px;" onclick="markTimelineTime(this)"><i class="ri-flag-line"></i> 标记</button>
+                    </div>
+                    <div style="flex:1;max-width:840px;">
+                        <textarea class="form-textarea" rows="2" style="font-size:13px;line-height:1.5;resize:vertical;min-height:60px;" placeholder="对应文本段落">I pondered deeply, then, over the adventures of the jungle. And after some work with a colored pencil I succeeded in making my first drawing.</textarea>
+                    </div>
+                    <div style="flex-shrink:0;display:flex;flex-direction:row;gap:8px;align-items:center;">
+                        <button class="btn btn-link btn-sm" style="color:var(--danger);padding:2px 6px;font-size:14px;" onclick="showDeleteSentenceModal(this)" title="删除分句"><i class="ri-delete-bin-line"></i></button>
+                        <button class="btn btn-link btn-sm" style="padding:2px 6px;font-size:14px;" onclick="addTimelineAfter(this)" title="添加分句"><i class="ri-add-line"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div class="card" style="margin-bottom:12px;">
-        <div class="card-body" style="display:flex;gap:12px;align-items:center;padding:12px 16px;">
-            <div style="width:28px;height:28px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;">3</div>
-            <div style="font-family:monospace;font-size:13px;color:var(--text-secondary);min-width:90px;flex-shrink:0;" id="align-timestamp-3">00:00:28.150</div>
-            <div style="flex:1;font-size:14px;color:var(--text-primary);">Here is a copy of the drawing. In the book it said: "Boa constrictors swallow their prey whole, without chewing it."</div>
-            <button class="btn btn-link btn-sm" style="color:var(--primary);" onclick="markTimestamp(3)"><i class="ri-flag-line"></i> 标记</button>
-        </div>
-    </div>
-
-    <div class="card" style="margin-bottom:12px;">
-        <div class="card-body" style="display:flex;gap:12px;align-items:center;padding:12px 16px;">
-            <div style="width:28px;height:28px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;">4</div>
-            <div style="font-family:monospace;font-size:13px;color:var(--text-secondary);min-width:90px;flex-shrink:0;" id="align-timestamp-4">00:00:42.890</div>
-            <div style="flex:1;font-size:14px;color:var(--text-primary);">I pondered deeply, then, over the adventures of the jungle. And after some work with a colored pencil I succeeded in making my first drawing.</div>
-            <button class="btn btn-link btn-sm" style="color:var(--primary);" onclick="markTimestamp(4)"><i class="ri-flag-line"></i> 标记</button>
-        </div>
-    </div>
-
-    <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);border-radius:8px;border:1px solid var(--border);margin-top:16px;">
-        <button class="btn btn-primary btn-sm" style="width:40px;height:40px;border-radius:50%;padding:0;display:flex;align-items:center;justify-content:center;" onclick="alert('播放音频')"><i class="ri-play-fill" style="font-size:18px;"></i></button>
-        <div style="flex:1;height:4px;background:var(--border);border-radius:2px;position:relative;">
-            <div style="width:30%;height:100%;background:var(--primary);border-radius:2px;"></div>
-        </div>
-        <span style="font-size:12px;color:var(--text-muted);font-family:monospace;">01:23:456 / 06:15:789</span>
-    </div>
-
-    <div style="display:flex;justify-content:flex-end;margin-top:24px;">
-        <button class="btn btn-primary" onclick="alert('保存成功');navigateTo('listening')">保存</button>
     </div>
 </div>
-`,
 
+<!-- 底部音频播放器 -->
+<div style="position:fixed;bottom:0;left:var(--sidebar-width);right:0;background:#fff;border-top:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:12px;z-index:100;">
+    <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;min-width:120px;">
+        <i class="ri-music-2-line" style="color:var(--primary);font-size:16px;"></i>
+        <span style="font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px;" id="audio-name-display">listening_audio.mp3</span>
+    </div>
+    <button class="btn btn-secondary" style="width:32px;height:32px;border-radius:50%;padding:0;flex-shrink:0;font-size:14px;display:flex;align-items:center;justify-content:center;" title="回退 5s"><i class="ri-rewind-fill" style="font-size:16px;"></i></button>
+    <button class="btn btn-secondary" style="width:32px;height:32px;border-radius:50%;padding:0;flex-shrink:0;font-size:14px;display:flex;align-items:center;justify-content:center;" title="回退 0.5s"><i class="ri-rewind-mini-fill" style="font-size:16px;"></i></button>
+    <button class="btn btn-primary" style="width:36px;height:36px;border-radius:50%;padding:0;font-size:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><i class="ri-play-fill" style="font-size:18px;"></i></button>
+    <button class="btn btn-secondary" style="width:32px;height:32px;border-radius:50%;padding:0;flex-shrink:0;font-size:14px;display:flex;align-items:center;justify-content:center;" title="快进 0.5s"><i class="ri-speed-mini-fill" style="font-size:16px;"></i></button>
+    <button class="btn btn-secondary" style="width:32px;height:32px;border-radius:50%;padding:0;flex-shrink:0;font-size:14px;display:flex;align-items:center;justify-content:center;" title="快进 5s"><i class="ri-speed-fill" style="font-size:16px;"></i></button>
+    <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+        <!-- 波形背景 -->
+        <div style="height:20px;background:var(--bg);border-radius:10px;position:relative;overflow:hidden;display:flex;align-items:center;gap:1px;padding:0 4px;">
+            <div style="width:2px;height:6px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:12px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:18px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:15px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:20px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:10px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:16px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:14px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:19px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:11px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:15px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:18px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:8px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:21px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:12px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:16px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:14px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:19px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:10px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:15px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:18px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:11px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:21px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:12px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:16px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:14px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:19px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:10px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:15px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:18px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:11px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:21px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:12px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:16px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:14px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:19px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:10px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:15px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:18px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:11px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:21px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:12px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:16px;background:var(--primary);opacity:0.3;"></div>
+            <div style="width:2px;height:14px;background:var(--primary);opacity:0.3;"></div>
+        </div>
+        <!-- 进度条（高度8px，不超过10px） -->
+        <div style="height:8px;background:var(--bg);border-radius:4px;position:relative;overflow:hidden;">
+            <div style="position:absolute;left:0;top:0;bottom:0;width:35%;background:var(--primary);border-radius:4px;"></div>
+            <div style="position:absolute;left:35%;top:0;bottom:0;width:2px;background:#fff;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);font-variant-numeric:tabular-nums;">
+            <span>01:23:456</span>
+            <span>06:15:789</span>
+        </div>
+    </div>
+</div>
+
+<!-- 删除分句确认弹窗 -->
+<div class="modal-overlay" id="modal-delete-sentence">
+    <div class="modal" style="max-width:400px;">
+        <div class="modal-header">
+            <span class="modal-title">确认删除</span>
+            <button class="modal-close" onclick="closeModal('modal-delete-sentence')"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="modal-body" style="text-align:center;padding:24px 20px;">
+            <i class="ri-error-warning-line" style="font-size:40px;color:var(--danger);margin-bottom:12px;"></i>
+            <div style="font-size:14px;color:var(--text-primary);line-height:1.6;">删除当前分句后，将无法恢复，是否确认删除？</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('modal-delete-sentence')">取消</button>
+            <button class="btn btn-danger" onclick="confirmDeleteSentence()">确认删除</button>
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+</style>
+`,
 });
+
+function handleListeningAudioUpload(input) {
+    if (!input.files || !input.files.length) return;
+    const file = input.files[0];
+    const sizeMB = (file.size / 1024 / 1024).toFixed(1) + ' MB';
+    const audio = new Audio(URL.createObjectURL(file));
+    audio.addEventListener('loadedmetadata', function() {
+        const duration = audio.duration;
+        const minutes = Math.floor(duration / 60);
+        const seconds = Math.floor(duration % 60);
+        const timeStr = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+        const infoDiv = document.getElementById('listening-add-audio-info');
+        if (infoDiv) {
+            infoDiv.innerHTML = '<div style="font-size:13px;font-weight:500;">' + file.name + '</div>' +
+                '<div style="font-size:12px;color:var(--text-muted);">' + sizeMB + ' · ' + timeStr + '</div>';
+        }
+        const alignmentInfoDiv = document.getElementById('listening-alignment-audio-info');
+        if (alignmentInfoDiv) {
+            alignmentInfoDiv.innerHTML = '<div style="font-size:13px;font-weight:500;">' + file.name + '</div>' +
+                '<div style="font-size:12px;color:var(--text-muted);">' + sizeMB + ' · ' + timeStr + '</div>';
+        }
+        alert('音频已上传');
+    });
+}
+
